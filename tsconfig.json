@@ -1,0 +1,30 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "react-jsx",
+		"declaration": true,
+		"declarationMap": true,
+		"outDir": "./lib",
+		"baseUrl": ".",
+		"paths": {
+			"~/components": ["src/components/index.ts"],
+			"~/form": ["src/form/index.ts"],
+			"~/utils": ["src/utils.ts"],
+			"~/theme": ["src/theme/index.ts"]
+		}
+	},
+	"exclude": ["node_modules"],
+	"include": ["src/**/*", "stories/**/*"]
+}

@@ -1,0 +1,8 @@
+node_modules/
+lib/
+
+.storybook/
+
+pnpm-lock.yaml
+
+.DS_Store
