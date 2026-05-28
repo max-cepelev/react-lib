@@ -1,5 +1,5 @@
 import type { Meta } from 'storybook-react-rsbuild';
-import { Card, CardContent, Carousel } from '~/components';
+import { Card, Carousel } from '~/components';
 
 export default {
 	title: 'Carousel',
@@ -38,7 +38,7 @@ export function Demo() {
 			showArrows
 			renderItem={(item) => (
 				<Card style={{ height: 400, padding: 6 }}>
-					<CardContent
+					<Card.Content
 						style={{
 							display: 'flex',
 							justifyContent: 'center',
@@ -54,7 +54,7 @@ export function Demo() {
 						>
 							{item.title}
 						</span>
-					</CardContent>
+					</Card.Content>
 				</Card>
 			)}
 		/>
@@ -92,7 +92,7 @@ export function Vertical() {
 			renderItem={(item) => (
 				<div style={{ padding: 10, height: '100%' }}>
 					<Card style={{ height: '100%', padding: 10 }}>
-						<CardContent
+						<Card.Content
 							style={{
 								display: 'flex',
 								justifyContent: 'center',
@@ -108,7 +108,7 @@ export function Vertical() {
 							>
 								{item.title}
 							</span>
-						</CardContent>
+						</Card.Content>
 					</Card>
 				</div>
 			)}
