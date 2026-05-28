@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.15.2
+
+### Patch Changes
+
+- Fix lib import
+
 ## 0.15.1
 
 ### Patch Changes

@@ -6,13 +6,14 @@ import { pluginDts } from 'rsbuild-plugin-dts';
 export default defineConfig({
 	lib: [
 		{
-			bundle: true,
 			dts: true,
+			bundle: true,
 			format: 'esm',
 			source: {
 				entry: {
 					index: './src/index.ts',
 				},
+				exclude: ['.src/stories/**'],
 			},
 		},
 	],
@@ -27,9 +28,9 @@ export default defineConfig({
 	},
 	output: {
 		cleanDistPath: true,
+		minify: true,
 		target: 'web',
-		// Отключаем встраивание стилей для создания отдельных CSS файлов
-		injectStyles: false,
+		externals: ['react', 'react-dom', '@fontsource-variable/roboto'],
 		// Устанавливаем пути для CSS файлов
 		distPath: {
 			root: './lib',
