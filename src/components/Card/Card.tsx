@@ -1,14 +1,7 @@
 import { clsx } from 'clsx';
 import type { HTMLAttributes } from 'react';
 import { theme } from '~/theme';
-import {
-	card,
-	cardContent,
-	cardDescription,
-	cardFooter,
-	cardHeader,
-	cardTitle,
-} from './card.css';
+import * as styles from './card.css';
 
 const Card = ({
 	className,
@@ -19,51 +12,38 @@ const Card = ({
 }) => (
 	<div
 		style={{ boxShadow: theme.elevation[elevation] }}
-		className={clsx(card, className)}
+		className={clsx(styles.root, className)}
 		{...props}
 	/>
 );
 
-const CardHeader = ({
-	className,
-	...props
-}: HTMLAttributes<HTMLDivElement>) => (
-	<div className={clsx(cardHeader, className)} {...props} />
+const Header = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+	<div className={clsx(styles.header, className)} {...props} />
 );
 
-const CardTitle = ({
-	className,
-	...props
-}: HTMLAttributes<HTMLHeadingElement>) => (
-	<h3 className={clsx(cardTitle, className)} {...props} />
+const Title = ({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) => (
+	<h3 className={clsx(styles.title, className)} {...props} />
 );
 
-const CardDescription = ({
+const Description = ({
 	className,
 	...props
 }: HTMLAttributes<HTMLParagraphElement>) => (
-	<p className={clsx(cardDescription, className)} {...props} />
+	<p className={clsx(styles.description, className)} {...props} />
 );
 
-const CardContent = ({
-	className,
-	...props
-}: HTMLAttributes<HTMLDivElement>) => (
-	<div className={clsx(cardContent, className)} {...props} />
+const Content = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+	<div className={clsx(styles.content, className)} {...props} />
 );
 
-const CardFooter = ({
-	className,
-	...props
-}: HTMLAttributes<HTMLDivElement>) => (
-	<div className={clsx(cardFooter, className)} {...props} />
+const Footer = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+	<div className={clsx(styles.footer, className)} {...props} />
 );
 
-export {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-};
+Card.Footer = Footer;
+Card.Header = Header;
+Card.Title = Title;
+Card.Description = Description;
+Card.Content = Content;
+
+export { Card };

@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.15.1
+
+### Patch Changes
+
+- Update Card component
+
 ## 0.15.0
 
 ### Minor Changes
