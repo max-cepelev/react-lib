@@ -124,7 +124,7 @@ const buttonVariants = styleVariants<Record<ButtonVariant, ComplexStyleRule>>({
 
 const buttonSizes = styleVariants<Record<ButtonSize, ComplexStyleRule>>({
 	sm: {
-		height: theme.spacing[6],
+		height: 28,
 		padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
 		borderRadius: theme.borderRadius.sm,
 		fontSize: theme.fontSize.xs,
@@ -135,7 +135,7 @@ const buttonSizes = styleVariants<Record<ButtonSize, ComplexStyleRule>>({
 		fontSize: theme.fontSize.sm,
 	},
 	lg: {
-		height: theme.spacing[10],
+		height: 36,
 		padding: `${theme.spacing[2]} ${theme.spacing[4]}`,
 		fontSize: theme.fontSize.base,
 	},
@@ -144,8 +144,8 @@ const buttonSizes = styleVariants<Record<ButtonSize, ComplexStyleRule>>({
 		width: theme.spacing[8],
 	},
 	iconSm: {
-		height: theme.spacing[6],
-		width: theme.spacing[6],
+		height: 28,
+		width: 28,
 	},
 });
 

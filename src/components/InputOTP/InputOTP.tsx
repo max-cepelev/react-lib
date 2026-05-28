@@ -33,7 +33,7 @@ export const InputOTP = ({
 				return (
 					<div className={styles.group}>
 						{slots.map((slot, index) => (
-							<Slot key={`${index}-${slot.char}`} {...slot} />
+							<Slot key={`${index.toString()}-${slot.char}`} {...slot} />
 						))}
 					</div>
 				);
@@ -43,13 +43,13 @@ export const InputOTP = ({
 				<>
 					<div className={styles.group}>
 						{slots.slice(0, slots.length / 2).map((slot, idx) => (
-							<Slot key={`${idx}-${slot.char}`} {...slot} />
+							<Slot key={`${idx.toString()}-${slot.char}`} {...slot} />
 						))}
 					</div>
 					<Separator />
 					<div className={styles.group}>
 						{slots.slice(slots.length / 2).map((slot, idx) => (
-							<Slot key={`${idx}-${slot.char}`} {...slot} />
+							<Slot key={`${idx.toString()}-${slot.char}`} {...slot} />
 						))}
 					</div>
 				</>

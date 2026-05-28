@@ -1,5 +1,6 @@
 import { style, styleVariants } from '@vanilla-extract/css';
 import { theme } from '~/theme';
+import { spacing } from '~/utils';
 
 export const container = style(
 	{
@@ -18,7 +19,7 @@ export const container = style(
 
 export const variants = styleVariants({
 	outlined: {
-		border: `1px solid ${theme.colors.border}`,
+		outline: `1px solid ${theme.colors.border}`,
 		borderRadius: theme.borderRadius.md,
 	},
 	standard: {
@@ -34,6 +35,7 @@ export const fullWidthClass = style({
 export const containerHover = style({
 	selectors: {
 		'&:hover': {
+			outlineColor: `color-mix(in oklch, ${theme.colors.border} 80%, ${theme.colors.primary} 100%)`,
 			borderColor: `color-mix(in oklch, ${theme.colors.border} 80%, ${theme.colors.primary} 100%)`,
 		},
 	},
@@ -42,7 +44,7 @@ export const containerHover = style({
 export const containerFocusWithin = style({
 	selectors: {
 		'&:focus-within': {
-			borderColor: `color-mix(in oklch, ${theme.colors.primary} 80%, transparent)`,
+			outlineColor: `color-mix(in oklch, ${theme.colors.primary} 80%, transparent)`,
 		},
 	},
 });
@@ -53,12 +55,13 @@ export const disabledClass = style({
 });
 
 export const errorClass = style({
-	borderColor: theme.colors.error,
+	outlineColor: theme.colors.error,
 	':focus-within': {
-		borderColor: `color-mix(in oklch, ${theme.colors.error} 80%, transparent)`,
+		outlineColor: `color-mix(in oklch, ${theme.colors.error} 80%, transparent)`,
+		borderColor: theme.colors.error,
 	},
 	':hover': {
-		borderColor: theme.colors.error,
+		outlineColor: theme.colors.error,
 	},
 });
 
@@ -87,19 +90,19 @@ export const input = style({
 // Size variants
 export const sizes = styleVariants({
 	sm: {
-		height: theme.spacing[8],
-		fontSize: theme.fontSize.sm, // 12px
-		padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
+		height: '28px',
+		padding: `0.125rem ${theme.spacing[2]}`,
+		fontSize: theme.fontSize.sm,
 	},
 	md: {
-		height: theme.spacing[10],
+		height: '32px',
+		padding: spacing(1, 3),
 		fontSize: theme.fontSize.base,
-		padding: `${theme.spacing[2]} ${theme.spacing[3]}`,
 	},
 	lg: {
-		height: theme.spacing[12],
-		fontSize: theme.fontSize.lg, // 16px
-		padding: `${theme.spacing[2]} ${theme.spacing[4]}`,
+		height: '36px',
+		padding: spacing(2, 3),
+		fontSize: theme.fontSize.base,
 	},
 });
 

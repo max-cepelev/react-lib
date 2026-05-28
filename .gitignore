@@ -6,3 +6,7 @@ lib/
 pnpm-lock.yaml
 
 .DS_Store
+
+example/
+
+.changeset/

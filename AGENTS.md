@@ -142,3 +142,35 @@ When working with this codebase:
 - Ensure TypeScript types are properly exported
 - Add corresponding Storybook stories for new components
 - Use Vanilla Extract for styling to maintain type safety
+
+### Vanilla Extract Styling Rules
+
+**CRITICAL**: Vanilla Extract has strict selector rules:
+- **DO NOT** use child element selectors in `style()` selectors, e.g. `& a`, `& p`, `& > div`
+- **DO** use `globalStyle()` for styling child elements within a component
+- Selectors in `style()` must target the `&` character (current class) with modifiers only, e.g. `&:hover`, `&:focus-visible`, `&[data-state="open"]`
+- For child element styling, use `globalStyle(\`${parentClass} child\`, { ... })` instead of `selectors: { '& child': { ... } }`
+
+Example:
+```typescript
+// ❌ WRONG - will cause build error
+const content = style({
+  selectors: {
+    '& a': { color: 'blue' },  // Invalid!
+    '& p:not(:last-child)': { marginBottom: '1rem' }  // Invalid!
+  }
+});
+
+// ✅ CORRECT - use globalStyle for child elements
+const content = style({
+  padding: spacing(2),
+});
+
+globalStyle(`${content} a`, {
+  color: theme.colors.primary,
+});
+
+globalStyle(`${content} p:not(:last-child)`, {
+  marginBottom: spacing(4),
+});
+```

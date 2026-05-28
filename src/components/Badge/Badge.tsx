@@ -23,4 +23,4 @@ function Badge({
 	);
 }
 
-export { Badge, badgeVariants, type BadgeVariant };
+export { Badge, type BadgeVariant, badgeVariants };

@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.14.0
+
+### Minor Changes
+
+- Replace Radix Accordion/Checkbox with Base UI
+
 ## 0.13.2
 
 ### Patch Changes

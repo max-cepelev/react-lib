@@ -153,9 +153,9 @@ createGlobalTheme(':root', theme, {
 		loose: '2',
 	},
 	borderRadius: {
-		sm: '0.25rem',
-		md: '0.375rem',
-		lg: '0.5rem',
+		sm: '0.375rem',
+		md: '0.5rem',
+		lg: '1rem',
 	},
 });
 

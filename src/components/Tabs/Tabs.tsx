@@ -9,7 +9,7 @@ import { TabsContent } from './TabsContent';
 import { TabsList } from './TabsList';
 import { TabsTrigger } from './TabsTrigger';
 
-export type { TabsProps, TabsContentProps, TabsListProps, TabsTriggerProps };
+export type { TabsContentProps, TabsListProps, TabsProps, TabsTriggerProps };
 
 export const Tabs = (props: TabsProps) => {
 	return <Root {...props} />;

@@ -17,12 +17,11 @@
 		"declaration": true,
 		"declarationMap": true,
 		"outDir": "./lib",
-		"baseUrl": ".",
 		"paths": {
-			"~/components": ["src/components/index.ts"],
-			"~/form": ["src/form/index.ts"],
-			"~/utils": ["src/utils.ts"],
-			"~/theme": ["src/theme/index.ts"]
+			"~/components": ["./src/components/index.ts"],
+			"~/form": ["./src/form/index.ts"],
+			"~/utils": ["./src/utils.ts"],
+			"~/theme": ["./src/theme/index.ts"]
 		}
 	},
 	"exclude": ["node_modules"],

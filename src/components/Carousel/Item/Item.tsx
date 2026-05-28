@@ -4,7 +4,7 @@ export function Item(props: React.ComponentProps<'div'>) {
 	return (
 		<div
 			className={styles.item}
-			role="group"
+			role="presentation"
 			aria-roledescription="slide"
 			data-slot="carousel-item"
 			{...props}

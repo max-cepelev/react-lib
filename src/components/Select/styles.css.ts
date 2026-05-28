@@ -47,19 +47,19 @@ export const trigger = style({
 // Size variants
 export const sizes = styleVariants({
 	sm: {
-		height: theme.spacing[8],
+		height: 28,
 		fontSize: theme.fontSize.sm, // 12px
 		padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
 	},
 	md: {
-		height: theme.spacing[10],
+		height: theme.spacing[8],
 		fontSize: theme.fontSize.base,
-		padding: `${theme.spacing[2]} ${theme.spacing[3]}`,
+		padding: `${theme.spacing[2]} ${theme.spacing[2]}`,
 	},
 	lg: {
-		height: theme.spacing[12],
-		fontSize: theme.fontSize.lg, // 16px
-		padding: `${theme.spacing[2]} ${theme.spacing[4]}`,
+		height: 36,
+		fontSize: theme.fontSize.base, // 16px
+		padding: `${theme.spacing[2]} ${theme.spacing[2]}`,
 	},
 });
 

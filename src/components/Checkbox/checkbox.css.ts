@@ -21,7 +21,7 @@ export const root = style({
 			cursor: 'not-allowed',
 			opacity: 0.5,
 		},
-		'&[data-state="checked"]': {
+		'&[data-checked]': {
 			backgroundColor: theme.colors.primary,
 			color: theme.colors.foreground.primary,
 		},

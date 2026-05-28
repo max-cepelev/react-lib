@@ -25,6 +25,7 @@ export const triggerClass = style({
 	border: 'none',
 	backgroundColor: 'transparent',
 	cursor: 'pointer',
+	lineHeight: theme.lineHeight.none,
 
 	selectors: {
 		'&:focus-visible': {
@@ -46,18 +47,18 @@ export const triggerClass = style({
 
 export const sizes = styleVariants({
 	sm: {
-		height: theme.spacing[8],
+		height: 28,
 		fontSize: theme.fontSize.sm,
 		padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
 	},
 	md: {
-		height: theme.spacing[10],
+		height: theme.spacing[8],
 		fontSize: theme.fontSize.base,
 		padding: `${theme.spacing[2]} ${theme.spacing[3]}`,
 	},
 	lg: {
-		height: theme.spacing[12],
-		fontSize: theme.fontSize.lg,
+		height: 36,
+		fontSize: theme.fontSize.base,
 		padding: `${theme.spacing[2]} ${theme.spacing[4]}`,
 	},
 });

@@ -90,8 +90,8 @@ export {
 	alignments,
 	colors,
 	displays,
-	transforms,
 	Typography,
+	transforms,
 	variants,
 	weights,
 };

@@ -45,6 +45,7 @@ export const DataGridActionCell = <TRow,>(
 	const { main, secondary } = actions;
 
 	return (
+		// biome-ignore lint/a11y/noStaticElementInteractions: <>
 		<div
 			onClick={handleWrapperClick}
 			onKeyDown={handleWrapperClick}

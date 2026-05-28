@@ -12,14 +12,6 @@ export function ScrollTopButton({
 }: ScrollTopButtonProps) {
 	const [isVisible, setIsVisible] = useState(false);
 
-	const toggleVisibility = () => {
-		if (window.scrollY > 400) {
-			setIsVisible(true);
-		} else {
-			setIsVisible(false);
-		}
-	};
-
 	const scrollToTop = () => {
 		window.scrollTo({
 			top: 0,
@@ -29,6 +21,14 @@ export function ScrollTopButton({
 	};
 
 	useEffect(() => {
+		const toggleVisibility = () => {
+			if (window.scrollY > 400) {
+				setIsVisible(true);
+			} else {
+				setIsVisible(false);
+			}
+		};
+
 		window.addEventListener('scroll', toggleVisibility);
 		return () => {
 			window.removeEventListener('scroll', toggleVisibility);

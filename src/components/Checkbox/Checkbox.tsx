@@ -1,19 +1,19 @@
-import {
-	type CheckboxProps as CheckboxPrimitiveProps,
-	Indicator,
-	Root,
-} from '@radix-ui/react-checkbox';
+import { Checkbox as BaseCheckbox } from '@base-ui/react';
 import { clsx } from 'clsx';
 
 import { Check } from 'lucide-react';
 import { icon, indicator, root } from './checkbox.css';
 
-export type CheckboxProps = CheckboxPrimitiveProps;
+export type CheckboxProps = BaseCheckbox.Root.Props;
 
 export const Checkbox = ({ className, ...props }: CheckboxProps) => (
-	<Root className={clsx(root, className)} {...props}>
-		<Indicator className={indicator}>
+	<BaseCheckbox.Root
+		data-slot="checkbox"
+		className={clsx(root, className)}
+		{...props}
+	>
+		<BaseCheckbox.Indicator className={indicator}>
 			<Check className={icon} />
-		</Indicator>
-	</Root>
+		</BaseCheckbox.Indicator>
+	</BaseCheckbox.Root>
 );
