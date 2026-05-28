@@ -1,7 +1,6 @@
 {
 	"name": "@max-ts/kit",
 	"version": "0.14.0",
-	"private": true,
 	"main": "./lib/index.js",
 	"module": "./lib/index.mjs",
 	"types": "./lib/index.d.ts",
