@@ -26,6 +26,7 @@ export * from './Input';
 export * from './InputOTP';
 export * from './Label';
 export * from './MaskField';
+export * from './Notification';
 export * from './PageLayout';
 export * from './Pagination';
 export * from './PeriodPicker';
