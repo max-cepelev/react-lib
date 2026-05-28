@@ -1,12 +1,5 @@
 import type { Meta } from 'storybook-react-rsbuild';
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from '~/components';
+import { Card } from '~/components';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -22,21 +15,23 @@ export default {
 export const Example = () => {
 	return (
 		<Card>
-			<CardHeader>
-				<CardTitle>Create project</CardTitle>
-				<CardDescription>Deploy your new project in one-click.</CardDescription>
-			</CardHeader>
-			<CardContent>
+			<Card.Header>
+				<Card.Title>Create project</Card.Title>
+				<Card.Description>
+					Deploy your new project in one-click.
+				</Card.Description>
+			</Card.Header>
+			<Card.Content>
 				<form>
 					<div className="grid w-full items-center gap-4">Hello</div>
 				</form>
-			</CardContent>
-			<CardFooter className="flex justify-between">
+			</Card.Content>
+			<Card.Footer className="flex justify-between">
 				{/* biome-ignore lint/a11y/useButtonType: <> */}
 				<button>Cancel</button>
 				{/* biome-ignore lint/a11y/useButtonType: <> */}
 				<button>Deploy</button>
-			</CardFooter>
+			</Card.Footer>
 		</Card>
 	);
 };
