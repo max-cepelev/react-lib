@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.17.1
+
+### Patch Changes
+
+- Export Popover createHandle, add Root alias
+
 ## 0.17.0
 
 ### Minor Changes
