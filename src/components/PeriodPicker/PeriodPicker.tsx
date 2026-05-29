@@ -2,7 +2,7 @@ import { Calendar1 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { Button } from '../Button';
-import { Popover, PopoverContent, PopoverTrigger } from '../Popover';
+import { Popover } from '../Popover';
 import { TextField, type TextFieldProps } from '../TextField';
 import { MONTHS, QUARTERS } from './constants';
 import * as styles from './styles.css';
@@ -84,18 +84,20 @@ export const PeriodPicker = (props: PeriodPickerProps) => {
 				fullWidth={fullWidth}
 				name={name}
 				endAdornment={
-					<PopoverTrigger asChild>
-						<Button disabled={disabled} variant="ghost" size="icon">
-							<Calendar1 />
-						</Button>
-					</PopoverTrigger>
+					<Popover.Trigger
+						render={
+							<Button disabled={disabled} variant="ghost" size="icon">
+								<Calendar1 />
+							</Button>
+						}
+					/>
 				}
 				placeholder={placeholder}
 				error={error}
 				helperText={helperText}
 				className={className}
 			/>
-			<PopoverContent align="end" alignOffset={-10} side="bottom">
+			<Popover.Content align="end" alignOffset={-10} side="bottom">
 				<div className={styles.wrapper}>
 					<YearsDropdown
 						year={year}
@@ -151,7 +153,7 @@ export const PeriodPicker = (props: PeriodPickerProps) => {
 						</div>
 					)}
 				</div>
-			</PopoverContent>
+			</Popover.Content>
 		</Popover>
 	);
 };

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '../Button';
 import { Calendar, type PropsSingle } from '../Calendar';
 import { MaskField } from '../MaskField';
-import { Popover, PopoverContent, PopoverTrigger } from '../Popover';
+import { Popover } from '../Popover';
 import type { TextFieldProps } from '../TextField';
 
 export type DatePickerProps = Omit<PropsSingle, 'onSelect' | 'mode'> & {
@@ -139,11 +139,13 @@ export const DatePicker = (props: DatePickerProps) => {
 				size={size}
 				name={name}
 				endAdornment={
-					<PopoverTrigger asChild>
-						<Button variant="ghost" size="icon" onClick={handleClick}>
-							<Calendar1 />
-						</Button>
-					</PopoverTrigger>
+					<Popover.Trigger
+						render={
+							<Button variant="ghost" size="icon" onClick={handleClick}>
+								<Calendar1 />
+							</Button>
+						}
+					/>
 				}
 				maskProps={{
 					mask: '__.__.____',
@@ -154,7 +156,7 @@ export const DatePicker = (props: DatePickerProps) => {
 				error={!!innerError || error}
 				helperText={innerError || helperText}
 			/>
-			<PopoverContent align="end" alignOffset={-10} side="bottom">
+			<Popover.Content align="end" alignOffset={-10} side="bottom">
 				<Calendar
 					month={month}
 					onMonthChange={setMonth}
@@ -164,7 +166,7 @@ export const DatePicker = (props: DatePickerProps) => {
 					mode="single"
 					captionLayout={getLayout()}
 				/>
-			</PopoverContent>
+			</Popover.Content>
 		</Popover>
 	);
 };

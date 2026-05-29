@@ -1,12 +1,7 @@
 import { clsx } from 'clsx';
 import type { ReactNode, SyntheticEvent } from 'react';
 import { Button } from '../Button';
-import {
-	Popover,
-	PopoverContent,
-	type PopoverContentProps,
-	PopoverTrigger,
-} from '../Popover';
+import { Popover, type PopoverProps } from '../Popover';
 import { Typography } from '../Typography';
 import {
 	actionsClass,
@@ -45,8 +40,8 @@ export type ConfirmActionProps = {
 	skipConfirm?: boolean;
 
 	popoverProps?: {
-		side: PopoverContentProps['side'];
-		align: PopoverContentProps['align'];
+		side: PopoverProps.Content['side'];
+		align: PopoverProps.Content['align'];
 	};
 
 	/**
@@ -82,12 +77,12 @@ export const ConfirmAction = (props: ConfirmActionProps) => {
 
 	return (
 		<Popover open={open} onOpenChange={onOpenChange}>
-			<PopoverTrigger asChild>
+			<Popover.Trigger>
 				{actionComponent({
 					onClick: onActionComponentClick,
 				})}
-			</PopoverTrigger>
-			<PopoverContent
+			</Popover.Trigger>
+			<Popover.Content
 				side={side}
 				align={align}
 				className={clsx(popoverClass, { [hasTextClass]: Boolean(text) })}
@@ -102,7 +97,7 @@ export const ConfirmAction = (props: ConfirmActionProps) => {
 						<Button {...confirmButtonProps}>{confirmButtonText}</Button>
 					</div>
 				</div>
-			</PopoverContent>
+			</Popover.Content>
 		</Popover>
 	);
 };

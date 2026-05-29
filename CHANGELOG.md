@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.17.0
+
+### Minor Changes
+
+- Change Popover component
+
 ## 0.16.0
 
 ### Minor Changes

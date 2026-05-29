@@ -1,5 +1,5 @@
 import type { Meta } from 'storybook-react-rsbuild';
-import { Button, Popover, PopoverContent, PopoverTrigger } from '~/components';
+import { Button, Popover } from '~/components';
 
 export default {
 	title: 'Popover',
@@ -13,12 +13,10 @@ export default {
 export const PopoverDemo = () => {
 	return (
 		<Popover>
-			<PopoverTrigger asChild>
-				<Button variant="outline">Trigger</Button>
-			</PopoverTrigger>
-			<PopoverContent side="top">
+			<Popover.Trigger render={<Button variant="outline">Trigger</Button>} />
+			<Popover.Content side="top">
 				Place content for the popover here.
-			</PopoverContent>
+			</Popover.Content>
 		</Popover>
 	);
 };

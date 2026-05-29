@@ -21,25 +21,18 @@ export const content = style({
 	backgroundColor: theme.colors.background.paper,
 	padding: theme.spacing[4],
 	outline: 'none',
-	boxShadow: theme.elevation[3],
+	boxShadow: theme.elevation[2],
 	selectors: {
-		'&[data-state="open"]': {
-			animation: `${zoomIn} 150ms ease-out`,
+		'&[data-starting-style]': {
+			animation: `${zoomIn} 250ms ease-in`,
 		},
-		'&[data-state="closed"]': {
+		'&[data-ending-style]': {
 			animation: `${zoomOut} 150ms ease-out`,
 		},
-		// '&[data-side="top"]': {
-		// 	animation: `${slideFromBottom} 150ms ease-out`,
-		// },
-		// '&[data-side="bottom"]': {
-		// 	animation: `${slideFromTop} 150ms ease-out`,
-		// },
-		// '&[data-side="left"]': {
-		// 	animation: `${slideFromRight} 150ms ease-out`,
-		// },
-		// '&[data-side="right"]': {
-		// 	animation: `${slideFromLeft} 150ms ease-out`,
-		// },
 	},
+});
+
+export const positioner = style({
+	isolation: 'isolate',
+	zIndex: 50,
 });
