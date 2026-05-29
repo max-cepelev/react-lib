@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.16.0
+
+### Minor Changes
+
+- Switch Badge and Button from Radix Slot to Base UI
+
 ## 0.15.2
 
 ### Patch Changes
