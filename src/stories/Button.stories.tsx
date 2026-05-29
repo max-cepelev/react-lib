@@ -1,5 +1,5 @@
 import type { Meta } from 'storybook-react-rsbuild';
-import { Button } from '~/components';
+import { Button, Tooltip } from '~/components';
 
 export default {
 	title: 'Button',
@@ -27,10 +27,20 @@ export const Link = () => <Button variant="link">Link</Button>;
 
 export const Ghost = () => <Button variant="ghost">Ghost</Button>;
 
-export const Disabled = () => <Button disabled>Disabled</Button>;
+export const Disabled = () => (
+	<Tooltip arrow text="disabled">
+		<span>
+			<Button disabled>Disabled</Button>
+		</span>
+	</Tooltip>
+);
 
 export const Loading = () => <Button isLoading>Loading</Button>;
 
 export const StartAdornment = () => (
 	<Button startAdornment="+">StartAdornment</Button>
+);
+
+export const RenderLink = () => (
+	<Button variant="link" render={<a href="/">Hello</a>} />
 );

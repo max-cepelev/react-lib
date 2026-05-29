@@ -7,7 +7,7 @@ import {
 import { theme } from '~/theme';
 import type { ButtonSize, ButtonVariant } from './types';
 
-const buttonBase = style({
+export const buttonBase = style({
 	display: 'inline-flex',
 	justifyContent: 'center',
 	alignItems: 'center',
@@ -43,7 +43,7 @@ const spin = keyframes({
 	},
 });
 
-const loading = style({
+export const loading = style({
 	pointerEvents: 'none',
 	opacity: 0.6,
 	'::after': {
@@ -73,11 +73,13 @@ const loading = style({
 	},
 });
 
-const fullWidthStyle = style({
+export const fullWidthStyle = style({
 	width: '100%',
 });
 
-const buttonVariants = styleVariants<Record<ButtonVariant, ComplexStyleRule>>({
+export const buttonVariants = styleVariants<
+	Record<ButtonVariant, ComplexStyleRule>
+>({
 	default: {
 		backgroundColor: theme.colors.primary,
 		color: theme.colors.foreground.primary,
@@ -122,7 +124,7 @@ const buttonVariants = styleVariants<Record<ButtonVariant, ComplexStyleRule>>({
 	},
 });
 
-const buttonSizes = styleVariants<Record<ButtonSize, ComplexStyleRule>>({
+export const buttonSizes = styleVariants<Record<ButtonSize, ComplexStyleRule>>({
 	sm: {
 		height: 28,
 		padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
@@ -149,10 +151,10 @@ const buttonSizes = styleVariants<Record<ButtonSize, ComplexStyleRule>>({
 	},
 });
 
-export default {
-	buttonBase,
-	buttonSizes,
-	buttonVariants,
-	fullWidthStyle,
-	loading,
-};
+export const startAdornment = style({
+	marginRight: theme.spacing[2],
+});
+
+export const endAdornment = style({
+	marginLeft: theme.spacing[2],
+});

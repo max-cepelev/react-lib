@@ -41,7 +41,7 @@ export const Tooltip = ({
 	content,
 	children,
 	side = 'top',
-	sideOffset,
+	sideOffset = 10,
 	alignOffset,
 	delayDuration = 0,
 	className,

@@ -1,11 +1,9 @@
-import { Slot } from '@radix-ui/react-slot';
+import { Button as ButtonPrimitive } from '@base-ui/react/button';
 import { clsx } from 'clsx';
-import styles from './button.css';
-import { Content } from './Content';
+import * as styles from './button.css';
 import type { ButtonSize, ButtonVariant } from './types';
 
-export type ButtonProps = React.ComponentProps<'button'> & {
-	asChild?: boolean;
+export type ButtonProps = ButtonPrimitive.Props & {
 	isLoading?: boolean;
 	fullWidth?: boolean;
 	variant?: ButtonVariant;
@@ -18,15 +16,16 @@ const Button = ({
 	className,
 	variant = 'default',
 	size = 'md',
-	asChild = false,
+	startAdornment,
+	endAdornment,
 	isLoading = false,
 	fullWidth,
+	children,
 	...props
 }: ButtonProps) => {
-	const Component = asChild ? Slot : Content;
-
 	return (
-		<Component
+		<ButtonPrimitive
+			nativeButton={props.nativeButton ?? !props.render}
 			className={clsx(
 				styles.buttonBase,
 				styles.buttonVariants[variant],
@@ -35,7 +34,15 @@ const Button = ({
 				className,
 			)}
 			{...props}
-		/>
+		>
+			{startAdornment && (
+				<span className={styles.startAdornment}>{startAdornment}</span>
+			)}
+			{children}
+			{endAdornment && (
+				<span className={styles.endAdornment}>{endAdornment}</span>
+			)}
+		</ButtonPrimitive>
 	);
 };
 
