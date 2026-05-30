@@ -84,7 +84,7 @@ The project uses TypeScript path mapping:
 - **Input/Forms**: Input, TextField, Select, Checkbox, RadioGroup, DatePicker, etc.
 - **Feedback**: Dialog, Tooltip, CircularProgress, ContentState
 - **Navigation**: Tabs, Pagination, Accordion
-- **Actions**: Button, ToggleGroup, ConfirmAction
+- **Actions**: Button, ButtonGroup, ToggleGroup, ConfirmAction
 
 ### Creating New Components
 

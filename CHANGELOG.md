@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.21.0
+
+### Minor Changes
+
+- feat: add ButtonGroup component
+
 ## 0.20.0
 
 ### Minor Changes
