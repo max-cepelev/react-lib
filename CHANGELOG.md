@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.19.0
+
+### Minor Changes
+
+- refactor Dialog to use Base UI compound API
+
 ## 0.18.0
 
 ### Minor Changes

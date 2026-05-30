@@ -1,5 +1,6 @@
 import { globalStyle, keyframes, style } from '@vanilla-extract/css';
 import { theme } from '~/theme';
+import { negativeSpacing, spacing } from '~/utils';
 
 const fadeIn = keyframes({
 	from: { opacity: 0 },
@@ -11,103 +12,73 @@ const fadeOut = keyframes({
 	to: { opacity: 0 },
 });
 
+const zoomIn = keyframes({
+	from: { opacity: 0, transform: 'translate(-50%, -50%) scale(0.95)' },
+	to: { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+});
+
+const zoomOut = keyframes({
+	from: { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+	to: { opacity: 0, transform: 'translate(-50%, -50%) scale(0.95)' },
+});
+
 export const overlay = style({
 	position: 'fixed',
 	inset: 0,
 	zIndex: 50,
-	backgroundColor: 'rgba(0, 0, 0, 0.6)',
-
+	isolation: 'isolate',
+	backgroundColor: 'rgba(0, 0, 0, 0.1)',
+	backdropFilter: 'blur(4px)',
 	selectors: {
-		'&[data-state="open"]': {
-			animation: `${fadeIn} 200ms ease-out`,
+		'&[data-open]': {
+			animation: `${fadeIn} 100ms ease-out`,
 		},
-		'&[data-state="closed"]': {
-			animation: `${fadeOut} 200ms ease-in`,
+		'&[data-closed]': {
+			animation: `${fadeOut} 100ms ease-in`,
 		},
 	},
-});
-
-const contentShow = keyframes({
-	from: { opacity: 0, transform: 'translate(-50%, -48%) scale(0.96)' },
-	to: { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
-});
-
-const contentHide = keyframes({
-	from: { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
-	to: { opacity: 0, transform: 'translate(-50%, -48%) scale(0.96)' },
 });
 
 export const content = style({
 	position: 'fixed',
-	left: '50%',
 	top: '50%',
+	left: '50%',
 	zIndex: 50,
 	display: 'grid',
 	width: '100%',
-	maxWidth: '32rem',
+	maxWidth: 'calc(100% - 2rem)',
 	transform: 'translate(-50%, -50%)',
-	gap: theme.spacing[4],
-	border: `1px solid ${theme.colors.border}`,
+	gap: spacing(4),
+	border: `1px solid color-mix(in oklch, ${theme.colors.text.primary} 10%, transparent)`,
+	borderRadius: theme.borderRadius.lg,
 	backgroundColor: theme.colors.background.paper,
-	padding: theme.spacing[4],
-	borderRadius: theme.borderRadius.md,
+	padding: spacing(4),
 	boxShadow: theme.elevation[3],
-	transitionDuration: '200ms',
-
-	'@media': {
-		'(min-width: 640px)': {
-			borderRadius: theme.borderRadius.lg,
+	outline: 'none',
+	color: theme.colors.text.primary,
+	fontSize: theme.fontSize.sm,
+	selectors: {
+		'&[data-open]': {
+			animation: `${zoomIn} 100ms ease-out, ${fadeIn} 100ms ease-out`,
+		},
+		'&[data-closed]': {
+			animation: `${zoomOut} 100ms ease-in, ${fadeOut} 100ms ease-in`,
 		},
 	},
-
-	selectors: {
-		'&[data-state="open"]': {
-			animation: `${contentShow} 200ms ease-out`,
-		},
-		'&[data-state="closed"]': {
-			animation: `${contentHide} 200ms ease-in`,
+	'@media': {
+		'(min-width: 640px)': {
+			maxWidth: '24rem',
 		},
 	},
 });
 
 export const closeButton = style({
 	position: 'absolute',
+	top: theme.spacing[2],
 	right: theme.spacing[2],
-	top: theme.spacing[3],
-	borderRadius: theme.borderRadius.md,
-	opacity: 0.7,
-	transition: 'opacity 150ms',
-	color: theme.colors.primary,
-	backgroundColor: theme.colors.background.paper,
-	border: 'none',
-	cursor: 'pointer',
-	display: 'flex',
-	justifyContent: 'center',
-	alignItems: 'center',
-	width: '24px',
-	height: '24px',
-	selectors: {
-		'&:hover': {
-			opacity: 1,
-		},
-		'&:focus': {
-			outline: 'none',
-		},
-		'&:disabled': {
-			pointerEvents: 'none',
-		},
-		'&[data-state="open"]': {
-			backgroundColor: theme.colors.primary,
-		},
-	},
 });
 
-globalStyle(`${closeButton} svg`, {
-	width: '24px',
-	height: '24px',
-});
-
-export const closeSpan = style({
+export const closeText = style({
 	position: 'absolute',
 	width: '1px',
 	height: '1px',
@@ -122,43 +93,48 @@ export const closeSpan = style({
 export const header = style({
 	display: 'flex',
 	flexDirection: 'column',
-
-	textAlign: 'center',
-
-	'@media': {
-		'(min-width: 640px)': {
-			textAlign: 'left',
-		},
-	},
-});
-
-export const hasDescription = style({
-	gap: theme.spacing[2],
+	gap: spacing(2),
 });
 
 export const footer = style({
 	display: 'flex',
 	flexDirection: 'column-reverse',
-	gap: theme.spacing[2],
-
+	gap: spacing(2),
+	marginLeft: negativeSpacing(4),
+	marginRight: negativeSpacing(4),
+	marginBottom: negativeSpacing(4),
+	padding: spacing(4),
+	borderTop: `1px solid ${theme.colors.border}`,
+	borderBottomRightRadius: theme.borderRadius.lg,
+	borderBottomLeftRadius: theme.borderRadius.lg,
+	backgroundColor: `color-mix(in oklch, ${theme.colors.text.primary} 5%, transparent)`,
 	'@media': {
 		'(min-width: 640px)': {
 			flexDirection: 'row',
 			justifyContent: 'flex-end',
-			gap: theme.spacing[2],
 		},
 	},
 });
 
 export const title = style({
-	fontSize: theme.fontSize.lg,
-	fontWeight: theme.fontWeight.semibold,
+	fontSize: theme.fontSize.base,
+	fontWeight: theme.fontWeight.medium,
 	lineHeight: theme.lineHeight.none,
-	letterSpacing: '-0.025em',
-	paddingRight: theme.spacing[4],
+	paddingRight: spacing(8),
 });
 
 export const description = style({
+	color: theme.colors.text.secondary,
 	fontSize: theme.fontSize.sm,
-	color: theme.colors.text.hint,
+	lineHeight: theme.lineHeight.normal,
+	textWrap: 'balance',
+});
+
+globalStyle(`${description} a`, {
+	textDecoration: 'underline',
+	textUnderlineOffset: spacing(3),
+});
+
+globalStyle(`${description} a:hover`, {
+	color: theme.colors.text.primary,
 });

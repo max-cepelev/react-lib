@@ -8,7 +8,6 @@ export const container = style({
 
 export const labelClass = style({
 	marginBottom: 6,
-	marginLeft: theme.borderRadius.md,
 });
 
 export const helperTextClass = style({
