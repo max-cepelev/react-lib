@@ -27,7 +27,7 @@ This is a React component library (`@max-ts/kit`) built with modern tooling for 
 - **Styling**: Vanilla Extract CSS-in-TypeScript for type-safe styling
 - **Component Development**: Storybook for component documentation and testing
 - **Code Quality**: Biome for linting and formatting
-- **UI Primitives**: Radix UI for accessible base components
+- **UI Primitives**: Base UI is preferred for new accessible primitives; Radix UI is still present for existing components
 - **Forms**: React Hook Form integration with custom form components
 
 ### Project Structure
@@ -55,11 +55,12 @@ The library uses a comprehensive design system defined in `src/theme/theme.css.t
 ### Component Architecture
 
 Components follow a consistent pattern:
-1. TypeScript component with typed props extending HTML element props
+1. TypeScript component with typed props extending the underlying primitive or HTML element props
 2. Vanilla Extract styles with theme integration
-3. Support for `asChild` pattern via Radix Slot when applicable
-4. Consistent size and variant prop patterns
-5. Full TypeScript support with exported types
+3. Compound components expose subparts as static properties on the root component, e.g. `DropdownMenu.Trigger`
+4. Base UI composition uses the standard `render` prop; do not add or preserve Radix-style `asChild`
+5. Consistent size and variant prop patterns
+6. Full TypeScript support with exported types
 
 ### Path Aliases
 
@@ -91,34 +92,70 @@ When creating a new component, follow this structure:
 
 1. **Create component folder** in `src/components/ComponentName/`
 2. **Component file** (`ComponentName.tsx`):
-   - Import theme from `~/theme`
-   - Use theme tokens for all styling values (colors, spacing, typography, etc.)
-   - Extend appropriate HTML element props for type safety
-   - Export component and its types
+   - Import primitive components from Base UI when wrapping accessible UI behavior
+   - Import styles as a namespace: `import * as styles from './styles.css'`
+   - Import props from `./types` when the component has several parts or complex prop types
+   - Define the root component as a named `function ComponentName(...)`
+   - Define compound subcomponents as short internal function names (`Trigger`, `Content`, `Item`) and attach them to the root (`ComponentName.Trigger = Trigger`)
+   - Export the root component only for compound components (`export { ComponentName }`) instead of exporting each part as a separate top-level component
+   - Use Base UI's `render` prop for element replacement/composition; do not introduce `asChild`
+   - Use `data-slot` attributes on root and subparts for traceability and styling hooks
+   - Use `data-*` attributes for local state/variant flags (`data-inset`, `data-variant`) instead of class toggles such as `{ inset }`
+   - Merge classes directly with `clsx(styles.part, className)`; do not add custom className merge helpers unless there is a demonstrated need
 3. **Styles file** (`componentName.css.ts` or `styles.css.ts`):
    - Use Vanilla Extract's `style()` and `styleVariants()` functions
    - Reference theme tokens: `theme.colors`, `theme.spacing`, `theme.fontSize`, etc.
    - Use `spacing()` and `negativeSpacing()` helpers from `~/utils` for dynamic spacing
-4. **Types file** (`types.ts`) - if component has complex type definitions
-5. **Index file** (`index.ts`) - export all public APIs
+4. **Types file** (`types.ts`) - use a namespace for component props when component has multiple parts:
+   - Import primitive types from the concrete Base UI package, e.g. `import type { Menu } from '@base-ui/react/menu'`
+   - Export `ComponentNameProps` as a namespace
+   - Mirror each subpart with a type alias, e.g. `ComponentNameProps.Root`, `ComponentNameProps.Trigger`, `ComponentNameProps.Content`
+   - Compose popup/content props from both popup and positioner props when needed, e.g. `Menu.Popup.Props & Pick<Menu.Positioner.Props, 'align' | 'alignOffset' | 'side' | 'sideOffset'>`
+5. **Index file** (`index.ts`) - export the public component API; for compound components this is usually the root component and any public types, not every subpart as a top-level export
 6. **Storybook story** in `stories/ComponentName.stories.tsx`
 7. **Export component** in `src/components/index.ts`
 
 Example component structure:
 ```typescript
 // ComponentName.tsx
-import { theme } from '~/theme';
-import { spacing } from '~/utils';
-import styles from './styles.css';
+import { Menu as MenuPrimitive } from '@base-ui/react/menu';
+import { clsx } from 'clsx';
+import * as styles from './styles.css';
+import type { ComponentNameProps } from './types';
 
-export type ComponentProps = React.ComponentProps<'div'> & {
-  variant?: 'default' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
-};
+function ComponentName({ ...props }: ComponentNameProps.Root) {
+  return <MenuPrimitive.Root data-slot="component-name" {...props} />;
+}
 
-export const Component = ({ variant = 'default', size = 'md', ...props }: ComponentProps) => {
-  // implementation
-};
+function Trigger({ ...props }: ComponentNameProps.Trigger) {
+  return <MenuPrimitive.Trigger data-slot="component-name-trigger" {...props} />;
+}
+
+function Content({ className, ...props }: ComponentNameProps.Content) {
+  return (
+    <MenuPrimitive.Popup
+      data-slot="component-name-content"
+      className={clsx(styles.content, className)}
+      {...props}
+    />
+  );
+}
+
+ComponentName.Trigger = Trigger;
+ComponentName.Content = Content;
+
+export { ComponentName };
+```
+
+```typescript
+// types.ts
+import type { Menu } from '@base-ui/react/menu';
+
+export namespace ComponentNameProps {
+  export type Root = Menu.Root.Props;
+  export type Trigger = Menu.Trigger.Props;
+  export type Content = Menu.Popup.Props;
+}
 ```
 
 ```typescript
@@ -141,6 +178,8 @@ When working with this codebase:
 - Follow the component folder structure pattern
 - Ensure TypeScript types are properly exported
 - Add corresponding Storybook stories for new components
+- For compound components, stories should import only the root component and use the static API (`ComponentName.Trigger`, `ComponentName.Content`, etc.)
+- Storybook examples should cover meaningful subparts and states, not only the simplest open/closed case
 - Use Vanilla Extract for styling to maintain type safety
 
 ### Vanilla Extract Styling Rules

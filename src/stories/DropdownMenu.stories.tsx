@@ -1,21 +1,15 @@
-import type { Meta } from 'storybook-react-rsbuild';
 import {
-	Button,
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuGroup,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuPortal,
-	DropdownMenuSeparator,
-	DropdownMenuShortcut,
-	DropdownMenuSub,
-	DropdownMenuSubContent,
-	DropdownMenuSubTrigger,
-	DropdownMenuTrigger,
-} from '~/components';
+	Building2Icon,
+	CreditCardIcon,
+	DownloadIcon,
+	EditIcon,
+	Trash2Icon,
+	WalletIcon,
+} from 'lucide-react';
+import { useState } from 'react';
+import type { Meta } from 'storybook-react-rsbuild';
+import { Button, DropdownMenu } from '~/components';
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
 	title: 'DropdownMenu',
 	component: DropdownMenu,
@@ -25,63 +19,190 @@ export default {
 	tags: ['autodocs'],
 } as Meta<typeof DropdownMenu>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const DropdownMenuDemo = () => {
+export const Basic = () => {
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button variant="outline">Open</Button>
-			</DropdownMenuTrigger>
-			<DropdownMenuContent style={{ width: 200 }}>
-				<DropdownMenuLabel>My Account</DropdownMenuLabel>
-				<DropdownMenuSeparator />
-				<DropdownMenuGroup>
-					<DropdownMenuItem>
+			<DropdownMenu.Trigger render={<Button variant="outline" />}>
+				Open
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Content align="start" style={{ width: 200 }}>
+				<DropdownMenu.Group>
+					<DropdownMenu.Label>My Account</DropdownMenu.Label>
+					<DropdownMenu.Item>
 						Profile
-						<DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-					</DropdownMenuItem>
-					<DropdownMenuItem>
+						<DropdownMenu.Shortcut>⇧⌘P</DropdownMenu.Shortcut>
+					</DropdownMenu.Item>
+					<DropdownMenu.Item>
 						Billing
-						<DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-					</DropdownMenuItem>
-					<DropdownMenuItem>
+						<DropdownMenu.Shortcut>⌘B</DropdownMenu.Shortcut>
+					</DropdownMenu.Item>
+					<DropdownMenu.Item>
 						Settings
-						<DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-					</DropdownMenuItem>
-					<DropdownMenuItem>
-						Keyboard shortcuts
-						<DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
-					</DropdownMenuItem>
-				</DropdownMenuGroup>
-				<DropdownMenuSeparator />
-				<DropdownMenuGroup>
-					<DropdownMenuItem>Team</DropdownMenuItem>
-					<DropdownMenuSub>
-						<DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
-						<DropdownMenuPortal>
-							<DropdownMenuSubContent>
-								<DropdownMenuItem>Email</DropdownMenuItem>
-								<DropdownMenuItem>Message</DropdownMenuItem>
-								<DropdownMenuSeparator />
-								<DropdownMenuItem>More...</DropdownMenuItem>
-							</DropdownMenuSubContent>
-						</DropdownMenuPortal>
-					</DropdownMenuSub>
-					<DropdownMenuItem>
+						<DropdownMenu.Shortcut>⌘S</DropdownMenu.Shortcut>
+					</DropdownMenu.Item>
+				</DropdownMenu.Group>
+				<DropdownMenu.Separator />
+				<DropdownMenu.Group>
+					<DropdownMenu.Item>GitHub</DropdownMenu.Item>
+					<DropdownMenu.Item>Support</DropdownMenu.Item>
+					<DropdownMenu.Item disabled>API</DropdownMenu.Item>
+				</DropdownMenu.Group>
+				<DropdownMenu.Separator />
+				<DropdownMenu.Group>
+					<DropdownMenu.Item variant="destructive">
+						Log out
+						<DropdownMenu.Shortcut>⇧⌘Q</DropdownMenu.Shortcut>
+					</DropdownMenu.Item>
+				</DropdownMenu.Group>
+			</DropdownMenu.Content>
+		</DropdownMenu>
+	);
+};
+
+export const Submenu = () => {
+	return (
+		<DropdownMenu>
+			<DropdownMenu.Trigger render={<Button variant="outline" />}>
+				Open
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Content>
+				<DropdownMenu.Group>
+					<DropdownMenu.Item>Team</DropdownMenu.Item>
+					<DropdownMenu.Sub>
+						<DropdownMenu.SubTrigger>Invite users</DropdownMenu.SubTrigger>
+						<DropdownMenu.Portal>
+							<DropdownMenu.SubContent>
+								<DropdownMenu.Item>Email</DropdownMenu.Item>
+								<DropdownMenu.Item>Message</DropdownMenu.Item>
+								<DropdownMenu.Sub>
+									<DropdownMenu.SubTrigger>
+										More options
+									</DropdownMenu.SubTrigger>
+									<DropdownMenu.Portal>
+										<DropdownMenu.SubContent>
+											<DropdownMenu.Item>Calendly</DropdownMenu.Item>
+											<DropdownMenu.Item>Slack</DropdownMenu.Item>
+											<DropdownMenu.Separator />
+											<DropdownMenu.Item>Webhook</DropdownMenu.Item>
+										</DropdownMenu.SubContent>
+									</DropdownMenu.Portal>
+								</DropdownMenu.Sub>
+								<DropdownMenu.Separator />
+								<DropdownMenu.Item>Advanced...</DropdownMenu.Item>
+							</DropdownMenu.SubContent>
+						</DropdownMenu.Portal>
+					</DropdownMenu.Sub>
+					<DropdownMenu.Item>
 						New Team
-						<DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-					</DropdownMenuItem>
-				</DropdownMenuGroup>
-				<DropdownMenuSeparator />
-				<DropdownMenuItem>GitHub</DropdownMenuItem>
-				<DropdownMenuItem>Support</DropdownMenuItem>
-				<DropdownMenuItem disabled>API</DropdownMenuItem>
-				<DropdownMenuSeparator />
-				<DropdownMenuItem>
-					Log out
-					<DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-				</DropdownMenuItem>
-			</DropdownMenuContent>
+						<DropdownMenu.Shortcut>⌘+T</DropdownMenu.Shortcut>
+					</DropdownMenu.Item>
+				</DropdownMenu.Group>
+			</DropdownMenu.Content>
+		</DropdownMenu>
+	);
+};
+
+export const Checkboxes = () => {
+	const [showStatusBar, setShowStatusBar] = useState(true);
+	const [showActivityBar, setShowActivityBar] = useState(false);
+	const [showPanel, setShowPanel] = useState(false);
+
+	return (
+		<DropdownMenu>
+			<DropdownMenu.Trigger render={<Button variant="outline" />}>
+				Appearance
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Content style={{ width: 200 }}>
+				<DropdownMenu.Group>
+					<DropdownMenu.Label>Appearance</DropdownMenu.Label>
+					<DropdownMenu.CheckboxItem
+						checked={showStatusBar}
+						onCheckedChange={setShowStatusBar}
+					>
+						Status Bar
+					</DropdownMenu.CheckboxItem>
+					<DropdownMenu.CheckboxItem
+						checked={showActivityBar}
+						onCheckedChange={setShowActivityBar}
+						disabled
+					>
+						Activity Bar
+					</DropdownMenu.CheckboxItem>
+					<DropdownMenu.CheckboxItem
+						checked={showPanel}
+						onCheckedChange={setShowPanel}
+					>
+						Panel
+					</DropdownMenu.CheckboxItem>
+				</DropdownMenu.Group>
+			</DropdownMenu.Content>
+		</DropdownMenu>
+	);
+};
+
+export const RadioItems = () => {
+	const [paymentMethod, setPaymentMethod] = useState('card');
+
+	return (
+		<DropdownMenu>
+			<DropdownMenu.Trigger render={<Button variant="outline" />}>
+				Payment Method
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Content style={{ width: 224 }}>
+				<DropdownMenu.Group>
+					<DropdownMenu.Label>Select Payment Method</DropdownMenu.Label>
+					<DropdownMenu.RadioGroup
+						value={paymentMethod}
+						onValueChange={setPaymentMethod}
+					>
+						<DropdownMenu.RadioItem value="card">
+							<CreditCardIcon />
+							Credit Card
+						</DropdownMenu.RadioItem>
+						<DropdownMenu.RadioItem value="paypal">
+							<WalletIcon />
+							PayPal
+						</DropdownMenu.RadioItem>
+						<DropdownMenu.RadioItem value="bank">
+							<Building2Icon />
+							Bank Transfer
+						</DropdownMenu.RadioItem>
+					</DropdownMenu.RadioGroup>
+				</DropdownMenu.Group>
+			</DropdownMenu.Content>
+		</DropdownMenu>
+	);
+};
+
+export const IconsAndRender = () => {
+	return (
+		<DropdownMenu>
+			<DropdownMenu.Trigger render={<Button variant="outline" />}>
+				Actions
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Content align="end" style={{ width: 180 }}>
+				<DropdownMenu.Item>
+					<EditIcon />
+					Edit
+				</DropdownMenu.Item>
+				<DropdownMenu.Item>
+					<DownloadIcon />
+					Download
+				</DropdownMenu.Item>
+				<DropdownMenu.Separator />
+				<DropdownMenu.Item
+					render={
+						<Button variant="ghost" size="sm" fullWidth>
+							Rendered with Button
+						</Button>
+					}
+				/>
+				<DropdownMenu.Separator />
+				<DropdownMenu.Item variant="destructive">
+					<Trash2Icon />
+					Delete
+				</DropdownMenu.Item>
+			</DropdownMenu.Content>
 		</DropdownMenu>
 	);
 };

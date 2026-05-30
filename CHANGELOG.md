@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.18.0
+
+### Minor Changes
+
+- refactor dropdown menu to use Base UI compound API
+
 ## 0.17.1
 
 ### Patch Changes

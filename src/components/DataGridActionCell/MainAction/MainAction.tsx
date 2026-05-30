@@ -1,10 +1,5 @@
 import { Button } from '../../Button';
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from '../../DropdownMenu';
+import { DropdownMenu } from '../../DropdownMenu';
 import { Tooltip, type TooltipProps } from '../../Tooltip';
 import type { ActionCellHandler, MainActionKind } from '../types';
 
@@ -43,34 +38,40 @@ export const MainAction = <TAction,>({
 
 		return (
 			<DropdownMenu>
-				<DropdownMenuTrigger asChild>
-					<Tooltip
-						key={name}
-						text={disabledReason || name}
-						side={tooltipPlacement}
-						arrow
-					>
-						<Button
-							variant="ghost"
-							size="icon"
-							isLoading={isLoading}
-							disabled={isDisabled || disabled}
-						>
-							{icon}
-						</Button>
-					</Tooltip>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent>
+				<Tooltip
+					key={name}
+					text={disabledReason || name}
+					side={tooltipPlacement}
+					arrow
+				>
+					<DropdownMenu.Trigger
+						render={
+							<Button
+								variant="ghost"
+								size="icon"
+								isLoading={isLoading}
+								disabled={isDisabled || disabled}
+							>
+								{icon}
+							</Button>
+						}
+					/>
+				</Tooltip>
+				<DropdownMenu.Content>
 					{actions.map(
 						({ name: nestedActionName, onClick: onClickNested, ...props }) => (
-							<DropdownMenuItem {...props} key={nestedActionName} asChild>
-								<Button size="sm" onClick={onActionClick(onClickNested)}>
-									{nestedActionName}
-								</Button>
-							</DropdownMenuItem>
+							<DropdownMenu.Item
+								{...props}
+								key={nestedActionName}
+								render={
+									<Button size="sm" onClick={onActionClick(onClickNested)}>
+										{nestedActionName}
+									</Button>
+								}
+							/>
 						),
 					)}
-				</DropdownMenuContent>
+				</DropdownMenu.Content>
 			</DropdownMenu>
 		);
 	}

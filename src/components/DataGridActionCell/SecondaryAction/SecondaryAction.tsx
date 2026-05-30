@@ -1,11 +1,6 @@
 import { EllipsisVertical } from 'lucide-react';
 import { Button } from '../../Button';
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from '../../DropdownMenu';
+import { DropdownMenu } from '../../DropdownMenu';
 import { Tooltip, type TooltipProps } from '../../Tooltip';
 import type { ActionCellHandler, SecondaryActionKind } from '../types';
 
@@ -36,32 +31,41 @@ export const SecondaryActions = <TAction,>({
 }: SecondaryActionProps<TAction>) => {
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button disabled={isDisabled} variant="ghost" size="icon">
-					<EllipsisVertical />
-				</Button>
-			</DropdownMenuTrigger>
-			<DropdownMenuContent>
+			<DropdownMenu.Trigger
+				render={
+					<Button disabled={isDisabled} variant="ghost" size="icon">
+						<EllipsisVertical />
+					</Button>
+				}
+			/>
+			<DropdownMenu.Content>
 				{actions.map((action) => {
 					const { onClick, name, disabledReason, isLoading } = action;
 
 					return (
-						<DropdownMenuItem key={name} asChild>
-							<Tooltip arrow side={tooltipPlacement} text={disabledReason}>
-								<Button
-									onClick={onActionClick(onClick)}
-									isLoading={isLoading}
-									variant="ghost"
-									size="sm"
-									fullWidth
-								>
-									{name}
-								</Button>
-							</Tooltip>
-						</DropdownMenuItem>
+						<Tooltip
+							key={name}
+							arrow
+							side={tooltipPlacement}
+							text={disabledReason}
+						>
+							<DropdownMenu.Item
+								render={
+									<Button
+										onClick={onActionClick(onClick)}
+										isLoading={isLoading}
+										variant="ghost"
+										size="sm"
+										fullWidth
+									>
+										{name}
+									</Button>
+								}
+							/>
+						</Tooltip>
 					);
 				})}
-			</DropdownMenuContent>
+			</DropdownMenu.Content>
 		</DropdownMenu>
 	);
 };

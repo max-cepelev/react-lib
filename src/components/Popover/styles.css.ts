@@ -34,5 +34,5 @@ export const content = style({
 
 export const positioner = style({
 	isolation: 'isolate',
-	zIndex: 50,
+	zIndex: 4000,
 });
