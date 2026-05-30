@@ -7,7 +7,7 @@ import {
 	buttonsClass,
 	containerClass,
 	labelClass,
-} from './buttonGroup.css';
+} from './toggleGroup.css';
 
 type Value = string | number;
 
@@ -20,7 +20,7 @@ type Option<T extends Value> = {
 	endAdornment?: React.ReactNode;
 };
 
-type ButtonGroupProps<
+type ToggleGroupProps<
 	TValue extends Value,
 	Multiple extends boolean = false,
 > = {
@@ -33,7 +33,7 @@ type ButtonGroupProps<
 	multiple?: Multiple;
 };
 
-export const ButtonGroup = <T extends Value, Multiple extends boolean = false>({
+export const ToggleGroup = <T extends Value, Multiple extends boolean = false>({
 	value,
 	onChange,
 	options,
@@ -41,7 +41,7 @@ export const ButtonGroup = <T extends Value, Multiple extends boolean = false>({
 	className,
 	label,
 	multiple,
-}: ButtonGroupProps<T, Multiple>) => {
+}: ToggleGroupProps<T, Multiple>) => {
 	const isMultiple = multiple === true;
 
 	const isActive = (optionValue: T): boolean => {

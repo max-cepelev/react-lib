@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.20.0
+
+### Minor Changes
+
+- refactor: rename ButtonGroup to ToggleGroup
+
 ## 0.19.0
 
 ### Minor Changes
