@@ -83,7 +83,7 @@ The project uses TypeScript path mapping:
 - **Data Display**: DataGrid, DataList, Carousel, Typography, Badge
 - **Input/Forms**: Input, TextField, Select, Checkbox, RadioGroup, DatePicker, etc.
 - **Feedback**: Dialog, Tooltip, CircularProgress, ContentState
-- **Navigation**: Tabs, Pagination, Accordion
+- **Navigation**: Breadcrumb, Tabs, Pagination, Accordion
 - **Actions**: Button, ButtonGroup, ToggleGroup, ConfirmAction
 
 ### Creating New Components

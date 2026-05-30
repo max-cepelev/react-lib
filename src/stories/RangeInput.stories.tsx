@@ -20,7 +20,6 @@ export function Demo() {
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 			<RangeInput
-				label="Цена"
 				minValue={filters.minEntrance}
 				maxValue={filters.maxEntrance}
 				unit="руб."
@@ -33,7 +32,6 @@ export function Demo() {
 				width={250}
 			/>
 			<RangeInput
-				label="Цена"
 				minValue={filters.minEntrance}
 				maxValue={filters.maxEntrance}
 				unit="руб."
@@ -46,7 +44,6 @@ export function Demo() {
 				width={250}
 			/>
 			<RangeInput
-				label="Цена"
 				minValue={filters.minEntrance}
 				maxValue={filters.maxEntrance}
 				unit="руб."

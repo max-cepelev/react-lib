@@ -16,7 +16,6 @@ export type RangeInputProps = {
 	maxValue?: number | null;
 	min: number;
 	max: number;
-	label?: string;
 	unit?: string;
 	onChange: (minValue: number, maxValue: number) => void;
 	width?: number | string;
@@ -34,7 +33,6 @@ export function RangeInput({
 	minValue,
 	maxValue,
 	width = 150,
-	label = '',
 	unit = '',
 	size = 'md',
 	className,
@@ -73,10 +71,7 @@ export function RangeInput({
 				width,
 			}}
 		>
-			<Typography className={textClass} color="disabled" variant="body2">
-				{label}
-			</Typography>
-			<Typography className={textClass} color="disabled" variant="body2">
+			<Typography className={textClass} color="disabled" variant="caption">
 				от
 			</Typography>
 			<input
@@ -88,7 +83,7 @@ export function RangeInput({
 				onKeyDown={onKeyDown}
 				ref={minInputRef}
 			/>
-			<Typography className={textClass} color="disabled" variant="body2">
+			<Typography className={textClass} color="disabled" variant="caption">
 				до
 			</Typography>
 			<input
@@ -100,7 +95,7 @@ export function RangeInput({
 				onKeyDown={onKeyDown}
 				ref={maxInputRef}
 			/>
-			<Typography className={textClass} color="disabled" variant="body2">
+			<Typography className={textClass} color="disabled" variant="caption">
 				{unit}
 			</Typography>
 			<div className={sliderClass}>

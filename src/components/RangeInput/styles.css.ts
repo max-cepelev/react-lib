@@ -4,7 +4,7 @@ import { theme } from '~/theme';
 export const container = style({
 	position: 'relative',
 	display: 'grid',
-	gridTemplateColumns: 'auto auto 1fr auto 1fr auto',
+	gridTemplateColumns: 'auto 1fr auto 1fr auto',
 	alignItems: 'center',
 	columnGap: theme.spacing[1],
 	background: theme.colors.background.paper,
@@ -26,19 +26,19 @@ export const activeClass = style({
 // Size variants
 export const sizes = styleVariants({
 	sm: {
-		height: theme.spacing[8],
-		fontSize: theme.fontSize.xs,
-		padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
+		height: 28,
+		fontSize: theme.fontSize.sm,
+		paddingInline: theme.spacing[2],
 	},
 	md: {
-		height: theme.spacing[10],
-		fontSize: theme.fontSize.sm,
-		padding: `${theme.spacing[2]} ${theme.spacing[3]}`,
+		height: 32,
+		fontSize: theme.fontSize.base,
+		paddingInline: theme.spacing[2],
 	},
 	lg: {
-		height: theme.spacing[12],
+		height: 36,
+		paddingInline: theme.spacing[3],
 		fontSize: theme.fontSize.base,
-		padding: `${theme.spacing[2]} ${theme.spacing[4]}`,
 	},
 });
 

@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.22.0
+
+### Minor Changes
+
+- feat: add Breadcrumb component
+
 ## 0.21.0
 
 ### Minor Changes
