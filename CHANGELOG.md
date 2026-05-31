@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.25.0
+
+### Minor Changes
+
+- Added Empty component
+
 ## 0.24.0
 
 ### Minor Changes

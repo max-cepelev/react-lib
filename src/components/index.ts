@@ -22,6 +22,7 @@ export * from './Description';
 export * from './Dialog';
 export * from './Drawer';
 export * from './DropdownMenu';
+export * from './Empty';
 export * from './ImageCarousel';
 export * from './Input';
 export * from './InputOTP';
