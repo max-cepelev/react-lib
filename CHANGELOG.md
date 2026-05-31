@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.23.0
+
+### Minor Changes
+
+- Added OverflowTypography
+
 ## 0.22.0
 
 ### Minor Changes

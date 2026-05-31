@@ -28,6 +28,7 @@ export * from './InputOTP';
 export * from './Label';
 export * from './MaskField';
 export * from './Notification';
+export * from './OverflowTypography';
 export * from './PageLayout';
 export * from './Pagination';
 export * from './PeriodPicker';

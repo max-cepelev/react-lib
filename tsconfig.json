@@ -22,7 +22,8 @@
 			"~/components": ["./src/components/index.ts"],
 			"~/form": ["./src/form/index.ts"],
 			"~/utils": ["./src/utils.ts"],
-			"~/theme": ["./src/theme/index.ts"]
+			"~/theme": ["./src/theme/index.ts"],
+			"~/hooks": ["./src/hooks/index.ts"]
 		}
 	},
 	"exclude": ["node_modules"],

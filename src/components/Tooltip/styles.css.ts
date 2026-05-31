@@ -28,6 +28,8 @@ export const contentClass = style({
 	backgroundColor: theme.colors.background.tooltip,
 	padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
 	boxShadow: theme.elevation[3],
+	color: theme.colors.foreground.primary,
+	maxWidth: 400,
 	selectors: {
 		'&[data-state="open"]': {
 			animation: `${zoomIn} 150ms ease-out`,
@@ -51,7 +53,6 @@ export const contentClass = style({
 });
 
 export const textClass = style({
-	color: theme.colors.foreground.primary,
 	fontSize: theme.fontSize.sm,
 	fontWeight: theme.fontWeight.medium,
 });

@@ -28,6 +28,7 @@ export type TypographyProps = Omit<
 	decoration?: 'none' | 'underline' | 'lineThrough';
 	component?: React.ElementType;
 	gutterBottom?: boolean;
+	ref?: React.Ref<HTMLElement>;
 };
 
 const VARIANT_COMPONENT_MAP: Record<
