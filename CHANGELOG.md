@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.24.0
+
+### Minor Changes
+
+- Added Sheet component
+
 ## 0.23.0
 
 ### Minor Changes

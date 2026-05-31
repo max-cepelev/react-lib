@@ -38,6 +38,7 @@ export * from './RadioGroup';
 export * from './RangeInput';
 export * from './ScrollTopButton';
 export * from './Select';
+export * from './Sheet';
 export * from './Slider';
 export * from './Tabs';
 export * from './TextField';
