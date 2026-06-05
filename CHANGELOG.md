@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.26.0
+
+### Minor Changes
+
+- Add Avatar, Collapsible, Sidebar. Slider Radix -> Base UI
+
 ## 0.25.0
 
 ### Minor Changes
