@@ -17,9 +17,19 @@ export function Dropdown(
 ) {
 	const { options, onChange, ...restProps } = props;
 
+	const selectedValue =
+		typeof restProps.value === 'string' || typeof restProps.value === 'number'
+			? restProps.value.toString()
+			: undefined;
+
 	const selectedOption = options?.find(
-		({ value }) => value === restProps.value,
+		({ value }) => value.toString() === selectedValue,
 	);
+
+	const items = options?.map(({ value, label }) => ({
+		value: value.toString(),
+		label,
+	}));
 
 	const handleChange = (value: string) => {
 		if (onChange) {
@@ -33,10 +43,7 @@ export function Dropdown(
 	};
 
 	return (
-		<Select
-			value={selectedOption?.value.toString()}
-			onValueChange={handleChange}
-		>
+		<Select value={selectedValue} onValueChange={handleChange} items={items}>
 			<SelectTrigger className={trigger}>
 				<SelectValue placeholder={selectedOption?.label} />
 			</SelectTrigger>

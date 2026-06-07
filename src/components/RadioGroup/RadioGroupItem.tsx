@@ -1,6 +1,6 @@
 'use client';
 
-import { Indicator, Item } from '@radix-ui/react-radio-group';
+import { Radio as RadioPrimitive } from '@base-ui/react/radio';
 import { clsx } from 'clsx';
 import { CircleIcon } from 'lucide-react';
 import { Label } from '../Label';
@@ -11,7 +11,7 @@ import {
 	itemWrapperClass,
 } from './styles.css';
 
-export type RadioGroupItemProps = React.ComponentProps<typeof Item> & {
+export type RadioGroupItemProps = RadioPrimitive.Root.Props & {
 	label: string;
 };
 
@@ -22,16 +22,19 @@ export const RadioGroupItem = ({
 }: RadioGroupItemProps) => {
 	return (
 		<div className={itemWrapperClass}>
-			<Item
+			<RadioPrimitive.Root
 				data-slot="radio-group-item"
 				id={props.id || props.value}
 				className={clsx(itemClass, className)}
 				{...props}
 			>
-				<Indicator data-slot="radio-group-indicator" className={indicatorClass}>
+				<RadioPrimitive.Indicator
+					data-slot="radio-group-indicator"
+					className={indicatorClass}
+				>
 					<CircleIcon className={iconClass} />
-				</Indicator>
-			</Item>
+				</RadioPrimitive.Indicator>
+			</RadioPrimitive.Root>
 			<Label htmlFor={props.id || props.value} data-slot="radio-group-label">
 				{label}
 			</Label>

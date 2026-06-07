@@ -37,7 +37,7 @@ export const triggerClass = style({
 			pointerEvents: 'none',
 			opacity: 0.5,
 		},
-		'&[data-state="active"]': {
+		'&[data-active]': {
 			backgroundColor: theme.colors.primary,
 			color: theme.colors.foreground.primary,
 			boxShadow: theme.elevation[3],

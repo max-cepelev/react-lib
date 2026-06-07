@@ -1,8 +1,12 @@
-import { List } from '@radix-ui/react-tabs';
+import { Tabs as TabsPrimitive } from '@base-ui/react/tabs';
 import { clsx } from 'clsx';
 import { listClass } from './styles.css';
 
-export type TabsListProps = React.ComponentPropsWithoutRef<typeof List>;
+export type TabsListProps = TabsPrimitive.List.Props;
 export const TabsList = ({ className, ...props }: TabsListProps) => (
-	<List className={clsx(listClass, className)} {...props} />
+	<TabsPrimitive.List
+		data-slot="tabs-list"
+		className={clsx(listClass, className)}
+		{...props}
+	/>
 );

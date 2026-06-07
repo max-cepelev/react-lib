@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.28.0
+
+### Minor Changes
+
+- Port primitives to Base UI
+
 ## 0.27.1
 
 ### Patch Changes

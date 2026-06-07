@@ -21,9 +21,14 @@ const zoomOut = keyframes({
 //   to: { opacity: 1, transform: 'translateY(0)' },
 // });
 
+export const positionerClass = style({
+	isolation: 'isolate',
+	zIndex: 50,
+});
+
 export const contentClass = style({
 	zIndex: 50,
-	overflow: 'hidden',
+	overflow: 'visible',
 	borderRadius: theme.borderRadius.md,
 	backgroundColor: theme.colors.background.tooltip,
 	padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
@@ -31,10 +36,10 @@ export const contentClass = style({
 	color: theme.colors.foreground.primary,
 	maxWidth: 400,
 	selectors: {
-		'&[data-state="open"]': {
+		'&[data-open]': {
 			animation: `${zoomIn} 150ms ease-out`,
 		},
-		'&[data-state="closed"]': {
+		'&[data-closed]': {
 			animation: `${zoomOut} 150ms ease-out`,
 		},
 		// '&[data-side="top"]': {
@@ -58,5 +63,26 @@ export const textClass = style({
 });
 
 export const arrowClass = style({
-	fill: theme.colors.background.tooltip,
+	zIndex: 50,
+	width: '0.625rem',
+	height: '0.625rem',
+	backgroundColor: theme.colors.background.tooltip,
+	borderRadius: 2,
+	pointerEvents: 'none',
+	transform: 'rotate(45deg)',
+
+	selectors: {
+		'&[data-side="top"]': {
+			bottom: '-0.25rem',
+		},
+		'&[data-side="bottom"]': {
+			top: '-0.25rem',
+		},
+		'&[data-side="left"], &[data-side="inline-start"]': {
+			right: '-0.25rem',
+		},
+		'&[data-side="right"], &[data-side="inline-end"]': {
+			left: '-0.25rem',
+		},
+	},
 });

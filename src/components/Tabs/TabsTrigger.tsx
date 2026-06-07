@@ -1,10 +1,8 @@
-import { Trigger } from '@radix-ui/react-tabs';
+import { Tabs as TabsPrimitive } from '@base-ui/react/tabs';
 import { clsx } from 'clsx';
 import { sizes, triggerClass } from './styles.css';
 
-export type TabsTriggerProps = React.ComponentPropsWithoutRef<
-	typeof Trigger
-> & {
+export type TabsTriggerProps = TabsPrimitive.Tab.Props & {
 	size?: 'sm' | 'md' | 'lg';
 };
 export const TabsTrigger = ({
@@ -12,5 +10,9 @@ export const TabsTrigger = ({
 	size = 'md',
 	...props
 }: TabsTriggerProps) => (
-	<Trigger className={clsx(triggerClass, sizes[size], className)} {...props} />
+	<TabsPrimitive.Tab
+		data-slot="tabs-trigger"
+		className={clsx(triggerClass, sizes[size], className)}
+		{...props}
+	/>
 );

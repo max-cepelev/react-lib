@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import type { ReactNode, SyntheticEvent } from 'react';
+import type { ReactElement, SyntheticEvent } from 'react';
 import { Button } from '../Button';
 import { Popover, type PopoverProps } from '../Popover';
 import { Typography } from '../Typography';
@@ -47,7 +47,7 @@ export type ConfirmActionProps = {
 	/**
 	 * Кнопка, действие которой необходимо подтвердить
 	 */
-	actionComponent: (params: ActionComponentParams) => ReactNode;
+	actionComponent: (params: ActionComponentParams) => ReactElement;
 
 	/**
 	 * Целевое действие, которое должно произойти после подтверждения
@@ -77,11 +77,11 @@ export const ConfirmAction = (props: ConfirmActionProps) => {
 
 	return (
 		<Popover open={open} onOpenChange={onOpenChange}>
-			<Popover.Trigger>
-				{actionComponent({
+			<Popover.Trigger
+				render={actionComponent({
 					onClick: onActionComponentClick,
 				})}
-			</Popover.Trigger>
+			/>
 			<Popover.Content
 				side={side}
 				align={align}

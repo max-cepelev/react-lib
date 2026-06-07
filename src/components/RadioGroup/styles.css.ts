@@ -16,6 +16,10 @@ export const itemWrapperClass = style({
 });
 
 export const itemClass = style({
+	position: 'relative',
+	display: 'inline-flex',
+	alignItems: 'center',
+	justifyContent: 'center',
 	border: `1px solid ${theme.colors.border}`,
 	color: theme.colors.primary,
 	backgroundColor: theme.colors.background.paper,
@@ -47,18 +51,16 @@ export const itemClass = style({
 });
 
 export const indicatorClass = style({
-	position: 'relative',
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'center',
+	width: '100%',
+	height: '100%',
+	color: theme.colors.primary,
 });
 
 export const iconClass = style({
-	position: 'absolute',
-	top: '50%',
-	left: '50%',
 	width: theme.spacing[2],
 	height: theme.spacing[2],
-	transform: 'translate(-50%, -50%)',
-	fill: theme.colors.primary,
+	fill: 'currentColor',
 });

@@ -10,12 +10,13 @@ export const OverflowTypography = (props: OverflowTypographyProps) => {
 	const {
 		label,
 		hasVisibleLastSymbols,
+		visibleLastSymbolsCount,
 		hasMultipleRows,
 		overflowRef,
 		tooltipContent,
 		restTooltipProps,
 		style,
-		visibleLastSymbolsCount,
+		restProps,
 	} = useLogic(props);
 
 	const { align = 'left', className, text, children } = props;
@@ -33,7 +34,7 @@ export const OverflowTypography = (props: OverflowTypographyProps) => {
 					data-slot="overflow-typography"
 				>
 					<Typography
-						{...props}
+						{...restProps}
 						align={align}
 						className={clsx(styles.truncate, className)}
 						component="span"
@@ -45,7 +46,7 @@ export const OverflowTypography = (props: OverflowTypographyProps) => {
 						{firstPartLabel}
 					</Typography>
 					<Typography
-						{...props}
+						{...restProps}
 						align={align}
 						className={className}
 						component="span"
@@ -62,7 +63,7 @@ export const OverflowTypography = (props: OverflowTypographyProps) => {
 	return (
 		<Tooltip {...restTooltipProps} arrow content={tooltipContent}>
 			<Typography
-				{...props}
+				{...restProps}
 				align={align}
 				className={clsx(
 					styles.truncate,

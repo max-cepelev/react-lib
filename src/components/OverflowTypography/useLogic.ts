@@ -1,8 +1,23 @@
 import { useLayoutEffect } from 'react';
 import { useOverflowed } from '~/hooks';
 import { DEFAULT_ROWS_COUNT } from './constants';
-import type { OverflowTypographyProps } from './types';
+import type {
+	OverflowTypographyProps,
+	OverflowTypographyTooltipProps,
+} from './types';
 import { getRowsCountStyle } from './utils';
+
+type UseLogicReturn = {
+	label: string | undefined;
+	hasVisibleLastSymbols: boolean;
+	hasMultipleRows: boolean;
+	overflowRef: (node: HTMLElement | null) => void;
+	tooltipContent: React.ReactNode;
+	restTooltipProps: Omit<OverflowTypographyTooltipProps, 'content' | 'text'>;
+	visibleLastSymbolsCount: number;
+	style: React.CSSProperties;
+	restProps: OverflowTypographyProps;
+};
 
 export const useLogic = ({
 	text,
@@ -12,7 +27,8 @@ export const useLogic = ({
 	rowsCount = DEFAULT_ROWS_COUNT,
 	ref,
 	style: styleProp,
-}: OverflowTypographyProps) => {
+	...restProps
+}: OverflowTypographyProps): UseLogicReturn => {
 	const style = getRowsCountStyle(rowsCount, styleProp);
 	const label = text ?? (typeof children === 'string' ? children : undefined);
 	const hasVisibleLastSymbols = Boolean(label && visibleLastSymbolsCount > 0);
@@ -50,5 +66,6 @@ export const useLogic = ({
 		restTooltipProps,
 		style,
 		visibleLastSymbolsCount,
+		restProps,
 	};
 };

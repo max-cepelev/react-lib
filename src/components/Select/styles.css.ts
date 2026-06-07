@@ -76,10 +76,15 @@ export const scrollButton = style({
 	padding: `${theme.spacing[1]} 0`, // 0.25rem 0
 });
 
+export const positioner = style({
+	isolation: 'isolate',
+	zIndex: 5000,
+});
+
 export const content = style({
 	position: 'relative',
-	zIndex: 50,
-	maxHeight: '24rem',
+	zIndex: 5000,
+	maxHeight: 'var(--available-height, 24rem)',
 	minWidth: '8rem',
 	overflow: 'hidden',
 	borderRadius: theme.borderRadius.md,
@@ -89,10 +94,10 @@ export const content = style({
 	boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
 
 	selectors: {
-		'&[data-state="open"]': {
+		'&[data-open]': {
 			animation: `${fadeIn} 150ms ease-out`,
 		},
-		'&[data-state="closed"]': {
+		'&[data-closed]': {
 			animation: `${fadeOut} 150ms ease-in`,
 		},
 		'&[data-side="bottom"]': {
@@ -112,14 +117,8 @@ export const content = style({
 
 export const viewport = style({
 	padding: theme.spacing[1], // 0.25rem
-
-	selectors: {
-		'&[data-position="popper"]': {
-			height: 'var(--radix-select-trigger-height)',
-			width: '100%',
-			minWidth: 'var(--radix-select-trigger-width)',
-		},
-	},
+	width: '100%',
+	minWidth: 'var(--anchor-width, 100%)',
 });
 
 export const label = style({
@@ -141,7 +140,7 @@ export const item = style({
 	outline: 'none',
 
 	selectors: {
-		'&:focus': {
+		'&[data-highlighted]': {
 			backgroundColor: theme.colors.background.elementHover, // accent
 			color: theme.colors.text.primary, // accent-foreground
 		},

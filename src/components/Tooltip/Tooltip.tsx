@@ -1,38 +1,32 @@
 import {
-	Arrow,
-	Content,
-	Portal,
-	Provider,
-	Root,
-	type TooltipContentProps,
-	Trigger,
-} from '@radix-ui/react-tooltip';
+	type TooltipPositioner,
+	Tooltip as TooltipPrimitive,
+	type TooltipRoot,
+} from '@base-ui/react/tooltip';
 
 import clsx from 'clsx';
-import { arrowClass, contentClass, textClass } from './styles.css';
+import {
+	arrowClass,
+	contentClass,
+	positionerClass,
+	textClass,
+} from './styles.css';
 
-const TooltipProvider = Provider;
-const TooltipRoot = Root;
-const TooltipTrigger = Trigger;
+const TooltipProvider = TooltipPrimitive.Provider;
+const TooltipRootComponent = TooltipPrimitive.Root;
+const TooltipTrigger = TooltipPrimitive.Trigger;
 
-const TooltipContent = ({
-	sideOffset = 4,
-	alignOffset,
-	ref,
-	...props
-}: React.ComponentProps<typeof Content>) => (
-	<Content ref={ref} sideOffset={sideOffset} {...props} />
-);
-
-export type TooltipProps = React.ComponentProps<typeof Root> & {
+export type TooltipProps = Omit<TooltipRoot.Props, 'children'> & {
+	children: React.ReactElement;
 	text?: string;
 	content?: React.ReactNode;
 	arrow?: boolean;
-	align?: TooltipContentProps['align'];
+	align?: TooltipPositioner.Props['align'];
 	sideOffset?: number;
 	alignOffset?: number;
-	side?: TooltipContentProps['side'];
+	side?: TooltipPositioner.Props['side'];
 	className?: string;
+	delayDuration?: number;
 	ref?: React.Ref<HTMLButtonElement>;
 };
 
@@ -42,31 +36,36 @@ export const Tooltip = ({
 	children,
 	side = 'top',
 	sideOffset = 10,
+	align = 'center',
 	alignOffset,
+	arrow,
 	delayDuration = 0,
 	className,
 	ref,
 	...props
 }: TooltipProps) => (
-	<TooltipProvider delayDuration={delayDuration}>
-		<TooltipRoot {...props}>
-			<TooltipTrigger ref={ref} asChild>
-				{children}
-			</TooltipTrigger>
+	<TooltipProvider delay={delayDuration}>
+		<TooltipRootComponent {...props}>
+			<TooltipTrigger ref={ref} render={children} />
 			{content || text ? (
-				<Portal>
-					<TooltipContent
-						className={clsx(contentClass, className)}
+				<TooltipPrimitive.Portal>
+					<TooltipPrimitive.Positioner
+						align={align}
 						alignOffset={alignOffset}
 						sideOffset={sideOffset}
-						hideWhenDetached
 						side={side}
+						className={positionerClass}
 					>
-						{content ?? <p className={textClass}>{text}</p>}
-						{props.arrow && <Arrow className={arrowClass} />}
-					</TooltipContent>
-				</Portal>
+						<TooltipPrimitive.Popup
+							data-slot="tooltip-content"
+							className={clsx(contentClass, className)}
+						>
+							{content ?? <p className={textClass}>{text}</p>}
+							{arrow && <TooltipPrimitive.Arrow className={arrowClass} />}
+						</TooltipPrimitive.Popup>
+					</TooltipPrimitive.Positioner>
+				</TooltipPrimitive.Portal>
 			) : null}
-		</TooltipRoot>
+		</TooltipRootComponent>
 	</TooltipProvider>
 );

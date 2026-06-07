@@ -1,14 +1,14 @@
 'use client';
 
-import { Root } from '@radix-ui/react-radio-group';
+import { RadioGroup as RadioGroupPrimitive } from '@base-ui/react/radio-group';
 import clsx from 'clsx';
 import { radioGroupClass } from './styles.css';
 
-export type RadioGroupProps = React.ComponentProps<typeof Root>;
+export type RadioGroupProps = RadioGroupPrimitive.Props;
 
 export const RadioGroup = ({ className, ...props }: RadioGroupProps) => {
 	return (
-		<Root
+		<RadioGroupPrimitive
 			data-slot="radio-group"
 			className={clsx(radioGroupClass, className)}
 			{...props}
