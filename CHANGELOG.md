@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.27.1
+
+### Patch Changes
+
+- Add root exports for form, hooks, theme
+
 ## 0.27.0
 
 ### Minor Changes
