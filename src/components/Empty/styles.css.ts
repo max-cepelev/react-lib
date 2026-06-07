@@ -4,8 +4,7 @@ import {
 	style,
 	styleVariants,
 } from '@vanilla-extract/css';
-import { theme } from '~/theme';
-import { spacing } from '~/utils';
+import { spacing, theme } from '~/theme';
 import type { EmptyMediaVariant } from './types';
 
 export const root = style({

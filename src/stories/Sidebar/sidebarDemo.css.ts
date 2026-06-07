@@ -11,6 +11,29 @@ export const appHeader = style({
 	transition: 'width 200ms linear, height 200ms linear',
 });
 
+export const simpleBrandIcon = style({});
+
+export const simpleBrandText = style({});
+
+export const simpleBrandChevron = style({});
+
+export const simpleSearch = style({});
+
+globalStyle(
+	`[data-slot="sidebar"][data-collapsible="icon"] ${simpleBrandText}, [data-slot="sidebar"][data-collapsible="icon"] ${simpleBrandChevron}, [data-slot="sidebar"][data-collapsible="icon"] ${simpleSearch}`,
+	{
+		display: 'none',
+	},
+);
+
+globalStyle(
+	`[data-slot="sidebar"][data-collapsible="icon"] ${simpleBrandIcon}`,
+	{
+		width: theme.spacing[8],
+		height: theme.spacing[8],
+	},
+);
+
 globalStyle(
 	`[data-slot="sidebar-wrapper"]:has([data-collapsible="icon"]) ${appHeader}`,
 	{

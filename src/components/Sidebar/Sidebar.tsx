@@ -6,24 +6,25 @@ import { useRender } from '@base-ui/react/use-render';
 import { clsx } from 'clsx';
 import { PanelLeftIcon } from 'lucide-react';
 import * as React from 'react';
+import { useIsMobile } from '~/hooks';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Sheet } from '../Sheet';
 import { Tooltip } from '../Tooltip';
+import {
+	SIDEBAR_COOKIE_MAX_AGE,
+	SIDEBAR_COOKIE_NAME,
+	SIDEBAR_KEYBOARD_SHORTCUT,
+	SIDEBAR_WIDTH,
+	SIDEBAR_WIDTH_ICON,
+	SIDEBAR_WIDTH_MOBILE,
+} from './constants';
 import * as styles from './styles.css';
 import type {
 	SidebarContextValue,
 	SidebarProps,
 	SidebarTooltip,
 } from './types';
-
-const SIDEBAR_COOKIE_NAME = 'sidebar_state';
-const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const SIDEBAR_WIDTH = '16rem';
-const SIDEBAR_WIDTH_MOBILE = '18rem';
-const SIDEBAR_WIDTH_ICON = '3rem';
-const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
-const MOBILE_BREAKPOINT = 768;
 
 const SidebarContext = React.createContext<SidebarContextValue | null>(null);
 
@@ -35,28 +36,6 @@ function useSidebar() {
 	}
 
 	return context;
-}
-
-function useIsMobile() {
-	const [isMobile, setIsMobile] = React.useState<boolean | undefined>(
-		undefined,
-	);
-
-	React.useEffect(() => {
-		const mediaQuery = window.matchMedia(
-			`(max-width: ${MOBILE_BREAKPOINT - 1}px)`,
-		);
-		const onChange = () => {
-			setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
-		};
-
-		mediaQuery.addEventListener('change', onChange);
-		setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
-
-		return () => mediaQuery.removeEventListener('change', onChange);
-	}, []);
-
-	return Boolean(isMobile);
 }
 
 function Provider({

@@ -1,6 +1,5 @@
 import { keyframes, style } from '@vanilla-extract/css';
-import { theme } from '~/theme';
-import { spacing } from '~/utils';
+import { spacing, theme } from '~/theme';
 
 const slideDistance = theme.spacing[10];
 const negativeSlideDistance = `calc(-1 * ${slideDistance})`;

@@ -4,8 +4,7 @@ import {
 	style,
 	styleVariants,
 } from '@vanilla-extract/css';
-import { theme } from '~/theme';
-import { negativeSpacing } from '~/utils';
+import { negativeSpacing, theme } from '~/theme';
 
 const fadeIn = keyframes({
 	from: { opacity: 0 },

@@ -1,6 +1,5 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { theme } from '~/theme';
-import { spacing } from '~/utils';
+import { spacing, theme } from '~/theme';
 
 export const root = style({
 	display: 'inline-flex',

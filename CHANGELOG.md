@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 0.27.0
+
+### Minor Changes
+
+- Tighten library build surface
+
 ## 0.26.0
 
 ### Minor Changes

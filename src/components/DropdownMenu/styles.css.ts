@@ -1,6 +1,5 @@
 import { globalStyle, keyframes, style } from '@vanilla-extract/css';
-import { theme } from '~/theme';
-import { negativeSpacing, spacing } from '~/utils';
+import { negativeSpacing, spacing, theme } from '~/theme';
 
 const zoomIn = keyframes({
 	from: {

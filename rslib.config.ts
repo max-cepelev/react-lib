@@ -13,7 +13,6 @@ export default defineConfig({
 				entry: {
 					index: './src/index.ts',
 				},
-				exclude: ['.src/stories/**'],
 			},
 		},
 	],
@@ -28,7 +27,6 @@ export default defineConfig({
 	},
 	output: {
 		cleanDistPath: true,
-		minify: true,
 		target: 'web',
 		externals: ['react', 'react-dom', '@fontsource-variable/roboto'],
 		// Устанавливаем пути для CSS файлов
@@ -36,7 +34,7 @@ export default defineConfig({
 			root: './lib',
 		},
 		filename: {
-			css: 'styles.css', // Имя CSS файла
+			css: 'styles.css',
 		},
 	},
 	plugins: [

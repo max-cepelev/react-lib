@@ -75,6 +75,7 @@ function AppSidebar({
 					<Sidebar.MenuItem>
 						<Sidebar.MenuButton size="lg" tooltip="Acme Workspace">
 							<div
+								className={demoStyles.simpleBrandIcon}
 								style={{
 									display: 'grid',
 									width: 28,
@@ -88,12 +89,16 @@ function AppSidebar({
 							>
 								A
 							</div>
-							<span>Acme Workspace</span>
-							<ChevronDownIcon />
+							<span className={demoStyles.simpleBrandText}>Acme Workspace</span>
+							<ChevronDownIcon className={demoStyles.simpleBrandChevron} />
 						</Sidebar.MenuButton>
 					</Sidebar.MenuItem>
 				</Sidebar.Menu>
-				<Sidebar.Input placeholder="Search" startAdornment={<SearchIcon />} />
+				<Sidebar.Input
+					className={demoStyles.simpleSearch}
+					placeholder="Search"
+					startAdornment={<SearchIcon />}
+				/>
 			</Sidebar.Header>
 			<Sidebar.Separator />
 			<Sidebar.Content>
@@ -370,12 +375,18 @@ const demoData = {
 function DemoLink({
 	href,
 	children,
-}: {
-	href: string;
-	children: React.ReactNode;
-}) {
+	onClick,
+	...props
+}: React.ComponentProps<'a'>) {
 	return (
-		<a href={href} onClick={(event) => event.preventDefault()}>
+		<a
+			{...props}
+			href={href}
+			onClick={(event) => {
+				onClick?.(event);
+				event.preventDefault();
+			}}
+		>
 			{children}
 		</a>
 	);

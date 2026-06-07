@@ -5,7 +5,6 @@ import {
 	styleVariants,
 } from '@vanilla-extract/css';
 import { theme } from '~/theme';
-import { spacing } from '~/utils';
 import type {
 	SidebarMenuButtonSize,
 	SidebarMenuButtonVariant,
@@ -43,6 +42,10 @@ export const desktopSidebar = style({
 			display: 'block',
 		},
 	},
+});
+
+globalStyle(`${wrapper}:has(${desktopSidebar}[data-side="right"])`, {
+	flexDirection: 'row-reverse',
 });
 
 export const gap = style({
@@ -730,8 +733,8 @@ export const menuSub = style({
 	minWidth: 0,
 	flexDirection: 'column',
 	gap: theme.spacing[1],
-	margin: `0 ${spacing(3)}`,
-	padding: `${theme.spacing[1]} 0 ${theme.spacing[1]} 0.625rem`,
+	margin: '0 14px',
+	padding: '2px 10px',
 	borderLeft: `1px solid ${sidebarBorder}`,
 	listStyle: 'none',
 	transform: 'translateX(1px)',

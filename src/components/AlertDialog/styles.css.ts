@@ -1,6 +1,5 @@
 import { globalStyle, keyframes, style } from '@vanilla-extract/css';
-import { theme } from '~/theme';
-import { spacing } from '~/utils';
+import { spacing, theme } from '~/theme';
 
 const fadeIn = keyframes({
 	from: { opacity: 0 },

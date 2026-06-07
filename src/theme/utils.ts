@@ -1,4 +1,4 @@
-import { type SpacingKey, theme } from './theme';
+import { type SpacingKey, theme } from '.';
 
 export type Spacing = {
 	(value: SpacingKey): string;
