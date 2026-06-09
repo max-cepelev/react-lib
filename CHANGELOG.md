@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.0.0
+
+### Major Changes
+
+- Remove form integration, first major version.
+
 ## 0.28.0
 
 ### Minor Changes

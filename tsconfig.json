@@ -20,7 +20,6 @@
 		"rootDir": "./src",
 		"paths": {
 			"~/components": ["./src/components/index.ts"],
-			"~/form": ["./src/form/index.ts"],
 			"~/theme": ["./src/theme/index.ts"],
 			"~/hooks": ["./src/hooks/index.ts"]
 		}
