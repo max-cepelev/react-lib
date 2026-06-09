@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.0.1
+
+### Patch Changes
+
+- Remove MaskField form story
+
 ## 1.0.0
 
 ### Major Changes
