@@ -21,11 +21,12 @@ const Button = ({
 	isLoading = false,
 	fullWidth,
 	children,
+	nativeButton,
 	...props
 }: ButtonProps) => {
 	return (
 		<ButtonPrimitive
-			nativeButton={props.nativeButton ?? !props.render}
+			nativeButton={nativeButton ?? !props.render}
 			className={clsx(
 				styles.buttonBase,
 				styles.buttonVariants[variant],

@@ -3,6 +3,7 @@ import {
 	Button,
 	DashboardLayout,
 	PageLayout,
+	Typography,
 	useDashboard,
 } from '~/components';
 
@@ -31,7 +32,9 @@ export const Example = () => {
 				/>
 				<DashboardLayout.Main>
 					<PageLayout>
-						<PageLayout.Header title={'Dashboard'} />
+						<PageLayout.Header>
+							<Typography variant="h1">Dashboard</Typography>
+						</PageLayout.Header>
 						<PageLayout.Content>
 							<Toggler />
 						</PageLayout.Content>

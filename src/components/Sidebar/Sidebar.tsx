@@ -179,7 +179,7 @@ function SidebarRoot({
 	}
 
 	return (
-		<div
+		<aside
 			data-state={state}
 			data-collapsible={state === 'collapsed' ? collapsible : undefined}
 			data-variant={variant}
@@ -202,7 +202,7 @@ function SidebarRoot({
 					{children}
 				</div>
 			</div>
-		</div>
+		</aside>
 	);
 }
 

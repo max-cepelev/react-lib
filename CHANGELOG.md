@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.1.0
+
+### Minor Changes
+
+- Add Combobox component and related styles
+
 ## 1.0.1
 
 ### Patch Changes

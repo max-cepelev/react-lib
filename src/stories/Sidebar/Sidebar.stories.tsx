@@ -409,60 +409,52 @@ function TeamSwitcher({
 	}
 
 	return (
-		<Sidebar.Group>
-			<Sidebar.Menu>
-				<Sidebar.MenuItem>
-					<DropdownMenu>
-						<DropdownMenu.Trigger render={<Sidebar.MenuButton size="lg" />}>
-							<div className={demoStyles.workspaceIcon}>
-								<activeTeam.logo />
-							</div>
-							<div className={demoStyles.textStack}>
-								<span className={demoStyles.titleText}>{activeTeam.name}</span>
-								<span className={demoStyles.subtitleText}>
-									{activeTeam.plan}
-								</span>
-							</div>
-							<ChevronsUpDownIcon className={demoStyles.chevronAuto} />
-						</DropdownMenu.Trigger>
-						<DropdownMenu.Content
-							className={demoStyles.dropdownWide}
-							align="start"
-							side={isMobile ? 'bottom' : 'right'}
-							sideOffset={4}
+		<DropdownMenu>
+			<DropdownMenu.Trigger render={<Sidebar.MenuButton size="lg" />}>
+				<div className={demoStyles.workspaceIcon}>
+					<activeTeam.logo />
+				</div>
+				<div className={demoStyles.textStack}>
+					<span className={demoStyles.titleText}>{activeTeam.name}</span>
+					<span className={demoStyles.subtitleText}>{activeTeam.plan}</span>
+				</div>
+				<ChevronsUpDownIcon className={demoStyles.chevronAuto} />
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Content
+				className={demoStyles.dropdownWide}
+				align="start"
+				side={isMobile ? 'bottom' : 'right'}
+				sideOffset={4}
+			>
+				<DropdownMenu.Group>
+					<DropdownMenu.Label className={demoStyles.dropdownLabelMuted}>
+						Teams
+					</DropdownMenu.Label>
+					{teams.map((team, index) => (
+						<DropdownMenu.Item
+							key={team.name}
+							onClick={() => setActiveTeam(team)}
+							className={demoStyles.dropdownItemPadded}
 						>
-							<DropdownMenu.Group>
-								<DropdownMenu.Label className={demoStyles.dropdownLabelMuted}>
-									Teams
-								</DropdownMenu.Label>
-								{teams.map((team, index) => (
-									<DropdownMenu.Item
-										key={team.name}
-										onClick={() => setActiveTeam(team)}
-										className={demoStyles.dropdownItemPadded}
-									>
-										<div className={demoStyles.workspaceIconSmall}>
-											<team.logo />
-										</div>
-										{team.name}
-										<DropdownMenu.Shortcut>⌘{index + 1}</DropdownMenu.Shortcut>
-									</DropdownMenu.Item>
-								))}
-							</DropdownMenu.Group>
-							<DropdownMenu.Separator />
-							<DropdownMenu.Group>
-								<DropdownMenu.Item className={demoStyles.dropdownItemPadded}>
-									<div className={demoStyles.workspaceIconSmall}>
-										<PlusIcon />
-									</div>
-									<div className={demoStyles.dropdownLabelMuted}>Add team</div>
-								</DropdownMenu.Item>
-							</DropdownMenu.Group>
-						</DropdownMenu.Content>
-					</DropdownMenu>
-				</Sidebar.MenuItem>
-			</Sidebar.Menu>
-		</Sidebar.Group>
+							<div className={demoStyles.workspaceIconSmall}>
+								<team.logo />
+							</div>
+							{team.name}
+							<DropdownMenu.Shortcut>⌘{index + 1}</DropdownMenu.Shortcut>
+						</DropdownMenu.Item>
+					))}
+				</DropdownMenu.Group>
+				<DropdownMenu.Separator />
+				<DropdownMenu.Group>
+					<DropdownMenu.Item className={demoStyles.dropdownItemPadded}>
+						<div className={demoStyles.workspaceIconSmall}>
+							<PlusIcon />
+						</div>
+						<div className={demoStyles.dropdownLabelMuted}>Add team</div>
+					</DropdownMenu.Item>
+				</DropdownMenu.Group>
+			</DropdownMenu.Content>
+		</DropdownMenu>
 	);
 }
 
@@ -596,11 +588,27 @@ function NavUser({
 	const { isMobile } = useSidebar();
 
 	return (
-		<Sidebar.Group>
-			<Sidebar.Menu>
-				<Sidebar.MenuItem>
-					<DropdownMenu>
-						<DropdownMenu.Trigger render={<Sidebar.MenuButton size="lg" />}>
+		<DropdownMenu>
+			<DropdownMenu.Trigger render={<Sidebar.MenuButton size="lg" />}>
+				<Avatar className={demoStyles.avatarSquare}>
+					<Avatar.Image src={user.avatar} alt={user.name} />
+					<Avatar.Fallback>CN</Avatar.Fallback>
+				</Avatar>
+				<div className={demoStyles.textStack}>
+					<span className={demoStyles.titleText}>{user.name}</span>
+					<span className={demoStyles.subtitleText}>{user.email}</span>
+				</div>
+				<ChevronsUpDownIcon className={demoStyles.chevronAuto} />
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Content
+				className={demoStyles.dropdownWide}
+				side={isMobile ? 'bottom' : 'right'}
+				align="end"
+				sideOffset={4}
+			>
+				<DropdownMenu.Group>
+					<DropdownMenu.Label className={demoStyles.dropdownUserLabel}>
+						<div className={demoStyles.dropdownUserRow}>
 							<Avatar className={demoStyles.avatarSquare}>
 								<Avatar.Image src={user.avatar} alt={user.name} />
 								<Avatar.Fallback>CN</Avatar.Fallback>
@@ -609,64 +617,40 @@ function NavUser({
 								<span className={demoStyles.titleText}>{user.name}</span>
 								<span className={demoStyles.subtitleText}>{user.email}</span>
 							</div>
-							<ChevronsUpDownIcon className={demoStyles.chevronAuto} />
-						</DropdownMenu.Trigger>
-						<DropdownMenu.Content
-							className={demoStyles.dropdownWide}
-							side={isMobile ? 'bottom' : 'right'}
-							align="end"
-							sideOffset={4}
-						>
-							<DropdownMenu.Group>
-								<DropdownMenu.Label className={demoStyles.dropdownUserLabel}>
-									<div className={demoStyles.dropdownUserRow}>
-										<Avatar className={demoStyles.avatarSquare}>
-											<Avatar.Image src={user.avatar} alt={user.name} />
-											<Avatar.Fallback>CN</Avatar.Fallback>
-										</Avatar>
-										<div className={demoStyles.textStack}>
-											<span className={demoStyles.titleText}>{user.name}</span>
-											<span className={demoStyles.subtitleText}>
-												{user.email}
-											</span>
-										</div>
-									</div>
-								</DropdownMenu.Label>
-							</DropdownMenu.Group>
-							<DropdownMenu.Separator />
-							<DropdownMenu.Group>
-								<DropdownMenu.Item>
-									<SparklesIcon />
-									Upgrade to Pro
-								</DropdownMenu.Item>
-							</DropdownMenu.Group>
-							<DropdownMenu.Separator />
-							<DropdownMenu.Group>
-								<DropdownMenu.Item>
-									<BadgeCheckIcon />
-									Account
-								</DropdownMenu.Item>
-								<DropdownMenu.Item>
-									<CreditCardIcon />
-									Billing
-								</DropdownMenu.Item>
-								<DropdownMenu.Item>
-									<BellIcon />
-									Notifications
-								</DropdownMenu.Item>
-							</DropdownMenu.Group>
-							<DropdownMenu.Separator />
-							<DropdownMenu.Group>
-								<DropdownMenu.Item>
-									<LogOutIcon />
-									Log out
-								</DropdownMenu.Item>
-							</DropdownMenu.Group>
-						</DropdownMenu.Content>
-					</DropdownMenu>
-				</Sidebar.MenuItem>
-			</Sidebar.Menu>
-		</Sidebar.Group>
+						</div>
+					</DropdownMenu.Label>
+				</DropdownMenu.Group>
+				<DropdownMenu.Separator />
+				<DropdownMenu.Group>
+					<DropdownMenu.Item>
+						<SparklesIcon />
+						Upgrade to Pro
+					</DropdownMenu.Item>
+				</DropdownMenu.Group>
+				<DropdownMenu.Separator />
+				<DropdownMenu.Group>
+					<DropdownMenu.Item>
+						<BadgeCheckIcon />
+						Account
+					</DropdownMenu.Item>
+					<DropdownMenu.Item>
+						<CreditCardIcon />
+						Billing
+					</DropdownMenu.Item>
+					<DropdownMenu.Item>
+						<BellIcon />
+						Notifications
+					</DropdownMenu.Item>
+				</DropdownMenu.Group>
+				<DropdownMenu.Separator />
+				<DropdownMenu.Group>
+					<DropdownMenu.Item>
+						<LogOutIcon />
+						Log out
+					</DropdownMenu.Item>
+				</DropdownMenu.Group>
+			</DropdownMenu.Content>
+		</DropdownMenu>
 	);
 }
 

@@ -5,9 +5,10 @@ export const container = style(
 	{
 		display: 'flex',
 		alignItems: 'center',
-		transition: 'border-color 0.2s ease, background-color 0.2s ease',
+		transition: 'outline-color 0.2s ease, box-shadow 0.2s ease',
 		':focus-within': {
-			borderColor: `color-mix(in oklch, ${theme.colors.primary} 80%, transparent)`,
+			outlineColor: `color-mix(in oklch, ${theme.colors.primary} 80%, transparent)`,
+			boxShadow: `0 0 0 3px color-mix(in oklch, ${theme.colors.primary} 20%, transparent)`,
 		},
 		':hover': {
 			backgroundColor: `color-mix(in oklch, ${theme.colors.background.elementHover} 40%, transparent)`,
@@ -31,23 +32,6 @@ export const fullWidthClass = style({
 	width: '100%',
 });
 
-export const containerHover = style({
-	selectors: {
-		'&:hover': {
-			outlineColor: `color-mix(in oklch, ${theme.colors.border} 80%, ${theme.colors.primary} 100%)`,
-			borderColor: `color-mix(in oklch, ${theme.colors.border} 80%, ${theme.colors.primary} 100%)`,
-		},
-	},
-});
-
-export const containerFocusWithin = style({
-	selectors: {
-		'&:focus-within': {
-			outlineColor: `color-mix(in oklch, ${theme.colors.primary} 80%, transparent)`,
-		},
-	},
-});
-
 export const disabledClass = style({
 	opacity: 0.5,
 	borderColor: theme.colors.border,
@@ -57,7 +41,7 @@ export const errorClass = style({
 	outlineColor: theme.colors.error,
 	':focus-within': {
 		outlineColor: `color-mix(in oklch, ${theme.colors.error} 80%, transparent)`,
-		borderColor: theme.colors.error,
+		boxShadow: `0 0 0 3px color-mix(in oklch, ${theme.colors.error} 20%, transparent)`,
 	},
 	':hover': {
 		outlineColor: theme.colors.error,

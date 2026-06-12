@@ -1,121 +1,44 @@
 import { clsx } from 'clsx';
-import { ChevronLeft, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
-import { type ReactNode, useEffect } from 'react';
-import {
-	Button,
-	type ButtonProps,
-	Tooltip,
-	Typography,
-	useDashboard,
-} from '~/components';
+import { type ReactElement, useEffect } from 'react';
 import { PAGE_HEADER_CLASSNAME } from '../constants';
-import {
-	actionsClass,
-	breadcrumbsClass,
-	buttonsClass,
-	rootClass,
-	subtitleClass,
-	subtitleContainerClass,
-	titleClass,
-	titleContainerClass,
-} from './styles.css';
+import * as styles from './styles.css';
 
 export type PageHeaderProps = {
 	/**
-	 * Заголовок страницы
-	 * @example <PageHeader title="Заголовок страницы" />
+	 * HTML title
+	 * @example <PageHeader htmlTitle="Заголовок страницы" />
 	 */
-	title: ReactNode | string;
-
-	/**
-	 * Описание страницы
-	 * @example <PageHeader description="Описание страницы" />
-	 */
-	subtitle?: ReactNode | string;
-
-	/**
-	 * Хлебные крошки
-	 * @example <PageHeader breadcrumbs={
-	 * <Breadcrumbs>
-	 *   <Link>Первая ссылка</Link>,
-	 *   <Link>Вторая ссылка</Link>,
-	 *   <>Текст</>
-	 * </Breadcrumbs>
-	 * } />
-	 */
-	breadcrumbs?: ReactNode;
+	htmlTitle?: string;
 
 	/**
 	 * Набор дополнительных действий
 	 * @example <PageHeader actions={<Button variant='link'>Перейти к счету</Button>} />
 	 */
-	actions?: ReactNode;
+	actions?: ReactElement;
 	/**
 	 * Название класса, применяется к корневому компоненту
 	 */
 	className?: string;
 
-	/**
-	 * Кнопка возврата на предыдущий экран
-	 * @example
-	 * <PageHeader
-	 *  backButton={{
-	 *    onClick: () => {},
-	 *  }}
-	 * />
-	 */
-	backButton?: Omit<ButtonProps, 'children' | 'variant'>;
+	children: ReactElement;
 };
 
-export const Header = (props: PageHeaderProps) => {
-	const { title, subtitle, breadcrumbs, actions, backButton, className } =
-		props;
-	const { pinned, togglePinned } = useDashboard();
-
+export const Header = ({
+	actions,
+	className,
+	htmlTitle,
+	children,
+}: PageHeaderProps) => {
 	useEffect(() => {
-		if (typeof title === 'string') {
-			document.title = title;
+		if (htmlTitle) {
+			document.title = htmlTitle;
 		}
-	}, [title]);
+	}, [htmlTitle]);
 
 	return (
-		<header className={clsx(PAGE_HEADER_CLASSNAME, rootClass, className)}>
-			<div className={buttonsClass}>
-				<Tooltip text={pinned ? 'Развернуть' : 'Свернуть'}>
-					<Button variant="ghost" size="icon" onClick={togglePinned}>
-						{pinned ? <PanelLeftOpen /> : <PanelLeftClose />}
-					</Button>
-				</Tooltip>
-				{backButton && (
-					<Tooltip text="Назад">
-						<Button {...(backButton as ButtonProps)} variant="ghost">
-							<ChevronLeft />
-						</Button>
-					</Tooltip>
-				)}
-			</div>
-			{breadcrumbs && <div className={breadcrumbsClass}>{breadcrumbs}</div>}
-			<div className={actionsClass}>{actions}</div>
-			{typeof title === 'string' ? (
-				<Typography
-					className={titleClass}
-					component="h1"
-					variant="h3"
-					aria-level={1}
-				>
-					{title}
-				</Typography>
-			) : (
-				<div className={titleContainerClass}>{title}</div>
-			)}
-			{subtitle && typeof subtitle === 'string' && (
-				<Typography className={subtitleClass} aria-level={2}>
-					{subtitle}
-				</Typography>
-			)}
-			{subtitle && typeof subtitle !== 'string' && (
-				<div className={subtitleContainerClass}>{subtitle}</div>
-			)}
+		<header className={clsx(styles.root, PAGE_HEADER_CLASSNAME, className)}>
+			<div className={styles.content}>{children}</div>
+			<div className={styles.actions}>{actions}</div>
 		</header>
 	);
 };
