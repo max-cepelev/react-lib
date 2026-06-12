@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.1.1
+
+### Patch Changes
+
+- Refactor Header component to use title prop and add sidebar trigger
+
 ## 1.1.0
 
 ### Minor Changes

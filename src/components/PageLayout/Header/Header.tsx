@@ -1,14 +1,17 @@
 import { clsx } from 'clsx';
 import { type ReactElement, useEffect } from 'react';
+import { Typography } from '../../Typography';
 import { PAGE_HEADER_CLASSNAME } from '../constants';
 import * as styles from './styles.css';
 
 export type PageHeaderProps = {
 	/**
 	 * HTML title
-	 * @example <PageHeader htmlTitle="Заголовок страницы" />
+	 * @example <PageHeader title="Заголовок страницы" />
 	 */
-	htmlTitle?: string;
+	title?: string;
+
+	sidebarTrigger?: ReactElement;
 
 	/**
 	 * Набор дополнительных действий
@@ -26,17 +29,28 @@ export type PageHeaderProps = {
 export const Header = ({
 	actions,
 	className,
-	htmlTitle,
+	title,
 	children,
+	sidebarTrigger,
 }: PageHeaderProps) => {
 	useEffect(() => {
-		if (htmlTitle) {
-			document.title = htmlTitle;
+		if (title) {
+			document.title = title;
 		}
-	}, [htmlTitle]);
+	}, [title]);
 
 	return (
 		<header className={clsx(styles.root, PAGE_HEADER_CLASSNAME, className)}>
+			<div className={styles.sidebarTriggerContainer}>
+				{sidebarTrigger ? sidebarTrigger : null}
+			</div>
+			<div className={styles.titleContainer}>
+				{title && (
+					<Typography variant="h4" component="h1">
+						{title}
+					</Typography>
+				)}
+			</div>
 			<div className={styles.content}>{children}</div>
 			<div className={styles.actions}>{actions}</div>
 		</header>
