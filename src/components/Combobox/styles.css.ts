@@ -164,7 +164,7 @@ export const itemIndicator = style({
 	pointerEvents: 'none',
 });
 
-export const label = style({
+export const groupLabel = style({
 	padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
 	color: theme.colors.text.secondary,
 	fontSize: theme.fontSize.xs,

@@ -129,11 +129,11 @@ function Group({ ...props }: ComboboxProps.Group) {
 	return <ComboboxPrimitive.Group data-slot="combobox-group" {...props} />;
 }
 
-function Label({ className, ...props }: ComboboxProps.Label) {
+function GroupLabel({ className, ...props }: ComboboxProps.Label) {
 	return (
 		<ComboboxPrimitive.GroupLabel
-			data-slot="combobox-label"
-			className={clsx(styles.label, className)}
+			data-slot="combobox-group-label"
+			className={clsx(styles.groupLabel, className)}
 			{...props}
 		/>
 	);
@@ -228,7 +228,7 @@ Combobox.Content = Content;
 Combobox.List = List;
 Combobox.Item = Item;
 Combobox.Group = Group;
-Combobox.Label = Label;
+Combobox.GroupLabel = GroupLabel;
 Combobox.Collection = Collection;
 Combobox.Empty = Empty;
 Combobox.Separator = Separator;
