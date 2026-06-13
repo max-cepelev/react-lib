@@ -9,7 +9,7 @@ export namespace InputGroupProps {
 	};
 
 	export type Button = Omit<ButtonProps, 'size' | 'type'> & {
-		size?: 'xs' | 'sm' | 'icon-xs' | 'icon-sm';
+		size?: 'extraSmall' | 'small' | 'iconExtraSmall' | 'iconSmall';
 		type?: 'button' | 'submit' | 'reset';
 	};
 

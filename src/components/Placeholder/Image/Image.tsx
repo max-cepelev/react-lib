@@ -14,7 +14,7 @@ export const Image = (props: ImageProps) => (
 	<img
 		alt={props.alt}
 		src={props.src}
-		className={clsx(wrapper, sizes[props.size || 'md'], props.className)}
+		className={clsx(wrapper, sizes[props.size || 'medium'], props.className)}
 		width={props.width}
 		height={props.height}
 	/>

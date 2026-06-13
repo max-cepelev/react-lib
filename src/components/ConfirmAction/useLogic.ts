@@ -16,7 +16,7 @@ export const useLogic = ({
 
 	const confirmButtonProps: Partial<ButtonProps> = {
 		variant: externalConfirmButtonProps?.isAccented ? 'destructive' : 'default',
-		size: 'sm',
+		size: 'small',
 		onClick: handleConfirm,
 	};
 

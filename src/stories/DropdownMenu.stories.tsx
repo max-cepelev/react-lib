@@ -192,7 +192,7 @@ export const IconsAndRender = () => {
 				<DropdownMenu.Separator />
 				<DropdownMenu.Item
 					render={
-						<Button variant="ghost" size="sm" fullWidth>
+						<Button variant="ghost" size="small" fullWidth>
 							Rendered with Button
 						</Button>
 					}

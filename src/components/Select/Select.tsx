@@ -34,12 +34,12 @@ const SelectGroup = SelectPrimitive.Group;
 const SelectValue = SelectPrimitive.Value;
 
 export type SelectTriggerProps = SelectPrimitive.Trigger.Props & {
-	size?: 'sm' | 'md' | 'lg';
+	size?: 'small' | 'medium' | 'large';
 };
 const SelectTrigger = ({
 	className,
 	children,
-	size = 'md',
+	size = 'medium',
 	...props
 }: SelectTriggerProps) => (
 	<SelectPrimitive.Trigger

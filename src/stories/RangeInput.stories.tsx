@@ -23,7 +23,7 @@ export function Demo() {
 				minValue={filters.minEntrance}
 				maxValue={filters.maxEntrance}
 				unit="руб."
-				size="sm"
+				size="small"
 				min={1}
 				max={10}
 				onChange={(min, max) =>
@@ -35,7 +35,7 @@ export function Demo() {
 				minValue={filters.minEntrance}
 				maxValue={filters.maxEntrance}
 				unit="руб."
-				size="md"
+				size="medium"
 				min={1}
 				max={10}
 				onChange={(min, max) =>
@@ -47,7 +47,7 @@ export function Demo() {
 				minValue={filters.minEntrance}
 				maxValue={filters.maxEntrance}
 				unit="руб."
-				size="lg"
+				size="large"
 				min={1}
 				max={10}
 				onChange={(min, max) =>

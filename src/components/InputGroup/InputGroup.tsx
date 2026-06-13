@@ -32,7 +32,7 @@ function Button({
 	className,
 	type = 'button',
 	variant = 'ghost',
-	size = 'xs',
+	size = 'extraSmall',
 	...props
 }: InputGroupProps.Button) {
 	return (

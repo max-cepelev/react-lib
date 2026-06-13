@@ -1,31 +1,31 @@
 import type { PlaceholderSize } from './types';
 
 export const SIZE: Record<PlaceholderSize, PlaceholderSize> = {
-	sm: 'sm',
-	md: 'md',
-	lg: 'lg',
+	small: 'small',
+	medium: 'medium',
+	large: 'large',
 } as const;
 
 export const IMAGE_WIDTH = {
-	[SIZE.sm]: '239px',
-	[SIZE.md]: '323px',
-	[SIZE.lg]: '458px',
+	[SIZE.small]: '239px',
+	[SIZE.medium]: '323px',
+	[SIZE.large]: '458px',
 };
 
 export const IMAGE_HEIGHT = {
-	[SIZE.sm]: '119px',
-	[SIZE.md]: '161px',
-	[SIZE.lg]: '229px',
+	[SIZE.small]: '119px',
+	[SIZE.medium]: '161px',
+	[SIZE.large]: '229px',
 };
 
 export const MAX_INNER_WIDTH = {
-	[SIZE.sm]: '384px',
-	[SIZE.md]: '400px',
-	[SIZE.lg]: '460px',
+	[SIZE.small]: '384px',
+	[SIZE.medium]: '400px',
+	[SIZE.large]: '460px',
 };
 
 export const TITLE_HEADER_LEVEL = {
-	[SIZE.sm]: 'subtitle1',
-	[SIZE.md]: 'h6',
-	[SIZE.lg]: 'h5',
+	[SIZE.small]: 'subtitle1',
+	[SIZE.medium]: 'h6',
+	[SIZE.large]: 'h5',
 } as const;

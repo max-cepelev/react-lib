@@ -3,11 +3,11 @@ import { clsx } from 'clsx';
 import { sizes, triggerClass } from './styles.css';
 
 export type TabsTriggerProps = TabsPrimitive.Tab.Props & {
-	size?: 'sm' | 'md' | 'lg';
+	size?: 'small' | 'medium' | 'large';
 };
 export const TabsTrigger = ({
 	className,
-	size = 'md',
+	size = 'medium',
 	...props
 }: TabsTriggerProps) => (
 	<TabsPrimitive.Tab

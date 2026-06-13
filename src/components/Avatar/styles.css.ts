@@ -18,11 +18,11 @@ export const root = style({
 			border: `1px solid ${theme.colors.border}`,
 			mixBlendMode: 'darken',
 		},
-		'&[data-size="sm"]': {
+		'&[data-size="small"]': {
 			width: theme.spacing[6],
 			height: theme.spacing[6],
 		},
-		'&[data-size="lg"]': {
+		'&[data-size="large"]': {
 			width: theme.spacing[10],
 			height: theme.spacing[10],
 		},
@@ -49,7 +49,7 @@ export const fallback = style({
 	fontSize: theme.fontSize.sm,
 });
 
-globalStyle(`${root}[data-size="sm"] ${fallback}`, {
+globalStyle(`${root}[data-size="small"] ${fallback}`, {
 	fontSize: theme.fontSize.xs,
 });
 
@@ -71,12 +71,12 @@ export const badge = style({
 	userSelect: 'none',
 });
 
-globalStyle(`${root}[data-size="sm"] ${badge}`, {
+globalStyle(`${root}[data-size="small"] ${badge}`, {
 	width: theme.spacing[2],
 	height: theme.spacing[2],
 });
 
-globalStyle(`${root}[data-size="lg"] ${badge}`, {
+globalStyle(`${root}[data-size="large"] ${badge}`, {
 	width: theme.spacing[3],
 	height: theme.spacing[3],
 });
@@ -86,7 +86,7 @@ globalStyle(`${badge} svg`, {
 	height: theme.spacing[2],
 });
 
-globalStyle(`${root}[data-size="sm"] ${badge} svg`, {
+globalStyle(`${root}[data-size="small"] ${badge} svg`, {
 	display: 'none',
 });
 
@@ -117,12 +117,12 @@ export const groupCount = style({
 	boxShadow: `0 0 0 2px ${theme.colors.background.paper}`,
 });
 
-globalStyle(`${group}:has([data-size="sm"]) ${groupCount}`, {
+globalStyle(`${group}:has([data-size="small"]) ${groupCount}`, {
 	width: theme.spacing[6],
 	height: theme.spacing[6],
 });
 
-globalStyle(`${group}:has([data-size="lg"]) ${groupCount}`, {
+globalStyle(`${group}:has([data-size="large"]) ${groupCount}`, {
 	width: theme.spacing[10],
 	height: theme.spacing[10],
 });
@@ -132,12 +132,12 @@ globalStyle(`${groupCount} svg`, {
 	height: theme.spacing[4],
 });
 
-globalStyle(`${group}:has([data-size="sm"]) ${groupCount} svg`, {
+globalStyle(`${group}:has([data-size="small"]) ${groupCount} svg`, {
 	width: theme.spacing[3],
 	height: theme.spacing[3],
 });
 
-globalStyle(`${group}:has([data-size="lg"]) ${groupCount} svg`, {
+globalStyle(`${group}:has([data-size="large"]) ${groupCount} svg`, {
 	width: theme.spacing[5],
 	height: theme.spacing[5],
 });

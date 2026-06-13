@@ -28,7 +28,7 @@ function Overlay({ className, ...props }: AlertDialogProps.Overlay) {
 
 function Content({
 	className,
-	size = 'default',
+	size = 'medium',
 	...props
 }: AlertDialogProps.Content) {
 	return (
@@ -103,7 +103,7 @@ function Action({ className, ...props }: AlertDialogProps.Action) {
 function Cancel({
 	className,
 	variant = 'outline',
-	size = 'md',
+	size = 'medium',
 	...props
 }: AlertDialogProps.Cancel) {
 	return (

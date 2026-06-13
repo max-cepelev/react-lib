@@ -11,7 +11,7 @@ export const container = style(
 			boxShadow: `0 0 0 3px color-mix(in oklch, ${theme.colors.primary} 20%, transparent)`,
 		},
 		':hover': {
-			backgroundColor: `color-mix(in oklch, ${theme.colors.background.elementHover} 40%, transparent)`,
+			outlineColor: `color-mix(in oklch, ${theme.colors.primary} 80%, transparent)`,
 		},
 	},
 	'Input',
@@ -35,6 +35,9 @@ export const fullWidthClass = style({
 export const disabledClass = style({
 	opacity: 0.5,
 	borderColor: theme.colors.border,
+	':hover': {
+		outlineColor: theme.colors.border,
+	},
 });
 
 export const errorClass = style({
@@ -72,17 +75,17 @@ export const input = style({
 
 // Size variants
 export const sizes = styleVariants({
-	sm: {
+	small: {
 		height: '28px',
 		padding: `0.125rem ${theme.spacing[2]}`,
 		fontSize: theme.fontSize.sm,
 	},
-	md: {
+	medium: {
 		height: '32px',
 		padding: spacing(1, 3),
 		fontSize: theme.fontSize.base,
 	},
-	lg: {
+	large: {
 		height: '36px',
 		padding: spacing(2, 3),
 		fontSize: theme.fontSize.base,

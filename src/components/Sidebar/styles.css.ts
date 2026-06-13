@@ -533,15 +533,15 @@ export const menuButtonVariants = styleVariants<
 export const menuButtonSizes = styleVariants<
 	Record<SidebarMenuButtonSize, object>
 >({
-	default: {
+	medium: {
 		height: theme.spacing[8],
 		fontSize: theme.fontSize.sm,
 	},
-	sm: {
+	small: {
 		height: '1.75rem',
 		fontSize: theme.fontSize.xs,
 	},
-	lg: {
+	large: {
 		height: theme.spacing[12],
 		fontSize: theme.fontSize.sm,
 	},
@@ -558,7 +558,7 @@ globalStyle(`${desktopSidebar}[data-collapsible="icon"] ${menuButton}`, {
 });
 
 globalStyle(
-	`${desktopSidebar}[data-collapsible="icon"] ${menuButton}[data-size="lg"]`,
+	`${desktopSidebar}[data-collapsible="icon"] ${menuButton}[data-size="large"]`,
 	{
 		padding: 0,
 	},
@@ -629,15 +629,15 @@ globalStyle(`${menuButton}:hover ~ ${menuAction}`, {
 	color: sidebarForeground,
 });
 
-globalStyle(`${menuButton}[data-size="sm"] ~ ${menuAction}`, {
+globalStyle(`${menuButton}[data-size="small"] ~ ${menuAction}`, {
 	top: theme.spacing[1],
 });
 
-globalStyle(`${menuButton}[data-size="default"] ~ ${menuAction}`, {
+globalStyle(`${menuButton}[data-size="medium"] ~ ${menuAction}`, {
 	top: '0.375rem',
 });
 
-globalStyle(`${menuButton}[data-size="lg"] ~ ${menuAction}`, {
+globalStyle(`${menuButton}[data-size="large"] ~ ${menuAction}`, {
 	top: '0.625rem',
 });
 
@@ -686,15 +686,15 @@ globalStyle(`${menuButton}[data-active="true"] ~ ${menuBadge}`, {
 	color: sidebarForeground,
 });
 
-globalStyle(`${menuButton}[data-size="sm"] ~ ${menuBadge}`, {
+globalStyle(`${menuButton}[data-size="small"] ~ ${menuBadge}`, {
 	top: theme.spacing[1],
 });
 
-globalStyle(`${menuButton}[data-size="default"] ~ ${menuBadge}`, {
+globalStyle(`${menuButton}[data-size="medium"] ~ ${menuBadge}`, {
 	top: '0.375rem',
 });
 
-globalStyle(`${menuButton}[data-size="lg"] ~ ${menuBadge}`, {
+globalStyle(`${menuButton}[data-size="large"] ~ ${menuBadge}`, {
 	top: '0.625rem',
 });
 
@@ -789,10 +789,10 @@ export const menuSubButton = style({
 export const menuSubButtonSizes = styleVariants<
 	Record<SidebarMenuSubButtonSize, object>
 >({
-	sm: {
+	small: {
 		fontSize: theme.fontSize.xs,
 	},
-	md: {
+	medium: {
 		fontSize: theme.fontSize.sm,
 	},
 });

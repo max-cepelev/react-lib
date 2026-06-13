@@ -26,13 +26,13 @@ export const wrapper = style({
 });
 
 export const sizes = styleVariants<Record<PlaceholderSize, ComplexStyleRule>>({
-	sm: {
+	small: {
 		gap: theme.spacing[4],
 	},
-	md: {
+	medium: {
 		gap: theme.spacing[8],
 	},
-	lg: {
+	large: {
 		gap: theme.spacing[10],
 	},
 });

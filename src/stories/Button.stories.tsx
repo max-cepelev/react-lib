@@ -19,9 +19,9 @@ export const Destructive = () => (
 	<Button variant="destructive">Destructive</Button>
 );
 
-export const Large = () => <Button size="lg">Large</Button>;
+export const Large = () => <Button size="large">Large</Button>;
 
-export const Small = () => <Button size="sm">Small</Button>;
+export const Small = () => <Button size="small">Small</Button>;
 
 export const Link = () => <Button variant="link">Link</Button>;
 

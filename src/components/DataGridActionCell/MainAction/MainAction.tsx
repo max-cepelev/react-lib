@@ -64,7 +64,7 @@ export const MainAction = <TAction,>({
 								{...props}
 								key={nestedActionName}
 								render={
-									<Button size="sm" onClick={onActionClick(onClickNested)}>
+									<Button size="small" onClick={onActionClick(onClickNested)}>
 										{nestedActionName}
 									</Button>
 								}

@@ -44,7 +44,7 @@ export function WithEllipsis() {
 						<DropdownMenu.Trigger
 							render={
 								<Button
-									size="iconSm"
+									size="iconSmall"
 									variant="ghost"
 									aria-label="Toggle breadcrumb menu"
 								/>

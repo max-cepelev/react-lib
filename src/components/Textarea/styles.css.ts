@@ -17,20 +17,23 @@ export const textarea = style({
 	transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
 	outline: 'none',
 	resize: 'vertical',
-
+	'::placeholder': {
+		color: theme.colors.text.hint,
+	},
+	':focus-visible': {
+		borderColor: theme.colors.primary,
+		boxShadow: `0 0 0 3px color-mix(in oklch, ${theme.colors.primary} 20%, transparent)`,
+	},
+	':hover': {
+		borderColor: theme.colors.primary,
+	},
+	':disabled': {
+		cursor: 'not-allowed',
+		opacity: 0.5,
+		backgroundColor: theme.colors.background.element,
+		borderColor: theme.colors.border,
+	},
 	selectors: {
-		'&::placeholder': {
-			color: theme.colors.text.hint,
-		},
-		'&:focus-visible': {
-			borderColor: theme.colors.primary,
-			boxShadow: `0 0 0 3px color-mix(in oklch, ${theme.colors.primary} 20%, transparent)`,
-		},
-		'&:disabled': {
-			cursor: 'not-allowed',
-			opacity: 0.5,
-			backgroundColor: theme.colors.background.element,
-		},
 		'&[aria-invalid="true"]': {
 			borderColor: theme.colors.error,
 			boxShadow: `0 0 0 3px color-mix(in oklch, ${theme.colors.error} 20%, transparent)`,

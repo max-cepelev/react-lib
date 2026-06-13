@@ -90,7 +90,7 @@ export const ConfirmAction = (props: ConfirmActionProps) => {
 				<div className={wrapperClass}>
 					{text && <Typography>{text}</Typography>}
 					<div className={actionsClass}>
-						<Button size="sm" variant="ghost" onClick={onCancel}>
+						<Button size="small" variant="ghost" onClick={onCancel}>
 							Отмена
 						</Button>
 

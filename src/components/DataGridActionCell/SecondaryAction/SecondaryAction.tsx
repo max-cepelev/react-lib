@@ -55,7 +55,7 @@ export const SecondaryActions = <TAction,>({
 										onClick={onActionClick(onClick)}
 										isLoading={isLoading}
 										variant="ghost"
-										size="sm"
+										size="small"
 										fullWidth
 									>
 										{name}

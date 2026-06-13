@@ -14,7 +14,7 @@ export namespace AlertDialogProps {
 
 	export type Content = AlertDialogPrimitive.Popup.Props & {
 		className?: string;
-		size?: 'default' | 'sm';
+		size?: 'medium' | 'small';
 	};
 
 	export type Header = React.ComponentProps<'div'> & {

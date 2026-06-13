@@ -25,28 +25,28 @@ export const Default = () => {
 		>
 			<Input
 				placeholder="Type something..."
-				size="sm"
+				size="small"
 				value={value}
 				onChange={(e) => setValue(e.target.value)}
 				name="test"
 			/>
-			<Button size="sm">sm</Button>
+			<Button size="small">small</Button>
 			<Input
 				placeholder="Type something..."
-				size="md"
+				size="medium"
 				value={value}
 				onChange={(e) => setValue(e.target.value)}
 				name="test1"
 			/>
-			<Button size="md">md</Button>
+			<Button size="medium">medium</Button>
 			<Input
 				placeholder="Type something..."
-				size="lg"
+				size="large"
 				value={value}
 				onChange={(e) => setValue(e.target.value)}
 				name="test2"
 			/>
-			<Button size="lg">lg</Button>
+			<Button size="large">large</Button>
 		</div>
 	);
 };
@@ -56,11 +56,16 @@ export const Standard = () => (
 );
 
 export const Large = () => (
-	<Input placeholder="Type something..." variant="outlined" size="lg" />
+	<Input placeholder="Type something..." variant="outlined" size="large" />
 );
 
 export const SmallWithError = () => (
-	<Input placeholder="Type something..." variant="outlined" error size="sm" />
+	<Input
+		placeholder="Type something..."
+		variant="outlined"
+		error
+		size="small"
+	/>
 );
 
 export const Disabled = () => (

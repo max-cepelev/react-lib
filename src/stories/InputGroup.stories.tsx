@@ -19,7 +19,11 @@ export function WithInlineAddons() {
 			</InputGroup.Addon>
 			<InputGroup.Input placeholder="Search..." />
 			<InputGroup.Addon align="inline-end">
-				<InputGroup.Button size="icon-xs" variant="ghost" aria-label="Submit">
+				<InputGroup.Button
+					size="iconExtraSmall"
+					variant="ghost"
+					aria-label="Submit"
+				>
 					<SendIcon />
 				</InputGroup.Button>
 			</InputGroup.Addon>
@@ -43,7 +47,7 @@ export function WithTextarea() {
 		<InputGroup style={{ width: 360 }}>
 			<InputGroup.Textarea placeholder="Write a message..." />
 			<InputGroup.Addon align="block-end">
-				<InputGroup.Button size="sm">Send</InputGroup.Button>
+				<InputGroup.Button size="small">Send</InputGroup.Button>
 			</InputGroup.Addon>
 		</InputGroup>
 	);

@@ -57,7 +57,7 @@ function Content({
 							<Button
 								variant="ghost"
 								className={styles.closeButton}
-								size="iconSm"
+								size="iconSmall"
 							/>
 						}
 					>

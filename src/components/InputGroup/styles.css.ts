@@ -13,14 +13,18 @@ export const root = style({
 	backgroundColor: 'transparent',
 	outline: 'none',
 	transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+	':hover': {
+		borderColor: theme.colors.primary,
+	},
+	':focus-within': {
+		borderColor: theme.colors.primary,
+		boxShadow: `0 0 0 3px color-mix(in oklch, ${theme.colors.primary} 20%, transparent)`,
+	},
 	selectors: {
-		'&:focus-within': {
-			borderColor: theme.colors.primary,
-			boxShadow: `0 0 0 3px color-mix(in oklch, ${theme.colors.primary} 20%, transparent)`,
-		},
 		'&:has([disabled])': {
 			opacity: 0.5,
 			backgroundColor: theme.colors.background.element,
+			borderColor: theme.colors.border,
 		},
 		'&:has([aria-invalid="true"])': {
 			borderColor: theme.colors.error,
@@ -90,23 +94,23 @@ export const button = style({
 });
 
 export const buttonSize = styleVariants({
-	xs: {
+	extraSmall: {
 		height: theme.spacing[6],
 		gap: theme.spacing[1],
 		padding: `0 ${theme.spacing[2]}`,
 		fontSize: theme.fontSize.xs,
 	},
-	sm: {
+	small: {
 		height: 28,
 		padding: `0 ${theme.spacing[2]}`,
 		fontSize: theme.fontSize.sm,
 	},
-	'icon-xs': {
+	iconExtraSmall: {
 		width: theme.spacing[6],
 		height: theme.spacing[6],
 		padding: 0,
 	},
-	'icon-sm': {
+	iconSmall: {
 		width: theme.spacing[8],
 		height: theme.spacing[8],
 		padding: 0,
@@ -131,7 +135,6 @@ export const control = style({
 	fontSize: theme.fontSize.sm,
 	outline: 'none',
 	boxShadow: 'none',
-
 	selectors: {
 		'&::placeholder': {
 			color: theme.colors.text.hint,

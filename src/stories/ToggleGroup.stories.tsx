@@ -46,7 +46,7 @@ export function MultipleWithLabel() {
 		<ToggleGroup
 			onChange={setFilters}
 			label="Rooms"
-			size="lg"
+			size="large"
 			value={filters}
 			multiple
 			options={[
@@ -74,7 +74,7 @@ export function IconButtonsWithTitle() {
 		<ToggleGroup
 			onChange={setFilters}
 			label="Rooms"
-			size="lg"
+			size="large"
 			value={filters}
 			multiple
 			options={[

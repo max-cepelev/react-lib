@@ -64,10 +64,10 @@ export const content = style({
 		'&[data-closed]': {
 			animation: `${zoomOut} 100ms ease-in, ${fadeOut} 100ms ease-in`,
 		},
-		'&[data-size="default"]': {
+		'&[data-size="medium"]': {
 			maxWidth: '20rem',
 		},
-		'&[data-size="sm"]': {
+		'&[data-size="small"]': {
 			maxWidth: '20rem',
 		},
 	},
@@ -75,7 +75,7 @@ export const content = style({
 	'@media': {
 		'(min-width: 640px)': {
 			selectors: {
-				'&[data-size="default"]': {
+				'&[data-size="medium"]': {
 					maxWidth: '24rem',
 				},
 			},
@@ -95,7 +95,7 @@ export const header = style({
 	textAlign: 'center',
 });
 
-globalStyle(`${content}[data-size="default"] ${header}`, {
+globalStyle(`${content}[data-size="medium"] ${header}`, {
 	'@media': {
 		'(min-width: 640px)': {
 			placeItems: 'start',
@@ -105,7 +105,7 @@ globalStyle(`${content}[data-size="default"] ${header}`, {
 });
 
 globalStyle(
-	`${content}[data-size="default"] ${header}:has([data-slot="alert-dialog-media"])`,
+	`${content}[data-size="medium"] ${header}:has([data-slot="alert-dialog-media"])`,
 	{
 		'@media': {
 			'(min-width: 640px)': {
@@ -129,12 +129,12 @@ export const footer = style({
 	borderBottomRightRadius: theme.borderRadius.lg,
 });
 
-globalStyle(`${content}[data-size="sm"] ${footer}`, {
+globalStyle(`${content}[data-size="small"] ${footer}`, {
 	display: 'grid',
 	gridTemplateColumns: '1fr 1fr',
 });
 
-globalStyle(`${content}[data-size="default"] ${footer}`, {
+globalStyle(`${content}[data-size="medium"] ${footer}`, {
 	'@media': {
 		'(min-width: 640px)': {
 			flexDirection: 'row',
@@ -161,7 +161,7 @@ globalStyle(`${media} svg`, {
 	height: '70%',
 });
 
-globalStyle(`${content}[data-size="default"] ${media}`, {
+globalStyle(`${content}[data-size="medium"] ${media}`, {
 	'@media': {
 		'(min-width: 640px)': {
 			gridRow: 'span 2',
@@ -177,7 +177,7 @@ export const title = style({
 });
 
 globalStyle(
-	`${content}[data-size="default"] ${title}:has(~ [data-slot="alert-dialog-media"])`,
+	`${content}[data-size="medium"] ${title}:has(~ [data-slot="alert-dialog-media"])`,
 	{
 		'@media': {
 			'(min-width: 640px)': {

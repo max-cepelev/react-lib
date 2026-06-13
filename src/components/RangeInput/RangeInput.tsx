@@ -19,7 +19,7 @@ export type RangeInputProps = {
 	unit?: string;
 	onChange: (minValue: number, maxValue: number) => void;
 	width?: number | string;
-	size?: 'sm' | 'md' | 'lg';
+	size?: 'small' | 'medium' | 'large';
 	className?: string;
 	isActive?: boolean;
 	minInputRef?: React.RefObject<HTMLInputElement>;
@@ -34,7 +34,7 @@ export function RangeInput({
 	maxValue,
 	width = 150,
 	unit = '',
-	size = 'md',
+	size = 'medium',
 	className,
 	isActive,
 	minInputRef,

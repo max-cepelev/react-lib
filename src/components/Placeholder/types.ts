@@ -1,1 +1,1 @@
-export type PlaceholderSize = 'sm' | 'md' | 'lg';
+export type PlaceholderSize = 'small' | 'medium' | 'large';

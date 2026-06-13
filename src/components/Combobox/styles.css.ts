@@ -279,7 +279,7 @@ export const chipsInput = style({
 });
 
 export const chipRemoveSize = styleVariants({
-	'icon-xs': {
+	iconExtraSmall: {
 		width: theme.spacing[5],
 		height: theme.spacing[5],
 		padding: 0,

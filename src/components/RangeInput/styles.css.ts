@@ -25,17 +25,17 @@ export const activeClass = style({
 
 // Size variants
 export const sizes = styleVariants({
-	sm: {
+	small: {
 		height: 28,
 		fontSize: theme.fontSize.sm,
 		paddingInline: theme.spacing[2],
 	},
-	md: {
+	medium: {
 		height: 32,
 		fontSize: theme.fontSize.base,
 		paddingInline: theme.spacing[2],
 	},
-	lg: {
+	large: {
 		height: 36,
 		paddingInline: theme.spacing[3],
 		fontSize: theme.fontSize.base,

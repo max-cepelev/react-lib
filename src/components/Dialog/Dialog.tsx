@@ -54,7 +54,7 @@ function Content({
 						render={
 							<Button
 								variant="ghost"
-								size="iconSm"
+								size="iconSmall"
 								className={styles.closeButton}
 							/>
 						}

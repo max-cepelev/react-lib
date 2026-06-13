@@ -46,17 +46,17 @@ export const triggerClass = style({
 });
 
 export const sizes = styleVariants({
-	sm: {
+	small: {
 		height: 28,
 		fontSize: theme.fontSize.sm,
 		padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
 	},
-	md: {
+	medium: {
 		height: theme.spacing[8],
 		fontSize: theme.fontSize.base,
 		padding: `${theme.spacing[2]} ${theme.spacing[3]}`,
 	},
-	lg: {
+	large: {
 		height: 36,
 		fontSize: theme.fontSize.base,
 		padding: `${theme.spacing[2]} ${theme.spacing[4]}`,

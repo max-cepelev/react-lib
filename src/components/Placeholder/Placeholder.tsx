@@ -67,7 +67,7 @@ export const Placeholder = ({
 	imgAlt,
 	description,
 	actions,
-	size = 'sm',
+	size = 'small',
 	renderImage,
 }: PlaceholderProps) => {
 	const RenderImage = useMemo(() => renderImage || Image, [renderImage]);

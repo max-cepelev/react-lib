@@ -73,7 +73,7 @@ function AppSidebar({
 			<Sidebar.Header>
 				<Sidebar.Menu>
 					<Sidebar.MenuItem>
-						<Sidebar.MenuButton size="lg" tooltip="Acme Workspace">
+						<Sidebar.MenuButton size="large" tooltip="Acme Workspace">
 							<div
 								className={demoStyles.simpleBrandIcon}
 								style={{
@@ -226,7 +226,7 @@ function Shell({
 				>
 					<Sidebar.Trigger />
 					<strong>Dashboard</strong>
-					<Button size="sm" variant="outline" style={{ marginLeft: 'auto' }}>
+					<Button size="small" variant="outline" style={{ marginLeft: 'auto' }}>
 						Create
 					</Button>
 				</header>
@@ -410,7 +410,7 @@ function TeamSwitcher({
 
 	return (
 		<DropdownMenu>
-			<DropdownMenu.Trigger render={<Sidebar.MenuButton size="lg" />}>
+			<DropdownMenu.Trigger render={<Sidebar.MenuButton size="large" />}>
 				<div className={demoStyles.workspaceIcon}>
 					<activeTeam.logo />
 				</div>
@@ -589,7 +589,7 @@ function NavUser({
 
 	return (
 		<DropdownMenu>
-			<DropdownMenu.Trigger render={<Sidebar.MenuButton size="lg" />}>
+			<DropdownMenu.Trigger render={<Sidebar.MenuButton size="large" />}>
 				<Avatar className={demoStyles.avatarSquare}>
 					<Avatar.Image src={user.avatar} alt={user.name} />
 					<Avatar.Fallback>CN</Avatar.Fallback>

@@ -195,7 +195,7 @@ function Chip({
 					className={clsx(
 						styles.chipRemove,
 						styles.chipRemoveButton,
-						styles.chipRemoveSize['icon-xs'],
+						styles.chipRemoveSize.iconExtraSmall,
 					)}
 					data-slot="combobox-chip-remove"
 				>

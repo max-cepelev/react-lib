@@ -5,4 +5,4 @@ export type ButtonVariant =
 	| 'ghost'
 	| 'link';
 
-export type ButtonSize = 'md' | 'sm' | 'lg' | 'icon' | 'iconSm';
+export type ButtonSize = 'medium' | 'small' | 'large' | 'icon' | 'iconSmall';

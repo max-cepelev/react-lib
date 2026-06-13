@@ -9,8 +9,8 @@ export type SidebarSide = 'left' | 'right';
 export type SidebarVariant = 'sidebar' | 'floating' | 'inset';
 export type SidebarCollapsible = 'offcanvas' | 'icon' | 'none';
 export type SidebarMenuButtonVariant = 'default' | 'outline';
-export type SidebarMenuButtonSize = 'default' | 'sm' | 'lg';
-export type SidebarMenuSubButtonSize = 'sm' | 'md';
+export type SidebarMenuButtonSize = 'medium' | 'small' | 'large';
+export type SidebarMenuSubButtonSize = 'small' | 'medium';
 
 export type SidebarContextValue = {
 	state: SidebarState;

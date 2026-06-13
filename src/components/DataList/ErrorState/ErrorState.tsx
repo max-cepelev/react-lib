@@ -11,7 +11,7 @@ type Props = {
 export const ErrorState = ({ onRetry }: Props) => (
 	<li className={item}>
 		<Typography align="center">{ERROR_MESSAGE}</Typography>
-		<Button size="sm" onClick={onRetry}>
+		<Button size="small" onClick={onRetry}>
 			Попробовать снова
 		</Button>
 	</li>

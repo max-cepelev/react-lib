@@ -27,7 +27,7 @@ type ToggleGroupProps<
 	options: Option<TValue>[];
 	value: Multiple extends true ? TValue[] : TValue;
 	onChange: (value: Multiple extends true ? TValue[] : TValue) => void;
-	size?: 'sm' | 'lg' | 'md' | 'icon';
+	size?: 'small' | 'large' | 'medium' | 'icon';
 	className?: string;
 	label?: string;
 	multiple?: Multiple;

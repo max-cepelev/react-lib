@@ -19,13 +19,13 @@ export const wrapper = style({
 });
 
 export const sizes = styleVariants<Record<PlaceholderSize, ComplexStyleRule>>({
-	sm: {
+	small: {
 		margin: `auto auto ${theme.spacing[4]}`,
 	},
-	md: {
+	medium: {
 		margin: `auto auto ${theme.spacing[8]}`,
 	},
-	lg: {
+	large: {
 		margin: `auto auto ${theme.spacing[10]}`,
 	},
 });

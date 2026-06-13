@@ -419,7 +419,7 @@ function getTooltipProps(tooltip: SidebarTooltip) {
 function MenuButton({
 	isActive = false,
 	variant = 'default',
-	size = 'default',
+	size = 'medium',
 	tooltip,
 	className,
 	render,
@@ -549,7 +549,7 @@ function MenuSubItem({ className, ...props }: SidebarProps.MenuSubItem) {
 }
 
 function MenuSubButton({
-	size = 'md',
+	size = 'medium',
 	isActive = false,
 	className,
 	render,

@@ -86,10 +86,10 @@ export const Sizes = () => {
 	return (
 		<Tabs defaultValue="account">
 			<Tabs.List>
-				<Tabs.Trigger size="sm" value="account">
+				<Tabs.Trigger size="small" value="account">
 					Account
 				</Tabs.Trigger>
-				<Tabs.Trigger size="sm" value="password">
+				<Tabs.Trigger size="small" value="password">
 					Password
 				</Tabs.Trigger>
 			</Tabs.List>

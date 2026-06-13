@@ -54,19 +54,19 @@ export function Sizes() {
 	return (
 		<div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
 			<Select>
-				<SelectTrigger size="sm" style={{ width: '180px' }}>
+				<SelectTrigger size="small" style={{ width: '180px' }}>
 					<SelectValue placeholder="Select a fruit" />
 				</SelectTrigger>
 				{content}
 			</Select>
 			<Select>
-				<SelectTrigger size="md" style={{ width: '180px' }}>
+				<SelectTrigger size="medium" style={{ width: '180px' }}>
 					<SelectValue placeholder="Select a fruit" />
 				</SelectTrigger>
 				{content}
 			</Select>
 			<Select>
-				<SelectTrigger size="lg" style={{ width: '180px' }}>
+				<SelectTrigger size="large" style={{ width: '180px' }}>
 					<SelectValue placeholder="Select a fruit" />
 				</SelectTrigger>
 				{content}

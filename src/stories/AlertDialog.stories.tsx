@@ -65,7 +65,7 @@ export function SmallSize() {
 			<AlertDialog.Trigger>
 				<Button>Open Small Alert Dialog</Button>
 			</AlertDialog.Trigger>
-			<AlertDialog.Content size="sm">
+			<AlertDialog.Content size="small">
 				<AlertDialog.Header>
 					<AlertDialog.Title>Delete account?</AlertDialog.Title>
 					<AlertDialog.Description>

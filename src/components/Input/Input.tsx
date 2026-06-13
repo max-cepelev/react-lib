@@ -16,7 +16,7 @@ import {
 
 export type InputProps = Omit<React.ComponentProps<'input'>, 'size'> & {
 	variant?: 'outlined' | 'standard';
-	size?: 'sm' | 'md' | 'lg';
+	size?: 'small' | 'medium' | 'large';
 	error?: boolean;
 	startAdornment?: React.ReactNode;
 	endAdornment?: React.ReactNode;
@@ -26,7 +26,7 @@ export type InputProps = Omit<React.ComponentProps<'input'>, 'size'> & {
 export const Input = ({
 	error,
 	variant = 'outlined',
-	size = 'md',
+	size = 'medium',
 	startAdornment,
 	endAdornment,
 	className,

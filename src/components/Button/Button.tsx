@@ -15,7 +15,7 @@ export type ButtonProps = ButtonPrimitive.Props & {
 const Button = ({
 	className,
 	variant = 'default',
-	size = 'md',
+	size = 'medium',
 	startAdornment,
 	endAdornment,
 	isLoading = false,

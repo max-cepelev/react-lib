@@ -5,7 +5,7 @@ import { clsx } from 'clsx';
 import * as styles from './styles.css';
 import type { AvatarProps } from './types';
 
-function Avatar({ className, size = 'default', ...props }: AvatarProps.Root) {
+function Avatar({ className, size = 'medium', ...props }: AvatarProps.Root) {
 	return (
 		<AvatarPrimitive.Root
 			data-slot="avatar"
