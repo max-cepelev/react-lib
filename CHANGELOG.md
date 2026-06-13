@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.3.0
+
+### Minor Changes
+
+- Refactor component sizes to use consistent naming convention
+
 ## 1.2.0
 
 ### Minor Changes
