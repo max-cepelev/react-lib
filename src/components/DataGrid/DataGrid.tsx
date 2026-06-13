@@ -25,7 +25,6 @@ export type DataGridProps<TRow> = {
 	isLoading?: boolean;
 	isDisabled?: boolean;
 	isError?: boolean;
-	stickyHeader?: boolean;
 	emptyState?: DataGridState;
 	errorState?: DataGridState;
 	onSelectRow?: (row: TRow[]) => void;
@@ -51,7 +50,6 @@ export function DataGrid<TRow>({
 	errorState,
 	footer,
 	title,
-	stickyHeader,
 	onRetry,
 }: DataGridProps<TRow>) {
 	const isFullHeight = isLoading || isError || rows.length === 0;
@@ -73,7 +71,7 @@ export function DataGrid<TRow>({
 				)}
 			>
 				{title && <caption className={titleClass}>{title}</caption>}
-				<Header columns={columns} height={headerHeight} sticky={stickyHeader} />
+				<Header columns={columns} height={headerHeight} />
 				<Body
 					rows={rows}
 					columns={columns}

@@ -178,7 +178,7 @@ const Container = (props: { children: React.ReactNode }) => {
 export const BaseExample = () => {
 	return (
 		<Container>
-			<DataGrid rows={rows} stickyHeader columns={columns} keyId="id" />
+			<DataGrid rows={rows} columns={columns} keyId="id" />
 		</Container>
 	);
 };
@@ -264,14 +264,7 @@ export const WithSorting = () => {
 			),
 		},
 	];
-	return (
-		<DataGrid
-			stickyHeader
-			rows={sortedRows}
-			columns={columnsWithActions}
-			keyId="id"
-		/>
-	);
+	return <DataGrid rows={sortedRows} columns={columnsWithActions} keyId="id" />;
 };
 
 export const Loading = () => {
@@ -298,7 +291,6 @@ export const WithPagination = () => {
 			rows={slicedData}
 			columns={columns}
 			keyId="id"
-			stickyHeader
 			footer={
 				<Pagination
 					onPageChange={setPage}

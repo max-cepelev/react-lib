@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.3.1
+
+### Patch Changes
+
+- Remove stickyHeader prop from DataGrid and Header components, updating styles accordingly. Adjusted related stories to reflect the changes.
+
 ## 1.3.0
 
 ### Minor Changes
