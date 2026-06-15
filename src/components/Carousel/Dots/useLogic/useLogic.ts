@@ -7,28 +7,27 @@ export const useLogic = (api: CarouselApi) => {
 
 	const onDotButtonClick = useCallback(
 		(index: number) => {
-			if (!api) return;
 			api.scrollTo(index);
 		},
 		[api],
 	);
 
 	const onInit = useCallback((api: CarouselApi) => {
-		if (!api) return;
 		setScrollSnaps(api.scrollSnapList());
 	}, []);
 
 	const onSelect = useCallback((api: CarouselApi) => {
-		if (!api) return;
 		setSelectedIndex(api.selectedScrollSnap());
 	}, []);
 
 	useEffect(() => {
-		if (!api) return;
-
 		onInit(api);
 		onSelect(api);
 		api.on('reInit', onInit).on('reInit', onSelect).on('select', onSelect);
+
+		return () => {
+			api.off('reInit', onInit).off('reInit', onSelect).off('select', onSelect);
+		};
 	}, [api, onInit, onSelect]);
 
 	return {

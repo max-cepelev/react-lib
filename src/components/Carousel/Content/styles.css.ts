@@ -1,20 +1,38 @@
 import { style, styleVariants } from '@vanilla-extract/css';
 import { theme } from '~/theme';
 
-export const wrapper = style({
-	overflow: 'hidden',
+export const content = style({
+	display: 'flex',
 	height: '100%',
 	width: '100%',
+	overflow: 'hidden',
+	scrollBehavior: 'smooth',
+	scrollbarWidth: 'none',
+	WebkitOverflowScrolling: 'touch',
+	selectors: {
+		'&::-webkit-scrollbar': {
+			display: 'none',
+		},
+	},
 });
 
 export const orientations = styleVariants({
 	horizontal: {
-		display: 'flex',
-		gap: theme.spacing[4],
+		overflowX: 'auto',
+		overflowY: 'hidden',
+		flexDirection: 'row',
+		scrollSnapType: 'x mandatory',
+		overscrollBehaviorX: 'contain',
+		overscrollBehaviorY: 'auto',
+		columnGap: theme.spacing[4],
 	},
 	vertical: {
-		display: 'flex',
+		overflowY: 'auto',
+		overflowX: 'hidden',
 		flexDirection: 'column',
-		gap: theme.spacing[4],
+		scrollSnapType: 'y mandatory',
+		overscrollBehaviorY: 'contain',
+		overscrollBehaviorX: 'auto',
+		rowGap: theme.spacing[4],
 	},
 });

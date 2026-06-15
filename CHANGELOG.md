@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.4.0
+
+### Minor Changes
+
+- Rewrite Carousel using native scroll snap
+
 ## 1.3.2
 
 ### Patch Changes

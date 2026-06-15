@@ -1,13 +1,10 @@
-import type { EmblaViewportRefType } from 'embla-carousel-react';
-
 import React from 'react';
-import type { CarouselApi, CarouselOptions } from './types';
+import type { CarouselApi, CarouselOrientation } from './types';
 
 type CarouselContextProps = {
-	carouselRef: EmblaViewportRefType;
+	carouselRef: (node: HTMLDivElement | null) => void;
 	api: CarouselApi;
-	opts: CarouselOptions;
-	orientation: 'horizontal' | 'vertical';
+	orientation: CarouselOrientation;
 	scrollPrev: () => void;
 	scrollNext: () => void;
 	canScrollPrev: boolean;

@@ -1,16 +1,22 @@
+import { clsx } from 'clsx';
+import type { ComponentProps } from 'react';
 import { useCarousel } from '../CarouselContext';
 import * as styles from './styles.css';
 
-export function Content(props: React.ComponentProps<'div'>) {
+export function Content({ className, ...props }: ComponentProps<'div'>) {
 	const { carouselRef, orientation = 'horizontal' } = useCarousel();
 
 	return (
 		<div
-			className={styles.wrapper}
+			className={clsx(
+				styles.content,
+				styles.orientations[orientation],
+				className,
+			)}
 			ref={carouselRef}
 			data-slot="carousel-content"
-		>
-			<div className={styles.orientations[orientation]} {...props} />
-		</div>
+			data-orientation={orientation}
+			{...props}
+		/>
 	);
 }

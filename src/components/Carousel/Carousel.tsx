@@ -1,86 +1,68 @@
 'use client';
 import { clsx } from 'clsx';
-import type { CSSProperties } from 'react';
-import { Buttons } from './Buttons';
+import type { ComponentProps } from 'react';
+import { Arrows } from './Buttons';
 import { CarouselContext } from './CarouselContext';
 import { Content } from './Content';
 import { Dots } from './Dots';
 import { Item } from './Item';
 import { rootClass } from './styles.css';
-import type { CarouselApi, CarouselOptions, CarouselPlugin } from './types';
+import type { CarouselAlign, CarouselApi, CarouselOrientation } from './types';
 import { useLogic } from './useLogic';
 
-export type CarouselProps<TData> = {
-	opts?: CarouselOptions;
-	plugins?: CarouselPlugin;
-	orientation?: 'horizontal' | 'vertical';
-	setApi?: (api: CarouselApi) => void;
-	className?: string;
-	width?: CSSProperties['width'];
-	height?: CSSProperties['height'];
-	data: TData[];
-	keyId: keyof TData;
-	showDots?: boolean;
-	showArrows?: boolean;
-	renderItem: (item: TData) => React.ReactNode;
+export type CarouselProps = ComponentProps<'section'> & {
+	align?: CarouselAlign;
+	orientation?: CarouselOrientation;
+	setApi?: (api: CarouselApi | undefined) => void;
 };
 
-export function Carousel<TData>({
-	width = '100%',
-	height = '100%',
+function Carousel({
+	align,
+	children,
+	className,
+	orientation: orientationProp,
+	setApi,
 	...props
-}: CarouselProps<TData>) {
+}: CarouselProps) {
 	const {
 		canScrollNext,
 		canScrollPrev,
 		scrollNext,
 		scrollPrev,
 		api,
-		opts,
 		orientation,
 		carouselRef,
 		handleKeyDown,
-		data,
-		isShowButtons,
-		isShowDots,
-	} = useLogic(props);
+	} = useLogic({ align, orientation: orientationProp, setApi });
 
 	return (
 		<CarouselContext.Provider
 			value={{
 				carouselRef,
 				api,
-				opts,
-				orientation:
-					orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
+				orientation,
 				scrollPrev,
 				scrollNext,
 				canScrollPrev,
 				canScrollNext,
 			}}
 		>
-			<div
+			<section
 				onKeyDownCapture={handleKeyDown}
-				className={clsx(rootClass, props.className)}
+				className={clsx(rootClass, className)}
 				data-slot="carousel"
-				style={{
-					width,
-					height,
-				}}
+				{...props}
 			>
-				<Content
-					style={{
-						width,
-						height,
-					}}
-				>
-					{data.map((item) => (
-						<Item key={`${item[props.keyId]}`}>{props.renderItem(item)}</Item>
-					))}
-				</Content>
-				{isShowButtons && <Buttons />}
-				{isShowDots && <Dots api={api} orientation={orientation} />}
-			</div>
+				{children}
+			</section>
 		</CarouselContext.Provider>
 	);
 }
+
+Carousel.Root = Carousel;
+Carousel.Content = Content;
+Carousel.Item = Item;
+Carousel.Arrows = Arrows;
+Carousel.Dots = Dots;
+
+export { Carousel };

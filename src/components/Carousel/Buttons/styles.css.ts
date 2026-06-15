@@ -1,47 +1,84 @@
-import { style, styleVariants } from '@vanilla-extract/css';
+import { globalStyle, style, styleVariants } from '@vanilla-extract/css';
 import { theme } from '~/theme';
 
-const base = style({
+const buttonBase = style({
 	position: 'absolute',
-	opacity: 0.4,
-	userSelect: 'none',
-	display: 'grid',
-	placeItems: 'center',
-	borderRadius: theme.borderRadius.md,
-	color: theme.colors.primary,
-	transition: 'opacity linear .2s',
+	backgroundColor: 'transparent',
+	border: 'none',
+	cursor: 'pointer',
+	display: 'flex',
+	justifyContent: 'center',
+	alignItems: 'center',
 	':disabled': {
-		pointerEvents: 'none',
-		opacity: 0.2,
-	},
-	':hover': {
-		opacity: 1,
+		userSelect: 'none',
+		cursor: 'default',
+		opacity: 0.5,
 	},
 });
 
-export const next = style([
-	base,
-	{
-		right: 0,
-		bottom: 0,
+export const iconWrapper = style({
+	width: theme.spacing[8],
+	height: theme.spacing[8],
+	display: 'flex',
+	justifyContent: 'center',
+	alignItems: 'center',
+	backgroundColor: theme.colors.background.paper,
+	borderRadius: '9999px',
+	transition: 'transform 0.2s ease',
+	selectors: {
+		[`${buttonBase}:not(:disabled):hover &`]: {
+			transform: 'scale(1.1)',
+		},
 	},
-]);
+});
 
-export const prev = style([
-	base,
-	{
-		left: 0,
-		top: 0,
-	},
-]);
+globalStyle(`${iconWrapper} svg`, {
+	width: theme.spacing[5],
+	height: theme.spacing[5],
+});
 
-export const orientations = styleVariants({
-	horizontal: {
-		height: '100%',
-		width: 'clamp(35px, 15%, 55px)',
-	},
-	vertical: {
-		height: 'clamp(35px, 15%, 55px)',
-		width: '100%',
-	},
+export const buttonNext = styleVariants({
+	horizontal: [
+		buttonBase,
+		{
+			right: 0,
+			top: 0,
+			width: 'clamp(2.5rem, 4vw, 4rem)',
+			height: '100%',
+		},
+	],
+	vertical: [
+		buttonBase,
+		{
+			left: 0,
+			bottom: 0,
+			width: '100%',
+			height: 'clamp(2.5rem, 4vw, 4rem)',
+		},
+	],
+});
+
+export const buttonPrev = styleVariants({
+	horizontal: [
+		buttonBase,
+		{
+			left: 0,
+			top: 0,
+			width: 'clamp(2.5rem, 4vw, 4rem)',
+			height: '100%',
+		},
+	],
+	vertical: [
+		buttonBase,
+		{
+			right: 0,
+			top: 0,
+			width: '100%',
+			height: 'clamp(2.5rem, 4vw, 4rem)',
+		},
+	],
+});
+
+globalStyle(`${buttonNext.vertical} svg, ${buttonPrev.vertical} svg`, {
+	transform: 'rotate(90deg)',
 });
