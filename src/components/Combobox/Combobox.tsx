@@ -46,6 +46,8 @@ function Input({
 	className,
 	children,
 	disabled = false,
+	error: _error,
+	helperText: _helperText,
 	showTrigger = true,
 	showClear = false,
 	...props
@@ -206,7 +208,12 @@ function Chip({
 	);
 }
 
-function ChipsInput({ className, ...props }: ComboboxProps.ChipsInput) {
+function ChipsInput({
+	className,
+	error: _error,
+	helperText: _helperText,
+	...props
+}: ComboboxProps.ChipsInput) {
 	return (
 		<ComboboxPrimitive.Input
 			data-slot="combobox-chip-input"

@@ -29,6 +29,15 @@ export const disabled = style({
 	opacity: 0.5,
 });
 
+export const loading = style({
+	display: 'flex',
+	minHeight: theme.spacing[10],
+	alignItems: 'center',
+	justifyContent: 'center',
+	padding: theme.spacing[2],
+	color: theme.colors.text.secondary,
+});
+
 export const optionMeta = style({
 	marginLeft: 'auto',
 	color: theme.colors.text.secondary,

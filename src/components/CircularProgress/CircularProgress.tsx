@@ -12,7 +12,7 @@ type CircularProgressProps = {
 
 export const CircularProgress: React.FC<CircularProgressProps> = ({
 	size = 30,
-	thickness = 2.6,
+	thickness = 2.2,
 	color = 'primary',
 	value = 0,
 	variant = 'indeterminate',

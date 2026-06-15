@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Meta } from 'storybook-react-rsbuild';
 import { Autocomplete } from '~/components';
 
@@ -116,6 +116,57 @@ export function MultipleWithObjects() {
 				</>
 			)}
 			style={{ width: 360 }}
+		/>
+	);
+}
+
+export function AsyncOptions() {
+	const [query, setQuery] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
+	const [options, setOptions] = useState<FruitOption[]>([]);
+	const [value, setValue] = useState<FruitOption | null>(null);
+
+	useEffect(() => {
+		if (query.trim().length < 2) {
+			setOptions([]);
+			setIsLoading(false);
+			return;
+		}
+
+		setIsLoading(true);
+
+		const timer = window.setTimeout(() => {
+			const normalizedQuery = query.trim().toLowerCase();
+			setOptions(
+				fruitOptions.filter((option) =>
+					option.name.toLowerCase().includes(normalizedQuery),
+				),
+			);
+			setIsLoading(false);
+		}, 600);
+
+		return () => window.clearTimeout(timer);
+	}, [query]);
+
+	return (
+		<Autocomplete<FruitOption>
+			label="Async fruit"
+			helperText="Options are loaded from an external source"
+			options={options}
+			value={value}
+			onChange={setValue}
+			onInputValueChange={setQuery}
+			placeholder="Type at least 2 characters"
+			filter={null}
+			isLoading={isLoading}
+			noOptionsText={
+				query.trim().length < 2
+					? 'Type at least 2 characters'
+					: 'No fruits found'
+			}
+			getOptionLabel={(option) => option.name}
+			getOptionValue={(option) => option.id}
+			style={{ width: 320 }}
 		/>
 	);
 }

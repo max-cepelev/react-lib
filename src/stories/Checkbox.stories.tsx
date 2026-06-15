@@ -1,6 +1,6 @@
 import { useId } from 'react';
 import type { Meta } from 'storybook-react-rsbuild';
-import { Checkbox } from '~/components';
+import { Checkbox, Label } from '~/components';
 
 export default {
 	title: 'Checkbox',
@@ -16,9 +16,9 @@ export const Default = () => {
 	return (
 		<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
 			<Checkbox id={id} />
-			<label htmlFor={id} style={{ cursor: 'pointer', userSelect: 'none' }}>
+			<Label htmlFor={id} style={{ cursor: 'pointer', userSelect: 'none' }}>
 				Accept terms and conditions
-			</label>
+			</Label>
 		</div>
 	);
 };

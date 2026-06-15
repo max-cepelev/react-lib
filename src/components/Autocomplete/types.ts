@@ -18,6 +18,8 @@ type AutocompleteBaseProps<TOption> = Omit<
 	labelClassName?: string;
 	helperText?: string;
 	error?: boolean;
+	isLoading?: boolean;
+	loadingText?: ReactNode;
 	fullWidth?: boolean;
 	id?: string;
 	placeholder?: string;

@@ -16,6 +16,8 @@ export namespace ComboboxProps {
 	export type Input = Combobox.Input.Props & {
 		showTrigger?: boolean;
 		showClear?: boolean;
+		error?: boolean;
+		helperText?: React.ReactNode;
 	};
 
 	export type Content = Combobox.Popup.Props &
@@ -44,5 +46,8 @@ export namespace ComboboxProps {
 		showRemove?: boolean;
 	};
 
-	export type ChipsInput = Combobox.Input.Props;
+	export type ChipsInput = Combobox.Input.Props & {
+		error?: boolean;
+		helperText?: React.ReactNode;
+	};
 }

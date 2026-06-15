@@ -1,5 +1,6 @@
 import { clsx } from 'clsx';
 import { useId, useState } from 'react';
+import { CircularProgress } from '../CircularProgress';
 import { Combobox, useComboboxAnchor } from '../Combobox';
 import { Label } from '../Label';
 import { Typography } from '../Typography';
@@ -24,8 +25,10 @@ function Autocomplete<TOption>(props: AutocompleteProps<TOption>) {
 		id,
 		inputClassName,
 		isOptionEqualToValue,
+		isLoading = false,
 		label,
 		labelClassName,
+		loadingText,
 		multiple,
 		noOptionsText = 'No results found',
 		onChange,
@@ -144,8 +147,22 @@ function Autocomplete<TOption>(props: AutocompleteProps<TOption>) {
 					anchor={multiple ? anchor : undefined}
 					className={contentClassName}
 				>
-					<Combobox.Empty>{noOptionsText}</Combobox.Empty>
-					<Combobox.List>{renderItem}</Combobox.List>
+					{isLoading ? (
+						<div
+							data-slot="autocomplete-loading"
+							className={styles.loading}
+							role="status"
+						>
+							{loadingText ?? (
+								<CircularProgress thickness={1.6} size={18} color="inherit" />
+							)}
+						</div>
+					) : (
+						<>
+							<Combobox.Empty>{noOptionsText}</Combobox.Empty>
+							<Combobox.List>{renderItem}</Combobox.List>
+						</>
+					)}
 				</Combobox.Content>
 			</Combobox>
 			{helperText && (

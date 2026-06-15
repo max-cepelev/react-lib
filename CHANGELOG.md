@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.3.2
+
+### Patch Changes
+
+- Add isLoading to Autocomplete
+
 ## 1.3.1
 
 ### Patch Changes
