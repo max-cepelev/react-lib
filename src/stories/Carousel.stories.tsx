@@ -30,7 +30,7 @@ export function Demo() {
 		},
 	];
 	return (
-		<Carousel.Root style={{ width: 500, height: 400 }}>
+		<Carousel style={{ width: 500, height: 400 }}>
 			<Carousel.Content>
 				{data.map((item) => (
 					<Carousel.Item key={item.id}>
@@ -58,7 +58,7 @@ export function Demo() {
 			</Carousel.Content>
 			<Carousel.Arrows />
 			<Carousel.Dots />
-		</Carousel.Root>
+		</Carousel>
 	);
 }
 
@@ -82,7 +82,7 @@ export function StartAligned() {
 		},
 	];
 	return (
-		<Carousel.Root align="start" style={{ width: 500, height: 400 }}>
+		<Carousel align="start" style={{ width: 500, height: 400 }}>
 			<Carousel.Content>
 				{data.map((item) => (
 					<Carousel.Item key={item.id}>
@@ -110,7 +110,7 @@ export function StartAligned() {
 			</Carousel.Content>
 			<Carousel.Arrows />
 			<Carousel.Dots />
-		</Carousel.Root>
+		</Carousel>
 	);
 }
 
@@ -134,7 +134,7 @@ export function Vertical() {
 		},
 	];
 	return (
-		<Carousel.Root orientation="vertical" style={{ width: 500, height: 400 }}>
+		<Carousel orientation="vertical" style={{ width: 500, height: 400 }}>
 			<Carousel.Content>
 				{data.map((item) => (
 					<Carousel.Item key={item.id}>
@@ -164,6 +164,6 @@ export function Vertical() {
 			</Carousel.Content>
 			<Carousel.Arrows />
 			<Carousel.Dots />
-		</Carousel.Root>
+		</Carousel>
 	);
 }

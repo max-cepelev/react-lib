@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.4.1
+
+### Patch Changes
+
+- Drop Carousel.Root alias
+
 ## 1.4.0
 
 ### Minor Changes

@@ -59,7 +59,6 @@ function Carousel({
 	);
 }
 
-Carousel.Root = Carousel;
 Carousel.Content = Content;
 Carousel.Item = Item;
 Carousel.Arrows = Arrows;
