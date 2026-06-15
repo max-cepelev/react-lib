@@ -1,13 +1,26 @@
+import { useState } from 'react';
 import type { Meta } from 'storybook-react-rsbuild';
-import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectLabel,
-	SelectTrigger,
-	SelectValue,
-} from '~/components';
+import { Select } from '~/components';
+
+const fruits = [
+	{ value: 'apple', label: 'Apple' },
+	{ value: 'banana', label: 'Banana' },
+	{ value: 'blueberry', label: 'Blueberry' },
+	{ value: 'grapes', label: 'Grapes' },
+	{ value: 'pineapple', label: 'Pineapple' },
+] as const;
+
+const roles = [
+	{ value: 'owner', label: 'Owner' },
+	{ value: 'admin', label: 'Admin' },
+	{ value: 'editor', label: 'Editor' },
+	{ value: 'analyst', label: 'Analyst' },
+	{ value: 'billing', label: 'Billing' },
+] as const;
+
+const roleLabels = Object.fromEntries(
+	roles.map((role) => [role.value, role.label]),
+) as Record<string, string>;
 
 export default {
 	title: 'Select',
@@ -16,125 +29,162 @@ export default {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-} as Meta<typeof Select>;
+} satisfies Meta<typeof Select>;
 
-export function SelectDemo() {
+function FruitItems() {
+	return (
+		<Select.Group>
+			<Select.Label>Fruits</Select.Label>
+			{fruits.map((fruit) => (
+				<Select.Item key={fruit.value} value={fruit.value}>
+					{fruit.label}
+				</Select.Item>
+			))}
+		</Select.Group>
+	);
+}
+
+export function Demo() {
 	return (
 		<Select>
-			<SelectTrigger style={{ width: '180px' }}>
-				<SelectValue placeholder="Select a fruit" />
-			</SelectTrigger>
-			<SelectContent style={{ width: '180px' }}>
-				<SelectGroup>
-					<SelectLabel>Fruits</SelectLabel>
-					<SelectItem value="apple">Apple</SelectItem>
-					<SelectItem value="banana">Banana</SelectItem>
-					<SelectItem value="blueberry">Blueberry</SelectItem>
-					<SelectItem value="grapes">Grapes</SelectItem>
-					<SelectItem value="pineapple">Pineapple</SelectItem>
-				</SelectGroup>
-			</SelectContent>
+			<Select.Trigger style={{ width: '180px' }}>
+				<Select.Value placeholder="Select a fruit" />
+			</Select.Trigger>
+			<Select.Content style={{ width: '180px' }}>
+				<FruitItems />
+			</Select.Content>
 		</Select>
 	);
 }
 
 export function Sizes() {
-	const content = (
-		<SelectContent style={{ width: '180px' }}>
-			<SelectGroup>
-				<SelectLabel>Fruits</SelectLabel>
-				<SelectItem value="apple">Apple</SelectItem>
-				<SelectItem value="banana">Banana</SelectItem>
-				<SelectItem value="blueberry">Blueberry</SelectItem>
-				<SelectItem value="grapes">Grapes</SelectItem>
-				<SelectItem value="pineapple">Pineapple</SelectItem>
-			</SelectGroup>
-		</SelectContent>
-	);
 	return (
 		<div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
-			<Select>
-				<SelectTrigger size="small" style={{ width: '180px' }}>
-					<SelectValue placeholder="Select a fruit" />
-				</SelectTrigger>
-				{content}
-			</Select>
-			<Select>
-				<SelectTrigger size="medium" style={{ width: '180px' }}>
-					<SelectValue placeholder="Select a fruit" />
-				</SelectTrigger>
-				{content}
-			</Select>
-			<Select>
-				<SelectTrigger size="large" style={{ width: '180px' }}>
-					<SelectValue placeholder="Select a fruit" />
-				</SelectTrigger>
-				{content}
-			</Select>
+			{(['small', 'medium', 'large'] as const).map((size) => (
+				<Select key={size}>
+					<Select.Trigger size={size} style={{ width: 280 }}>
+						<Select.Value placeholder="Select a fruit" />
+					</Select.Trigger>
+					<Select.Content>
+						<FruitItems />
+					</Select.Content>
+				</Select>
+			))}
 		</div>
 	);
 }
 
-export function SelectScrollable() {
+export function Multiple() {
+	return (
+		<Select multiple defaultValue={['apple', 'grapes']}>
+			<Select.Trigger style={{ width: '220px' }}>
+				<Select.Value placeholder="Select fruits">
+					{(value) =>
+						Array.isArray(value) && value.length > 0
+							? `${value.length} selected`
+							: 'Select fruits'
+					}
+				</Select.Value>
+			</Select.Trigger>
+			<Select.Content style={{ width: '220px' }}>
+				<FruitItems />
+			</Select.Content>
+		</Select>
+	);
+}
+
+export function MultipleControlled() {
+	const [value, setValue] = useState<string[]>(['admin', 'editor']);
+
+	return (
+		<Select multiple value={value} onValueChange={setValue}>
+			<Select.Trigger style={{ width: '260px' }}>
+				<Select.Value placeholder="Select roles">
+					{(selectedValue) => {
+						if (!Array.isArray(selectedValue) || selectedValue.length === 0) {
+							return 'Select roles';
+						}
+
+						return selectedValue.map((item) => roleLabels[item]).join(', ');
+					}}
+				</Select.Value>
+			</Select.Trigger>
+			<Select.Content style={{ width: '260px' }}>
+				<Select.Group>
+					<Select.Label>Workspace roles</Select.Label>
+					{roles.map((role) => (
+						<Select.Item key={role.value} value={role.value}>
+							{role.label}
+						</Select.Item>
+					))}
+				</Select.Group>
+			</Select.Content>
+		</Select>
+	);
+}
+
+export function Scrollable() {
 	return (
 		<Select>
-			<SelectTrigger style={{ width: '280px' }}>
-				<SelectValue placeholder="Select a timezone" />
-			</SelectTrigger>
-			<SelectContent>
-				<SelectGroup>
-					<SelectLabel>North America</SelectLabel>
-					<SelectItem value="est">Eastern Standard Time (EST)</SelectItem>
-					<SelectItem value="cst">Central Standard Time (CST)</SelectItem>
-					<SelectItem value="mst">Mountain Standard Time (MST)</SelectItem>
-					<SelectItem value="pst">Pacific Standard Time (PST)</SelectItem>
-					<SelectItem value="akst">Alaska Standard Time (AKST)</SelectItem>
-					<SelectItem value="hst">Hawaii Standard Time (HST)</SelectItem>
-				</SelectGroup>
-				<SelectGroup>
-					<SelectLabel>Europe & Africa</SelectLabel>
-					<SelectItem value="gmt">Greenwich Mean Time (GMT)</SelectItem>
-					<SelectItem value="cet">Central European Time (CET)</SelectItem>
-					<SelectItem value="eet">Eastern European Time (EET)</SelectItem>
-					<SelectItem value="west">
+			<Select.Trigger style={{ width: '280px' }}>
+				<Select.Value placeholder="Select a timezone" />
+			</Select.Trigger>
+			<Select.Content>
+				<Select.Group>
+					<Select.Label>North America</Select.Label>
+					<Select.Item value="est">Eastern Standard Time (EST)</Select.Item>
+					<Select.Item value="cst">Central Standard Time (CST)</Select.Item>
+					<Select.Item value="mst">Mountain Standard Time (MST)</Select.Item>
+					<Select.Item value="pst">Pacific Standard Time (PST)</Select.Item>
+					<Select.Item value="akst">Alaska Standard Time (AKST)</Select.Item>
+					<Select.Item value="hst">Hawaii Standard Time (HST)</Select.Item>
+				</Select.Group>
+				<Select.Group>
+					<Select.Label>Europe & Africa</Select.Label>
+					<Select.Item value="gmt">Greenwich Mean Time (GMT)</Select.Item>
+					<Select.Item value="cet">Central European Time (CET)</Select.Item>
+					<Select.Item value="eet">Eastern European Time (EET)</Select.Item>
+					<Select.Item value="west">
 						Western European Summer Time (WEST)
-					</SelectItem>
-					<SelectItem value="cat">Central Africa Time (CAT)</SelectItem>
-					<SelectItem value="eat">East Africa Time (EAT)</SelectItem>
-				</SelectGroup>
-				<SelectGroup>
-					<SelectLabel>Asia</SelectLabel>
-					<SelectItem value="msk">Moscow Time (MSK)</SelectItem>
-					<SelectItem value="ist">India Standard Time (IST)</SelectItem>
-					<SelectItem value="cst_china">China Standard Time (CST)</SelectItem>
-					<SelectItem value="jst">Japan Standard Time (JST)</SelectItem>
-					<SelectItem value="kst">Korea Standard Time (KST)</SelectItem>
-					<SelectItem value="ist_indonesia">
+					</Select.Item>
+					<Select.Item value="cat">Central Africa Time (CAT)</Select.Item>
+					<Select.Item value="eat">East Africa Time (EAT)</Select.Item>
+				</Select.Group>
+				<Select.Group>
+					<Select.Label>Asia</Select.Label>
+					<Select.Item value="msk">Moscow Time (MSK)</Select.Item>
+					<Select.Item value="ist">India Standard Time (IST)</Select.Item>
+					<Select.Item value="cst_china">China Standard Time (CST)</Select.Item>
+					<Select.Item value="jst">Japan Standard Time (JST)</Select.Item>
+					<Select.Item value="kst">Korea Standard Time (KST)</Select.Item>
+					<Select.Item value="ist_indonesia">
 						Indonesia Central Standard Time (WITA)
-					</SelectItem>
-				</SelectGroup>
-				<SelectGroup>
-					<SelectLabel>Australia & Pacific</SelectLabel>
-					<SelectItem value="awst">
+					</Select.Item>
+				</Select.Group>
+				<Select.Group>
+					<Select.Label>Australia & Pacific</Select.Label>
+					<Select.Item value="awst">
 						Australian Western Standard Time (AWST)
-					</SelectItem>
-					<SelectItem value="acst">
+					</Select.Item>
+					<Select.Item value="acst">
 						Australian Central Standard Time (ACST)
-					</SelectItem>
-					<SelectItem value="aest">
+					</Select.Item>
+					<Select.Item value="aest">
 						Australian Eastern Standard Time (AEST)
-					</SelectItem>
-					<SelectItem value="nzst">New Zealand Standard Time (NZST)</SelectItem>
-					<SelectItem value="fjt">Fiji Time (FJT)</SelectItem>
-				</SelectGroup>
-				<SelectGroup>
-					<SelectLabel>South America</SelectLabel>
-					<SelectItem value="art">Argentina Time (ART)</SelectItem>
-					<SelectItem value="bot">Bolivia Time (BOT)</SelectItem>
-					<SelectItem value="brt">Brasilia Time (BRT)</SelectItem>
-					<SelectItem value="clt">Chile Standard Time (CLT)</SelectItem>
-				</SelectGroup>
-			</SelectContent>
+					</Select.Item>
+					<Select.Item value="nzst">
+						New Zealand Standard Time (NZST)
+					</Select.Item>
+					<Select.Item value="fjt">Fiji Time (FJT)</Select.Item>
+				</Select.Group>
+				<Select.Group>
+					<Select.Label>South America</Select.Label>
+					<Select.Item value="art">Argentina Time (ART)</Select.Item>
+					<Select.Item value="bot">Bolivia Time (BOT)</Select.Item>
+					<Select.Item value="brt">Brasilia Time (BRT)</Select.Item>
+					<Select.Item value="clt">Chile Standard Time (CLT)</Select.Item>
+				</Select.Group>
+			</Select.Content>
 		</Select>
 	);
 }

@@ -1,9 +1,4 @@
-import {
-	globalStyle,
-	keyframes,
-	style,
-	styleVariants,
-} from '@vanilla-extract/css';
+import { globalStyle, keyframes, style } from '@vanilla-extract/css';
 import { negativeSpacing, theme } from '~/theme';
 
 const fadeIn = keyframes({
@@ -40,25 +35,21 @@ export const trigger = style({
 			cursor: 'not-allowed',
 			opacity: 0.5,
 		},
-	},
-});
-
-// Size variants
-export const sizes = styleVariants({
-	small: {
-		height: 28,
-		fontSize: theme.fontSize.sm, // 12px
-		padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
-	},
-	medium: {
-		height: theme.spacing[8],
-		fontSize: theme.fontSize.base,
-		padding: `${theme.spacing[2]} ${theme.spacing[2]}`,
-	},
-	large: {
-		height: 36,
-		fontSize: theme.fontSize.base, // 16px
-		padding: `${theme.spacing[2]} ${theme.spacing[2]}`,
+		'&[data-size="small"]': {
+			height: `calc(${theme.spacing[6]} + ${theme.spacing[1]})`,
+			fontSize: theme.fontSize.sm,
+			padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
+		},
+		'&[data-size="medium"]': {
+			height: theme.spacing[8],
+			fontSize: theme.fontSize.base,
+			padding: `${theme.spacing[2]} ${theme.spacing[2]}`,
+		},
+		'&[data-size="large"]': {
+			height: `calc(${theme.spacing[8]} + ${theme.spacing[1]})`,
+			fontSize: theme.fontSize.base,
+			padding: `${theme.spacing[2]} ${theme.spacing[2]}`,
+		},
 	},
 });
 
@@ -73,7 +64,7 @@ export const scrollButton = style({
 	cursor: 'default',
 	alignItems: 'center',
 	justifyContent: 'center',
-	padding: `${theme.spacing[1]} 0`, // 0.25rem 0
+	padding: `${theme.spacing[1]} 0`,
 });
 
 export const positioner = style({
@@ -116,15 +107,15 @@ export const content = style({
 });
 
 export const viewport = style({
-	padding: theme.spacing[1], // 0.25rem
+	padding: theme.spacing[1],
 	width: '100%',
 	minWidth: 'var(--anchor-width, 100%)',
 });
 
 export const label = style({
-	padding: `${theme.spacing[1]} ${theme.spacing[2]} ${theme.spacing[1]} ${theme.spacing[8]}`, // 0.375rem 0.5rem 0.375rem 2rem
+	padding: `${theme.spacing[1]} ${theme.spacing[2]} ${theme.spacing[1]} ${theme.spacing[8]}`,
 	fontSize: theme.fontSize.sm,
-	fontWeight: theme.fontWeight.semibold, // 600
+	fontWeight: theme.fontWeight.semibold,
 });
 
 export const item = style({
@@ -135,14 +126,14 @@ export const item = style({
 	userSelect: 'none',
 	alignItems: 'center',
 	borderRadius: theme.borderRadius.md,
-	padding: `${theme.spacing[1]} ${theme.spacing[2]} ${theme.spacing[1]} ${theme.spacing[8]}`, // 0.375rem 0.5rem 0.375rem 2rem
+	padding: `${theme.spacing[1]} ${theme.spacing[2]} ${theme.spacing[1]} ${theme.spacing[8]}`,
 	fontSize: theme.fontSize.sm,
 	outline: 'none',
 
 	selectors: {
 		'&[data-highlighted]': {
-			backgroundColor: theme.colors.background.elementHover, // accent
-			color: theme.colors.text.primary, // accent-foreground
+			backgroundColor: theme.colors.background.elementHover,
+			color: theme.colors.text.primary,
 		},
 		'&[data-disabled]': {
 			pointerEvents: 'none',
@@ -153,7 +144,7 @@ export const item = style({
 
 export const itemIndicatorWrapper = style({
 	position: 'absolute',
-	left: theme.spacing[2], // 0.5rem
+	left: theme.spacing[2],
 	display: 'flex',
 	height: '0.875rem',
 	width: '0.875rem',
@@ -162,9 +153,9 @@ export const itemIndicatorWrapper = style({
 });
 
 export const separator = style({
-	margin: `${theme.spacing[1]} ${negativeSpacing(1)}`, // 0.25rem -0.25rem
+	margin: `${theme.spacing[1]} ${negativeSpacing(1)}`,
 	height: '1px',
-	backgroundColor: theme.colors.background.element, // muted
+	backgroundColor: theme.colors.background.element,
 });
 
 export const icon = style({

@@ -1,11 +1,4 @@
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-	Typography,
-} from '~/components';
+import { Select, Typography } from '~/components';
 
 type YearsDropdownProps = {
 	year: number;
@@ -31,12 +24,12 @@ export function YearsDropdown({
 
 	return (
 		<Select onValueChange={onChange} value={year.toString()}>
-			<SelectTrigger>
-				<SelectValue placeholder={year.toString()} />
-			</SelectTrigger>
-			<SelectContent>
+			<Select.Trigger>
+				<Select.Value placeholder={year.toString()} />
+			</Select.Trigger>
+			<Select.Content>
 				{years.map((value) => (
-					<SelectItem value={value.toString()} key={value}>
+					<Select.Item value={value.toString()} key={value}>
 						<Typography
 							align="center"
 							variant="subtitle1"
@@ -44,9 +37,9 @@ export function YearsDropdown({
 						>
 							{value}
 						</Typography>
-					</SelectItem>
+					</Select.Item>
 				))}
-			</SelectContent>
+			</Select.Content>
 		</Select>
 	);
 }

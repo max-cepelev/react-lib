@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.5.0
+
+### Minor Changes
+
+- Refactor Select to compound component
+
 ## 1.4.1
 
 ### Patch Changes

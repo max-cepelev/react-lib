@@ -1,13 +1,6 @@
 import type { SelectHTMLAttributes } from 'react';
 import type { DropdownOption } from 'react-day-picker';
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-	Typography,
-} from '~/components';
+import { Select, Typography } from '~/components';
 import { trigger } from './styles.css';
 
 export function Dropdown(
@@ -44,18 +37,18 @@ export function Dropdown(
 
 	return (
 		<Select value={selectedValue} onValueChange={handleChange} items={items}>
-			<SelectTrigger className={trigger}>
-				<SelectValue placeholder={selectedOption?.label} />
-			</SelectTrigger>
-			<SelectContent>
+			<Select.Trigger className={trigger}>
+				<Select.Value placeholder={selectedOption?.label} />
+			</Select.Trigger>
+			<Select.Content>
 				{options?.map(({ value, label, disabled }) => (
-					<SelectItem key={value} value={value.toString()} disabled={disabled}>
+					<Select.Item key={value} value={value.toString()} disabled={disabled}>
 						<Typography align="center" transform="capitalize">
 							{label}
 						</Typography>
-					</SelectItem>
+					</Select.Item>
 				))}
-			</SelectContent>
+			</Select.Content>
 		</Select>
 	);
 }
