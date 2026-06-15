@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.5.1
+
+### Patch Changes
+
+- Update Select styles, move indicator right
+
 ## 1.5.0
 
 ### Minor Changes

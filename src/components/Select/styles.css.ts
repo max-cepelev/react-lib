@@ -42,12 +42,12 @@ export const trigger = style({
 		},
 		'&[data-size="medium"]': {
 			height: theme.spacing[8],
-			fontSize: theme.fontSize.base,
+			fontSize: theme.fontSize.sm,
 			padding: `${theme.spacing[2]} ${theme.spacing[2]}`,
 		},
 		'&[data-size="large"]': {
 			height: `calc(${theme.spacing[8]} + ${theme.spacing[1]})`,
-			fontSize: theme.fontSize.base,
+			fontSize: theme.fontSize.sm,
 			padding: `${theme.spacing[2]} ${theme.spacing[2]}`,
 		},
 	},
@@ -113,7 +113,7 @@ export const viewport = style({
 });
 
 export const label = style({
-	padding: `${theme.spacing[1]} ${theme.spacing[2]} ${theme.spacing[1]} ${theme.spacing[8]}`,
+	padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
 	fontSize: theme.fontSize.sm,
 	fontWeight: theme.fontWeight.semibold,
 });
@@ -126,7 +126,7 @@ export const item = style({
 	userSelect: 'none',
 	alignItems: 'center',
 	borderRadius: theme.borderRadius.md,
-	padding: `${theme.spacing[1]} ${theme.spacing[2]} ${theme.spacing[1]} ${theme.spacing[8]}`,
+	padding: `${theme.spacing[1]} ${theme.spacing[8]} ${theme.spacing[1]} ${theme.spacing[2]}`,
 	fontSize: theme.fontSize.sm,
 	outline: 'none',
 
@@ -144,7 +144,7 @@ export const item = style({
 
 export const itemIndicatorWrapper = style({
 	position: 'absolute',
-	left: theme.spacing[2],
+	right: theme.spacing[2],
 	display: 'flex',
 	height: '0.875rem',
 	width: '0.875rem',
