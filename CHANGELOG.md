@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.5.2
+
+### Patch Changes
+
+- Add multiselect chips to Select
+
 ## 1.5.1
 
 ### Patch Changes

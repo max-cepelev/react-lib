@@ -35,6 +35,10 @@ export const trigger = style({
 			cursor: 'not-allowed',
 			opacity: 0.5,
 		},
+		'&[aria-disabled="true"]': {
+			cursor: 'not-allowed',
+			opacity: 0.5,
+		},
 		'&[data-size="small"]': {
 			height: `calc(${theme.spacing[6]} + ${theme.spacing[1]})`,
 			fontSize: theme.fontSize.sm,
@@ -57,6 +61,90 @@ globalStyle(`${trigger} span`, {
 	textWrap: 'nowrap',
 	textOverflow: 'ellipsis',
 	overflow: 'hidden',
+});
+
+export const value = style({
+	display: 'flex',
+	minWidth: 0,
+	flex: 1,
+	alignItems: 'center',
+	overflow: 'hidden',
+});
+
+export const chipsValue = style({
+	position: 'relative',
+	display: 'flex',
+	width: '100%',
+	minWidth: 0,
+	alignItems: 'center',
+	gap: theme.spacing[1],
+	overflow: 'hidden',
+});
+
+export const chipsMeasure = style({
+	position: 'absolute',
+	left: 0,
+	top: 0,
+	display: 'flex',
+	gap: theme.spacing[1],
+	visibility: 'hidden',
+	pointerEvents: 'none',
+	whiteSpace: 'nowrap',
+});
+
+export const chip = style({
+	display: 'inline-flex',
+	width: 'fit-content',
+	height: theme.spacing[5],
+	flexShrink: 0,
+	alignItems: 'center',
+	justifyContent: 'center',
+	gap: theme.spacing[1],
+	borderRadius: theme.borderRadius.sm,
+	backgroundColor: theme.colors.background.element,
+	padding: `0 ${theme.spacing[2]}`,
+	color: theme.colors.text.primary,
+	fontSize: theme.fontSize.xs,
+	fontWeight: theme.fontWeight.medium,
+	whiteSpace: 'nowrap',
+});
+
+export const chipLabel = style({
+	minWidth: 0,
+	overflow: 'hidden',
+	textOverflow: 'ellipsis',
+});
+
+export const chipRemove = style({
+	display: 'inline-flex',
+	width: theme.spacing[5],
+	height: theme.spacing[5],
+	flexShrink: 0,
+	alignItems: 'center',
+	justifyContent: 'center',
+	marginRight: `-${theme.spacing[2]}`,
+	border: 0,
+	borderRadius: theme.borderRadius.sm,
+	backgroundColor: 'transparent',
+	color: 'inherit',
+	cursor: 'pointer',
+	opacity: 0.5,
+	padding: 0,
+
+	selectors: {
+		'&:hover': {
+			opacity: 1,
+		},
+		'&:disabled': {
+			cursor: 'not-allowed',
+		},
+	},
+});
+
+globalStyle(`${chipRemove} svg`, {
+	width: theme.spacing[3],
+	height: theme.spacing[3],
+	pointerEvents: 'none',
 });
 
 export const scrollButton = style({

@@ -18,10 +18,6 @@ const roles = [
 	{ value: 'billing', label: 'Billing' },
 ] as const;
 
-const roleLabels = Object.fromEntries(
-	roles.map((role) => [role.value, role.label]),
-) as Record<string, string>;
-
 export default {
 	title: 'Select',
 	component: Select,
@@ -76,15 +72,26 @@ export function Sizes() {
 
 export function Multiple() {
 	return (
-		<Select multiple defaultValue={['apple', 'grapes']}>
+		<Select multiple defaultValue={['apple', 'grapes']} items={fruits}>
 			<Select.Trigger style={{ width: '220px' }}>
-				<Select.Value placeholder="Select fruits">
-					{(value) =>
-						Array.isArray(value) && value.length > 0
-							? `${value.length} selected`
-							: 'Select fruits'
-					}
-				</Select.Value>
+				<Select.Value placeholder="Select fruits" />
+			</Select.Trigger>
+			<Select.Content style={{ width: '220px' }}>
+				<FruitItems />
+			</Select.Content>
+		</Select>
+	);
+}
+
+export function MultipleOverflow() {
+	return (
+		<Select
+			multiple
+			defaultValue={['apple', 'banana', 'blueberry', 'grapes', 'pineapple']}
+			items={fruits}
+		>
+			<Select.Trigger style={{ width: '220px' }}>
+				<Select.Value placeholder="Select fruits" />
 			</Select.Trigger>
 			<Select.Content style={{ width: '220px' }}>
 				<FruitItems />
@@ -97,17 +104,9 @@ export function MultipleControlled() {
 	const [value, setValue] = useState<string[]>(['admin', 'editor']);
 
 	return (
-		<Select multiple value={value} onValueChange={setValue}>
+		<Select multiple value={value} onValueChange={setValue} items={roles}>
 			<Select.Trigger style={{ width: '260px' }}>
-				<Select.Value placeholder="Select roles">
-					{(selectedValue) => {
-						if (!Array.isArray(selectedValue) || selectedValue.length === 0) {
-							return 'Select roles';
-						}
-
-						return selectedValue.map((item) => roleLabels[item]).join(', ');
-					}}
-				</Select.Value>
+				<Select.Value placeholder="Select roles" />
 			</Select.Trigger>
 			<Select.Content style={{ width: '260px' }}>
 				<Select.Group>
