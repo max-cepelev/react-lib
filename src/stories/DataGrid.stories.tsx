@@ -145,16 +145,16 @@ const rows = [
 
 const columns: DataGridColumns<(typeof rows)[0]> = [
 	{
-		title: 'ID',
+		label: 'ID',
 		field: 'id',
 		align: 'center',
 	},
 	{
-		title: 'Имя',
+		label: 'Имя',
 		field: 'name',
 	},
 	{
-		title: 'Дата',
+		label: 'Дата',
 		field: 'date',
 		align: 'center',
 	},
@@ -187,7 +187,7 @@ export const WithActions = () => {
 	const columnsWithActions: DataGridColumns<(typeof rows)[0]> = [
 		...columns,
 		{
-			title: 'Actions',
+			label: 'Actions',
 			align: 'center',
 			width: 150,
 			renderCell: (row) => (
@@ -229,7 +229,7 @@ export const WithSorting = () => {
 	}, [sorting]);
 	const columnsWithActions: DataGridColumns<(typeof rows)[0]> = [
 		{
-			title: 'ID',
+			label: 'ID',
 			field: 'id',
 			align: 'center',
 			renderHeaderCell: (column) => (
@@ -241,7 +241,7 @@ export const WithSorting = () => {
 			),
 		},
 		{
-			title: 'Имя',
+			label: 'Имя',
 			field: 'name',
 			renderHeaderCell: (column) => (
 				<DataGridSortHeader
@@ -252,7 +252,7 @@ export const WithSorting = () => {
 			),
 		},
 		{
-			title: 'Дата',
+			label: 'Дата',
 			field: 'date',
 			align: 'center',
 			renderHeaderCell: (column) => (

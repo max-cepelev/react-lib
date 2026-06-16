@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.5.3
+
+### Patch Changes
+
+- Rename DataGrid title to label, fix Select chip
+
 ## 1.5.2
 
 ### Patch Changes

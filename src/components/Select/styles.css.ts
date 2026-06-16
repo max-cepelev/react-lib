@@ -109,6 +109,10 @@ export const chip = style({
 	whiteSpace: 'nowrap',
 });
 
+globalStyle(`${chip}:has(button)`, {
+	paddingRight: 0,
+});
+
 export const chipLabel = style({
 	minWidth: 0,
 	overflow: 'hidden',

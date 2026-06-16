@@ -111,10 +111,10 @@ export const Example = () => {
 	const columns: DataGridColumns<DataType> = [
 		{
 			field: 'documentName',
-			title: 'Документ',
+			label: 'Документ',
 		},
 		{
-			title: 'Действия',
+			label: 'Действия',
 			width: '130px',
 			align: 'right',
 			renderCell: (row) => <FakeActionCell row={row} />,

@@ -18,7 +18,7 @@ export type DataGridSortHeaderProps<TData> = {
 export function DataGridSortHeader<TData>({
 	sorting,
 	setSorting,
-	column: { title, field, align = 'left' },
+	column: { label, field, align = 'left' },
 	className,
 }: DataGridSortHeaderProps<TData>) {
 	if (!field) {
@@ -43,7 +43,7 @@ export function DataGridSortHeader<TData>({
 			className={clsx(wrapper, alignments[align], className)}
 			onClick={handleClick}
 		>
-			{title}
+			{label}
 			{sorting.key === field ? (
 				sorting.order === 'asc' ? (
 					<ArrowDownNarrowWide size={16} />

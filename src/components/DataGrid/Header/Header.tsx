@@ -15,7 +15,7 @@ export function Header<TData>({ columns, height }: HeaderProps<TData>) {
 			<tr className={clsx(headerRow)}>
 				{columns.map((col) => (
 					<HeaderCell
-						key={col.title}
+						key={col.label}
 						column={col}
 						height={height}
 						width={col.width}

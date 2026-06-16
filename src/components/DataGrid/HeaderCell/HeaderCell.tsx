@@ -17,10 +17,10 @@ export function HeaderCell<TData>({
 		<th
 			style={{ color: column.color, height, width }}
 			align={column.align ?? 'left'}
-			title={column.title}
+			title={column.label}
 			className={headerCellClass}
 		>
-			{column.renderHeaderCell?.(column) || column.title}
+			{column.renderHeaderCell?.(column) || column.label}
 		</th>
 	);
 }

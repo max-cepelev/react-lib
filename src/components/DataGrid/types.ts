@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 export type DataGridColumn<TRow> = {
-	title: string;
+	label: string;
 	field?: keyof TRow;
 	width?: number | string;
 	align?: 'left' | 'center' | 'right' | 'justify';
