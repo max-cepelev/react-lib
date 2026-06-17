@@ -5,6 +5,7 @@ import {
 	DataGrid,
 	DataGridActionCell,
 	type DataGridColumns,
+	type DataGridRowId,
 	type DataGridSorting,
 	Pagination,
 } from '~/components';
@@ -248,6 +249,24 @@ export const WithSorting = () => {
 			sorting={sorting}
 			onSortingChange={setSorting}
 		/>
+	);
+};
+
+export const WithSelection = () => {
+	const [selectedRowIds, setSelectedRowIds] = useState<DataGridRowId[]>([1, 3]);
+
+	return (
+		<Container>
+			<DataGrid
+				rows={rows}
+				columns={columns}
+				keyId="id"
+				isRowSelectionEnabled
+				selectedRowIds={selectedRowIds}
+				onSelectedRowIdsChange={setSelectedRowIds}
+				footer={<div>Selected rows: {selectedRowIds.length}</div>}
+			/>
+		</Container>
 	);
 };
 

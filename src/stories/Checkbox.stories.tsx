@@ -22,3 +22,37 @@ export const Default = () => {
 		</div>
 	);
 };
+
+export const Checked = () => {
+	const id = useId();
+	return (
+		<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+			<Checkbox id={id} defaultChecked />
+			<Label htmlFor={id} style={{ cursor: 'pointer', userSelect: 'none' }}>
+				Selected
+			</Label>
+		</div>
+	);
+};
+
+export const Indeterminate = () => {
+	const id = useId();
+	return (
+		<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+			<Checkbox id={id} indeterminate />
+			<Label htmlFor={id} style={{ cursor: 'pointer', userSelect: 'none' }}>
+				Partially selected
+			</Label>
+		</div>
+	);
+};
+
+export const Disabled = () => {
+	const id = useId();
+	return (
+		<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+			<Checkbox id={id} disabled />
+			<Label htmlFor={id}>Disabled</Label>
+		</div>
+	);
+};

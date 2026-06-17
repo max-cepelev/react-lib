@@ -1,5 +1,11 @@
 import { clsx } from 'clsx';
-import { type CSSProperties, type ReactNode, useMemo } from 'react';
+import {
+	type CSSProperties,
+	type ReactNode,
+	useCallback,
+	useMemo,
+	useState,
+} from 'react';
 import type { ContentStateProps } from '../ContentState';
 import { Body } from './Body';
 import { ROW_HEIGHT } from './constants';
@@ -16,6 +22,7 @@ import {
 import type {
 	DataGridColumn,
 	DataGridEmptyState,
+	DataGridRowId,
 	DataGridSorting,
 	DataGridSortMode,
 } from './types';
@@ -36,6 +43,10 @@ export type DataGridProps<TRow> = {
 	sorting?: DataGridSorting<TRow>;
 	onSortingChange?: (sorting: DataGridSorting<TRow>) => void;
 	sortMode?: DataGridSortMode;
+	isRowSelectionEnabled?: boolean;
+	selectedRowIds?: DataGridRowId[];
+	defaultSelectedRowIds?: DataGridRowId[];
+	onSelectedRowIdsChange?: (rowIds: DataGridRowId[]) => void;
 	onSelectRow?: (row: TRow[]) => void;
 	onRowClick?: (row: TRow) => void;
 	title?: string;
@@ -59,9 +70,18 @@ export function DataGrid<TRow>({
 	sorting,
 	onSortingChange,
 	sortMode = 'client',
+	isRowSelectionEnabled,
+	selectedRowIds,
+	defaultSelectedRowIds = [],
+	onSelectedRowIdsChange,
+	onSelectRow,
 	footer,
 	title,
 }: DataGridProps<TRow>) {
+	const [uncontrolledSelectedRowIds, setUncontrolledSelectedRowIds] = useState(
+		defaultSelectedRowIds,
+	);
+
 	const sortedRows = useMemo(() => {
 		if (!sorting || sortMode === 'manual') {
 			return rows;
@@ -89,6 +109,74 @@ export function DataGrid<TRow>({
 			.map(({ row }) => row);
 	}, [columns, rows, sortMode, sorting]);
 
+	const activeSelectedRowIds = selectedRowIds ?? uncontrolledSelectedRowIds;
+	const selectedRowIdSet = useMemo(
+		() => new Set(activeSelectedRowIds),
+		[activeSelectedRowIds],
+	);
+
+	const visibleRowIds = useMemo(
+		() => sortedRows.map((row) => getRowId(row[keyId])),
+		[keyId, sortedRows],
+	);
+
+	const isAllRowsSelected =
+		visibleRowIds.length > 0 &&
+		visibleRowIds.every((rowId) => selectedRowIdSet.has(rowId));
+	const isSomeRowsSelected = visibleRowIds.some((rowId) =>
+		selectedRowIdSet.has(rowId),
+	);
+
+	const handleSelectedRowIdsChange = useCallback(
+		(nextSelectedRowIds: DataGridRowId[]) => {
+			if (!selectedRowIds) {
+				setUncontrolledSelectedRowIds(nextSelectedRowIds);
+			}
+
+			onSelectedRowIdsChange?.(nextSelectedRowIds);
+
+			if (onSelectRow) {
+				const nextSelectedRowIdSet = new Set(nextSelectedRowIds);
+				onSelectRow(
+					rows.filter((row) => nextSelectedRowIdSet.has(getRowId(row[keyId]))),
+				);
+			}
+		},
+		[keyId, onSelectRow, onSelectedRowIdsChange, rows, selectedRowIds],
+	);
+
+	const handleRowSelectionChange = useCallback(
+		(rowId: DataGridRowId, isSelected: boolean) => {
+			const nextSelectedRowIdSet = new Set(activeSelectedRowIds);
+
+			if (isSelected) {
+				nextSelectedRowIdSet.add(rowId);
+			} else {
+				nextSelectedRowIdSet.delete(rowId);
+			}
+
+			handleSelectedRowIdsChange(Array.from(nextSelectedRowIdSet));
+		},
+		[activeSelectedRowIds, handleSelectedRowIdsChange],
+	);
+
+	const handleAllRowsSelectionChange = useCallback(
+		(isSelected: boolean) => {
+			const nextSelectedRowIdSet = new Set(activeSelectedRowIds);
+
+			for (const rowId of visibleRowIds) {
+				if (isSelected) {
+					nextSelectedRowIdSet.add(rowId);
+				} else {
+					nextSelectedRowIdSet.delete(rowId);
+				}
+			}
+
+			handleSelectedRowIdsChange(Array.from(nextSelectedRowIdSet));
+		},
+		[activeSelectedRowIds, handleSelectedRowIdsChange, visibleRowIds],
+	);
+
 	const isFullHeight = isLoading || isError || rows.length === 0;
 	return (
 		<div
@@ -113,6 +201,11 @@ export function DataGrid<TRow>({
 					height={headerHeight}
 					sorting={sorting}
 					onSortingChange={onSortingChange}
+					isSelectionEnabled={isRowSelectionEnabled}
+					isAllRowsSelected={isAllRowsSelected}
+					isSomeRowsSelected={isSomeRowsSelected}
+					isSelectionDisabled={visibleRowIds.length === 0}
+					onAllRowsSelectionChange={handleAllRowsSelectionChange}
 				/>
 				<Body
 					rows={sortedRows}
@@ -124,11 +217,22 @@ export function DataGrid<TRow>({
 					emptyState={emptyState}
 					errorState={errorState}
 					isError={isError}
+					isRowSelectionEnabled={isRowSelectionEnabled}
+					selectedRowIdSet={selectedRowIdSet}
+					onRowSelectionChange={handleRowSelectionChange}
 				/>
 			</table>
 			{footer && <Footer>{footer}</Footer>}
 		</div>
 	);
+}
+
+function getRowId(value: unknown): DataGridRowId {
+	if (typeof value === 'string' || typeof value === 'number') {
+		return value;
+	}
+
+	return String(value);
 }
 
 function compareValues(a: unknown, b: unknown) {

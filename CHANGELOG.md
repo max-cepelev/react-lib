@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.7.0
+
+### Minor Changes
+
+- Add DataGrid selection, indeterminate Checkbox
+
 ## 1.6.0
 
 ### Minor Changes

@@ -16,3 +16,10 @@ export const selectableClass = style({
 		backgroundColor: theme.colors.background.elementHover,
 	},
 });
+
+export const selectionCellClass = style({
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'center',
+	borderBottom: `1px solid ${theme.colors.border}`,
+});

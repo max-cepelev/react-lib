@@ -1,8 +1,8 @@
 import { Checkbox as BaseCheckbox } from '@base-ui/react';
 import { clsx } from 'clsx';
 
-import { Check } from 'lucide-react';
-import { icon, indicator, root } from './checkbox.css';
+import { Check, Minus } from 'lucide-react';
+import { checkIcon, indicator, minusIcon, root } from './checkbox.css';
 
 export type CheckboxProps = BaseCheckbox.Root.Props;
 
@@ -13,7 +13,8 @@ export const Checkbox = ({ className, ...props }: CheckboxProps) => (
 		{...props}
 	>
 		<BaseCheckbox.Indicator className={indicator}>
-			<Check className={icon} />
+			<Check className={checkIcon} />
+			<Minus className={minusIcon} />
 		</BaseCheckbox.Indicator>
 	</BaseCheckbox.Root>
 );

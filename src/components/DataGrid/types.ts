@@ -39,6 +39,8 @@ export type DataGridSorting<TRow> = {
 
 export type DataGridSortMode = 'client' | 'manual';
 
+export type DataGridRowId = string | number;
+
 export type DataGridEmptyState = {
 	text: string;
 	imgSrc?: string;
