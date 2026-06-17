@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.9.0
+
+### Minor Changes
+
+- Refactor RangeInput logic and Slider types
+
 ## 1.8.1
 
 ### Patch Changes

@@ -5,8 +5,35 @@ import { clsx } from 'clsx';
 import * as React from 'react';
 import * as styles from './styles.css';
 
-export type SliderProps = SliderPrimitive.Root.Props<number[]> & {
-	onValueCommit?: (value: number[]) => void;
+export type SliderValue = number | readonly number[];
+
+export type SliderProps = SliderPrimitive.Root.Props<SliderValue> & {
+	onValueCommit?: (value: SliderValue) => void;
+};
+
+const getValues = (
+	value: SliderValue | undefined,
+	defaultValue: SliderValue | undefined,
+	min: number,
+	max: number,
+) => {
+	if (typeof value === 'number') {
+		return [value];
+	}
+
+	if (Array.isArray(value)) {
+		return [...value];
+	}
+
+	if (typeof defaultValue === 'number') {
+		return [defaultValue];
+	}
+
+	if (Array.isArray(defaultValue)) {
+		return [...defaultValue];
+	}
+
+	return [min, max];
 };
 
 export function Slider({
@@ -20,12 +47,7 @@ export function Slider({
 	...props
 }: SliderProps) {
 	const values = React.useMemo(
-		() =>
-			Array.isArray(value)
-				? value
-				: Array.isArray(defaultValue)
-					? defaultValue
-					: [min, max],
+		() => getValues(value, defaultValue, min, max),
 		[value, defaultValue, min, max],
 	);
 	const thumbs = React.useMemo(

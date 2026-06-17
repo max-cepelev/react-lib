@@ -48,6 +48,7 @@ export function RangeInput({
 		onKeyDown,
 		onValueChange,
 		onConfirm,
+		sliderValue,
 		minId,
 		maxId,
 	} = useLogic({
@@ -59,6 +60,7 @@ export function RangeInput({
 	});
 	return (
 		<div
+			data-slot="range-input"
 			className={clsx(
 				container,
 				sizes[size],
@@ -75,6 +77,7 @@ export function RangeInput({
 				от
 			</Typography>
 			<input
+				data-slot="range-input-min-field"
 				className={inputClass}
 				type="text"
 				id={minId}
@@ -87,6 +90,7 @@ export function RangeInput({
 				до
 			</Typography>
 			<input
+				data-slot="range-input-max-field"
 				className={inputClass}
 				type="text"
 				id={maxId}
@@ -98,11 +102,11 @@ export function RangeInput({
 			<Typography className={textClass} color="disabled" variant="caption">
 				{unit}
 			</Typography>
-			<div className={sliderClass}>
+			<div data-slot="range-input-slider" className={sliderClass}>
 				<Slider
 					min={min}
 					max={max}
-					value={[Number(minVal), Number(maxVal)]}
+					value={sliderValue}
 					onValueChange={onValueChange}
 					onValueCommit={onConfirm}
 				/>

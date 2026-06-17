@@ -4,7 +4,7 @@ import { theme } from '~/theme';
 export const container = style({
 	position: 'relative',
 	display: 'grid',
-	gridTemplateColumns: 'auto 1fr auto 1fr auto',
+	gridTemplateColumns: '1fr auto',
 	alignItems: 'center',
 	columnGap: theme.spacing[1],
 	background: theme.colors.background.paper,
@@ -23,7 +23,6 @@ export const activeClass = style({
 	borderColor: theme.colors.primary,
 });
 
-// Size variants
 export const sizes = styleVariants({
 	small: {
 		height: 28,
@@ -42,16 +41,12 @@ export const sizes = styleVariants({
 	},
 });
 
-export const textClass = style({
-	fontSize: 'inherit',
-});
-
 export const inputClass = style({
 	textAlign: 'center',
 	width: '100%',
 	minWidth: '24px',
 	border: 'none',
-	fontSize: 'inherit', // 14px
+	fontSize: 'inherit',
 	textWrap: 'nowrap',
 	textOverflow: 'ellipsis',
 	overflow: 'hidden',
@@ -64,14 +59,19 @@ export const inputClass = style({
 	},
 });
 
-export const sliderClass = style({
+export const textClass = style({
+	fontSize: 'inherit',
+});
+
+export const slider = style({
 	position: 'absolute',
 	bottom: -1,
 	left: '50%',
 	transform: 'translateX(-50%)',
-	width: 'calc(100% - 4px)',
+	paddingInline: theme.spacing[2],
+	borderRadius: 9999,
 });
 
-globalStyle(`${sliderClass} [data-slot="slider-track"]`, {
+globalStyle(`${slider} [data-slot="slider-track"]`, {
 	height: 1,
 });

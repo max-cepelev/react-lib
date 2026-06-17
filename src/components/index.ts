@@ -47,6 +47,7 @@ export * from './Select';
 export * from './Sheet';
 export * from './Sidebar';
 export * from './Slider';
+export * from './SliderInput';
 export * from './Spinner';
 export * from './Switch';
 export * from './Tabs';

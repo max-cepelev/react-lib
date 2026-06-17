@@ -1,11 +1,51 @@
 import {
-	type DetailedHTMLProps,
-	type InputHTMLAttributes,
+	type ChangeEvent,
+	type KeyboardEvent,
+	useCallback,
 	useEffect,
 	useId,
 	useState,
 } from 'react';
+import type { SliderValue } from '../../Slider';
 import type { RangeInputProps } from '../RangeInput';
+
+const getNumberFromInputValue = (value: string) => {
+	const numberValue = Number(value);
+
+	return Number.isNaN(numberValue) ? null : numberValue;
+};
+
+const clamp = (value: number, min: number, max: number) =>
+	Math.min(Math.max(value, min), max);
+
+const normalizeRange = (minValue: number, maxValue: number) => {
+	if (minValue <= maxValue) {
+		return [minValue, maxValue] as const;
+	}
+
+	return [maxValue, minValue] as const;
+};
+
+const getSliderValue = (
+	minValue: number,
+	maxValue: number,
+	min: number,
+	max: number,
+) => normalizeRange(clamp(minValue, min, max), clamp(maxValue, min, max));
+
+const getRangeValue = (value: SliderValue) => {
+	if (!Array.isArray(value)) {
+		return null;
+	}
+
+	const [minValue, maxValue] = value;
+
+	if (minValue === undefined || maxValue === undefined) {
+		return null;
+	}
+
+	return [minValue, maxValue] as const;
+};
 
 export const useLogic = ({
 	min,
@@ -17,58 +57,101 @@ export const useLogic = ({
 	const minId = useId();
 	const maxId = useId();
 
-	const [minVal, setMinVal] = useState(min);
-	const [maxVal, setMaxVal] = useState(max);
+	const [minVal, setMinVal] = useState(minValue ?? min);
+	const [maxVal, setMaxVal] = useState(maxValue ?? max);
+	const sliderValue = getSliderValue(minVal, maxVal, min, max);
 
-	const onValueChange = (newValue: number[]) => {
-		if (newValue[0] === newValue[1]) {
-			onChange(newValue[0], newValue[1]);
+	const commit = useCallback(
+		(nextMinValue: number, nextMaxValue: number) => {
+			const [normalizedMinValue, normalizedMaxValue] = normalizeRange(
+				clamp(nextMinValue, min, max),
+				clamp(nextMaxValue, min, max),
+			);
+
+			setMinVal(normalizedMinValue);
+			setMaxVal(normalizedMaxValue);
+			onChange(normalizedMinValue, normalizedMaxValue);
+		},
+		[min, max, onChange],
+	);
+
+	const onValueChange = useCallback((newValue: SliderValue) => {
+		const rangeValue = getRangeValue(newValue);
+
+		if (rangeValue === null) {
 			return;
 		}
-		setMinVal(newValue[0]);
-		setMaxVal(newValue[1]);
-	};
 
-	const onMinValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const { value } = event.target;
-		if (!Number.isNaN(+value)) {
-			setMinVal(+value);
-		}
-	};
+		const [newMinValue, newMaxValue] = rangeValue;
+		const [normalizedMinValue, normalizedMaxValue] = normalizeRange(
+			newMinValue,
+			newMaxValue,
+		);
 
-	const onMaxValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const { value } = event.target;
-		if (!Number.isNaN(value)) {
-			setMaxVal(+value);
-		}
-	};
+		setMinVal(normalizedMinValue);
+		setMaxVal(normalizedMaxValue);
+	}, []);
 
-	const onKeyDown = (
-		event: DetailedHTMLProps<
-			InputHTMLAttributes<HTMLInputElement>,
-			HTMLInputElement
-		>,
-	) => {
-		if (event.key === 'Enter') {
-			const minValue = minVal >= min && minVal <= max ? minVal : min;
-			const maxValue = maxVal >= min && maxVal <= max ? maxVal : max;
-			onChange(minValue, maxValue);
-		}
-	};
+	const onMinValueChange = useCallback(
+		(event: ChangeEvent<HTMLInputElement>) => {
+			const { value } = event.target;
+			const numberValue = getNumberFromInputValue(value);
 
-	const onConfirm = (value: Array<number>) => {
-		onChange(value[0], value[1]);
-	};
+			if (numberValue !== null) {
+				setMinVal(numberValue);
+			}
+		},
+		[],
+	);
+
+	const onMaxValueChange = useCallback(
+		(event: ChangeEvent<HTMLInputElement>) => {
+			const { value } = event.target;
+			const numberValue = getNumberFromInputValue(value);
+
+			if (numberValue !== null) {
+				setMaxVal(numberValue);
+			}
+		},
+		[],
+	);
+
+	const onKeyDown = useCallback(
+		(event: KeyboardEvent<HTMLInputElement>) => {
+			if (event.key !== 'Enter') {
+				return;
+			}
+
+			commit(minVal, maxVal);
+		},
+		[commit, minVal, maxVal],
+	);
+
+	const onConfirm = useCallback(
+		(value: SliderValue) => {
+			const rangeValue = getRangeValue(value);
+
+			if (rangeValue === null) {
+				return;
+			}
+
+			const [nextMinValue, nextMaxValue] = rangeValue;
+			commit(nextMinValue, nextMaxValue);
+		},
+		[commit],
+	);
 
 	useEffect(() => {
-		setMinVal(minValue ? minValue : min);
-		setMaxVal(maxValue ? maxValue : max);
+		setMinVal(minValue ?? min);
+		setMaxVal(maxValue ?? max);
 	}, [minValue, maxValue, min, max]);
+
 	return {
 		maxId,
 		minId,
 		minVal,
 		maxVal,
+		sliderValue,
 		onValueChange,
 		onMinValueChange,
 		onMaxValueChange,
