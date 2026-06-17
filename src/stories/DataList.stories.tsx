@@ -219,7 +219,7 @@ export const ErrorState = () => {
 				isError
 				errorState={{
 					title: 'Произошла ошибка',
-					errorList: ['Ошибка 500'],
+					message: 'Ошибка 500',
 					onRetry: handleRetry,
 				}}
 				itemContent={({ title, organization }, { index, className }) => (

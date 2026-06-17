@@ -1,4 +1,1 @@
-export type DataGridSorting<TData> = {
-	key: keyof TData;
-	order: 'asc' | 'desc';
-};
+export type { DataGridSorting } from '../DataGrid/types';

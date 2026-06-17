@@ -13,7 +13,6 @@ export type BodyProps<TRow> = Pick<
 	| 'rows'
 	| 'onRowClick'
 	| 'keyId'
-	| 'onRetry'
 > & {
 	rowHeight: number;
 };

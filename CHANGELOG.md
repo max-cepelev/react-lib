@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.6.0
+
+### Minor Changes
+
+- Add Spinner, refactor ContentState & DataGrid
+
 ## 1.5.3
 
 ### Patch Changes

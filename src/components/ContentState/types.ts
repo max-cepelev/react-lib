@@ -1,26 +1,17 @@
 import type { ReactNode } from 'react';
 
-export type ContentStateErrorProps = {
-	/**
-	 * Название ошибки
-	 */
-	title?: string;
+export namespace ContentStateProps {
+	export type ErrorState = {
+		title?: string;
+		message: string;
+		imgSrc?: string;
+		onRetry?: VoidFunction;
+	};
 
-	imgSrc?: string;
-	/**
-	 * Alt атрибут для изображения
-	 */
-	imgAlt?: string;
-	/**
-	 * Список ошибок для отображения
-	 */
-	errorList: string[];
-	/**
-	 * Элементы кнопок для дальнейших действий
-	 */
-	actions?: ReactNode;
-	/**
-	 * Функция для повторного действия
-	 */
-	onRetry: () => void;
-};
+	export type Root = {
+		isLoading?: boolean;
+		isError?: boolean;
+		errorState?: ErrorState;
+		children: ReactNode;
+	};
+}

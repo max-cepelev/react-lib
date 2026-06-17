@@ -5,7 +5,6 @@ import {
 	DataGrid,
 	DataGridActionCell,
 	type DataGridColumns,
-	DataGridSortHeader,
 	type DataGridSorting,
 	Pagination,
 } from '~/components';
@@ -219,52 +218,37 @@ export const WithSorting = () => {
 		key: 'id',
 		order: 'asc',
 	});
-	const sortedRows = useMemo(() => {
-		return [...rows].sort((a, b) => {
-			if (sorting.order === 'asc') {
-				return a[sorting.key] > b[sorting.key] ? 1 : -1;
-			}
-			return a[sorting.key] < b[sorting.key] ? 1 : -1;
-		});
-	}, [sorting]);
-	const columnsWithActions: DataGridColumns<(typeof rows)[0]> = [
+
+	const sortableColumns: DataGridColumns<(typeof rows)[0]> = [
 		{
 			label: 'ID',
 			field: 'id',
 			align: 'center',
-			renderHeaderCell: (column) => (
-				<DataGridSortHeader
-					column={column}
-					sorting={sorting}
-					setSorting={setSorting}
-				/>
-			),
+			sortable: true,
 		},
 		{
 			label: 'Имя',
 			field: 'name',
-			renderHeaderCell: (column) => (
-				<DataGridSortHeader
-					column={column}
-					sorting={sorting}
-					setSorting={setSorting}
-				/>
-			),
+			sortable: true,
 		},
 		{
 			label: 'Дата',
 			field: 'date',
 			align: 'center',
-			renderHeaderCell: (column) => (
-				<DataGridSortHeader
-					column={column}
-					sorting={sorting}
-					setSorting={setSorting}
-				/>
-			),
+			sortable: true,
+			sortAccessor: (row) => new Date(row.date),
 		},
 	];
-	return <DataGrid rows={sortedRows} columns={columnsWithActions} keyId="id" />;
+
+	return (
+		<DataGrid
+			rows={rows}
+			columns={sortableColumns}
+			keyId="id"
+			sorting={sorting}
+			onSortingChange={setSorting}
+		/>
+	);
 };
 
 export const Loading = () => {

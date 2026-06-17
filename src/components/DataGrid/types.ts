@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 
 export type DataGridColumn<TRow> = {
 	label: string;
@@ -7,6 +7,9 @@ export type DataGridColumn<TRow> = {
 	align?: 'left' | 'center' | 'right' | 'justify';
 	isDisabled?: boolean;
 	color?: string;
+	sortable?: boolean;
+	sortAccessor?: (row: TRow) => string | number | Date | null | undefined;
+	sortComparator?: (a: TRow, b: TRow) => number;
 	renderHeaderCell?: (
 		column: Omit<
 			DataGridColumn<TRow>,
@@ -27,11 +30,18 @@ export type DataGridColumns<TRow> = DataGridColumn<TRow>[];
 
 export type AlignVariant = 'left' | 'center' | 'right' | 'justify';
 
-export type DataGridState = {
+export type DataGridSortOrder = 'asc' | 'desc';
+
+export type DataGridSorting<TRow> = {
+	key: keyof TRow;
+	order: DataGridSortOrder;
+} | null;
+
+export type DataGridSortMode = 'client' | 'manual';
+
+export type DataGridEmptyState = {
 	text: string;
 	imgSrc?: string;
 	imgAlt?: string;
-	actions?: ReactNode;
-	errorList?: string[];
-	onRetry?: () => void;
+	actions?: ReactElement;
 };

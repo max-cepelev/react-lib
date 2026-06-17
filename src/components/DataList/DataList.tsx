@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 import { type Key, type ReactNode, useCallback, useRef, useState } from 'react';
 import { type ListRange, Virtuoso, type VirtuosoHandle } from 'react-virtuoso';
-import { ContentState, type ContentStateErrorProps } from '../ContentState';
+import { ContentState, type ContentStateProps } from '../ContentState';
 import { ITEM_CLASSNAME, OVERSCAN_COUNT } from './constants';
 import { EndData } from './EndData';
 import { ErrorState } from './ErrorState';
@@ -39,7 +39,7 @@ export type DataListProps<TDataItem extends Record<string, unknown>> = {
 	 */
 	endOfScrollMsg?: string;
 
-	errorState?: ContentStateErrorProps;
+	errorState?: ContentStateProps.ErrorState;
 
 	/**
 	 * Если true, показывается анимация загрузки
@@ -125,7 +125,7 @@ export const DataList = <TDataItem extends Record<string, unknown>>({
 	const isDataExist = Boolean(data?.length);
 
 	if (!isDataExist && !isLoading && !isError) {
-		return noDataPlaceholder ? <>{noDataPlaceholder}</> : <NoData />;
+		return noDataPlaceholder ? noDataPlaceholder : <NoData />;
 	}
 
 	return (

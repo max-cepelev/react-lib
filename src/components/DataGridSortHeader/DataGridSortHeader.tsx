@@ -11,12 +11,14 @@ import type { DataGridSorting } from './types';
 export type DataGridSortHeaderProps<TData> = {
 	column: DataGridColumn<TData>;
 	sorting: DataGridSorting<TData>;
-	setSorting: (sorting: DataGridSorting<TData>) => void;
+	onSortingChange?: (sorting: DataGridSorting<TData>) => void;
+	setSorting?: (sorting: DataGridSorting<TData>) => void;
 	className?: string;
 };
 
 export function DataGridSortHeader<TData>({
 	sorting,
+	onSortingChange,
 	setSorting,
 	column: { label, field, align = 'left' },
 	className,
@@ -24,14 +26,25 @@ export function DataGridSortHeader<TData>({
 	if (!field) {
 		return null;
 	}
+
+	const handleSortingChange = onSortingChange ?? setSorting;
+	const activeOrder = sorting?.key === field ? sorting.order : undefined;
+	const isActive = Boolean(activeOrder);
+
 	const handleClick = () => {
-		if (sorting.key === field) {
-			setSorting({
+		if (!handleSortingChange) {
+			return;
+		}
+
+		if (activeOrder === 'asc') {
+			handleSortingChange({
 				key: field,
-				order: sorting.order === 'asc' ? 'desc' : 'asc',
+				order: 'desc',
 			});
+		} else if (isActive) {
+			handleSortingChange(null);
 		} else {
-			setSorting({
+			handleSortingChange({
 				key: field,
 				order: 'asc',
 			});
@@ -42,10 +55,11 @@ export function DataGridSortHeader<TData>({
 			type="button"
 			className={clsx(wrapper, alignments[align], className)}
 			onClick={handleClick}
+			disabled={!handleSortingChange}
 		>
 			{label}
-			{sorting.key === field ? (
-				sorting.order === 'asc' ? (
+			{isActive ? (
+				activeOrder === 'asc' ? (
 					<ArrowDownNarrowWide size={16} />
 				) : (
 					<ArrowDownWideNarrow size={16} />

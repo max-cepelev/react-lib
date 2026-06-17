@@ -1,8 +1,7 @@
-import { Button } from '../../Button';
-import { CircularProgress } from '../../CircularProgress';
-import { Placeholder } from '../../Placeholder';
-import type { DataGridState } from '../types';
-import { container, loader } from './styles.css';
+import { ContentState, type ContentStateProps } from '../../ContentState';
+import { Empty } from '../../Empty';
+import type { DataGridEmptyState } from '../types';
+import { cell, container, stateImage } from './styles.css';
 
 export function State({
 	isLoading,
@@ -12,22 +11,20 @@ export function State({
 		text: 'Нет данных',
 	},
 	errorState = {
-		text: 'Произошла ошибка',
+		message: 'Произошла ошибка',
 	},
 	isError,
-	onRetry,
 }: {
 	isLoading?: boolean;
 	isEmpty?: boolean;
 	isError?: boolean;
 	columnsLength: number;
-	errorState?: DataGridState;
-	emptyState?: DataGridState;
-	onRetry?: () => void;
+	errorState?: ContentStateProps.ErrorState;
+	emptyState?: DataGridEmptyState;
 }) {
 	const Container = ({ children }: { children: React.ReactNode }) => (
 		<tr className={container}>
-			<td colSpan={columnsLength} align="center">
+			<td className={cell} colSpan={columnsLength}>
 				{children}
 			</td>
 		</tr>
@@ -36,38 +33,36 @@ export function State({
 	if (isLoading) {
 		return (
 			<Container>
-				<span className={loader}>
-					<CircularProgress />
-				</span>
+				<ContentState isLoading>{null}</ContentState>
 			</Container>
 		);
 	}
 
 	if (isEmpty) {
-		const { imgSrc, imgAlt, text } = emptyState;
+		const { imgSrc, imgAlt, text, actions } = emptyState;
 		return (
 			<Container>
-				<Placeholder title={text} imgSrc={imgSrc} imgAlt={imgAlt} />
+				<Empty>
+					<Empty.Header>
+						{imgSrc && (
+							<Empty.Media>
+								<img className={stateImage} src={imgSrc} alt={imgAlt ?? ''} />
+							</Empty.Media>
+						)}
+						<Empty.Title>{text}</Empty.Title>
+					</Empty.Header>
+					{actions && <Empty.Content>{actions}</Empty.Content>}
+				</Empty>
 			</Container>
 		);
 	}
 
 	if (isError) {
-		const { imgSrc, imgAlt, text } = errorState;
 		return (
 			<Container>
-				<Placeholder
-					title={text}
-					imgSrc={imgSrc}
-					imgAlt={imgAlt}
-					actions={
-						onRetry ? (
-							<Button variant="outline" onClick={onRetry}>
-								Попробовать снова
-							</Button>
-						) : undefined
-					}
-				/>
+				<ContentState isError errorState={errorState}>
+					{null}
+				</ContentState>
 			</Container>
 		);
 	}
