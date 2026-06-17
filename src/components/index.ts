@@ -48,6 +48,7 @@ export * from './Sheet';
 export * from './Sidebar';
 export * from './Slider';
 export * from './Spinner';
+export * from './Switch';
 export * from './Tabs';
 export * from './Textarea';
 export * from './TextField';

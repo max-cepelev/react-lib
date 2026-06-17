@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.8.0
+
+### Minor Changes
+
+- Add Switch component
+
 ## 1.7.0
 
 ### Minor Changes
