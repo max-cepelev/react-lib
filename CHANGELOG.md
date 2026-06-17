@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.8.1
+
+### Patch Changes
+
+- Rename Switch sizes sm/default -> small/medium
+
 ## 1.8.0
 
 ### Minor Changes

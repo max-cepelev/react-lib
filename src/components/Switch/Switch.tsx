@@ -5,7 +5,7 @@ import type { SwitchProps } from './types';
 
 export function Switch({
 	className,
-	size = 'default',
+	size = 'medium',
 	...props
 }: SwitchProps.Root) {
 	return (

@@ -12,11 +12,11 @@ export const root = style({
 	outline: 'none',
 	cursor: 'pointer',
 	selectors: {
-		'&[data-size="sm"]': {
+		'&[data-size="small"]': {
 			height: '14px',
 			width: '24px',
 		},
-		'&[data-size="default"]': {
+		'&[data-size="medium"]': {
 			height: '18.4px',
 			width: '32px',
 		},
@@ -44,28 +44,28 @@ export const thumb = style({
 	transition: 'transform 0.2s ease',
 });
 
-globalStyle(`${root}[data-size="sm"] ${thumb}`, {
+globalStyle(`${root}[data-size="small"] ${thumb}`, {
 	height: '12px',
 	width: '12px',
 });
 
-globalStyle(`${root}[data-size="default"] ${thumb}`, {
+globalStyle(`${root}[data-size="medium"] ${thumb}`, {
 	height: '16px',
 	width: '16px',
 });
 
-globalStyle(`${root}[data-size="sm"][data-unchecked] ${thumb}`, {
+globalStyle(`${root}[data-size="small"][data-unchecked] ${thumb}`, {
 	transform: 'translateX(0)',
 });
 
-globalStyle(`${root}[data-size="sm"][data-checked] ${thumb}`, {
+globalStyle(`${root}[data-size="small"][data-checked] ${thumb}`, {
 	transform: 'translateX(calc(100% - 2px))',
 });
 
-globalStyle(`${root}[data-size="default"][data-unchecked] ${thumb}`, {
+globalStyle(`${root}[data-size="medium"][data-unchecked] ${thumb}`, {
 	transform: 'translateX(0)',
 });
 
-globalStyle(`${root}[data-size="default"][data-checked] ${thumb}`, {
+globalStyle(`${root}[data-size="medium"][data-checked] ${thumb}`, {
 	transform: 'translateX(calc(100% - 2px))',
 });
