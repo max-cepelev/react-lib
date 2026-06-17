@@ -39,7 +39,7 @@ export const Small = () => {
 	const id = useId();
 	return (
 		<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-			<Switch id={id} size="sm" />
+			<Switch id={id} size="small" />
 			<Label htmlFor={id} style={{ cursor: 'pointer', userSelect: 'none' }}>
 				Small switch
 			</Label>
