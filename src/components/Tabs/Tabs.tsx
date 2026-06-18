@@ -1,23 +1,56 @@
-import {
-	type TabsList as TabsListPrimitive,
-	type TabsPanel,
-	Tabs as TabsPrimitive,
-	type TabsRoot,
-	type TabsTab,
-} from '@base-ui/react/tabs';
-import { TabsContent } from './TabsContent';
-import { TabsList } from './TabsList';
-import { TabsTrigger } from './TabsTrigger';
+import { Tabs as TabsPrimitive } from '@base-ui/react/tabs';
+import { clsx } from 'clsx';
+import * as styles from './styles.css';
+import type { TabsProps } from './types';
 
-export type TabsProps = TabsRoot.Props;
-export type TabsListProps = TabsListPrimitive.Props;
-export type TabsTriggerProps = TabsTab.Props;
-export type TabsContentProps = TabsPanel.Props;
+function Tabs({
+	className,
+	orientation = 'horizontal',
+	...props
+}: TabsProps.Root) {
+	return (
+		<TabsPrimitive.Root
+			data-slot="tabs"
+			orientation={orientation}
+			className={clsx(styles.root, className)}
+			{...props}
+		/>
+	);
+}
 
-export const Tabs = (props: TabsProps) => {
-	return <TabsPrimitive.Root data-slot="tabs" {...props} />;
-};
+function List({ className, variant = 'default', ...props }: TabsProps.List) {
+	return (
+		<TabsPrimitive.List
+			data-slot="tabs-list"
+			data-variant={variant}
+			className={clsx(styles.list, className)}
+			{...props}
+		/>
+	);
+}
 
-Tabs.Content = TabsContent;
-Tabs.List = TabsList;
-Tabs.Trigger = TabsTrigger;
+function Trigger({ className, ...props }: TabsProps.Trigger) {
+	return (
+		<TabsPrimitive.Tab
+			data-slot="tabs-trigger"
+			className={clsx(styles.trigger, className)}
+			{...props}
+		/>
+	);
+}
+
+function Content({ className, ...props }: TabsProps.Content) {
+	return (
+		<TabsPrimitive.Panel
+			data-slot="tabs-content"
+			className={clsx(styles.content, className)}
+			{...props}
+		/>
+	);
+}
+
+Tabs.Content = Content;
+Tabs.List = List;
+Tabs.Trigger = Trigger;
+
+export { Tabs };

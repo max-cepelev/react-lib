@@ -1,76 +1,142 @@
-import { style, styleVariants } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { theme } from '~/theme';
 
-export const listClass = style({
-	display: 'inline-flex',
-	height: '36px',
-	alignItems: 'center',
-	justifyContent: 'center',
-	columnGap: theme.spacing[1],
-	borderRadius: theme.borderRadius.md,
-	backgroundColor: 'transparent',
-	padding: theme.spacing[1],
-	color: theme.colors.text.disabled,
-});
-
-export const triggerClass = style({
-	display: 'inline-flex',
-	alignItems: 'center',
-	justifyContent: 'center',
-	whiteSpace: 'nowrap',
-	borderRadius: theme.borderRadius.md,
-	fontWeight: theme.fontWeight.medium,
-	transition: 'all 0.2s ease',
-	color: 'inherit',
-	border: 'none',
-	backgroundColor: 'transparent',
-	cursor: 'pointer',
-	lineHeight: theme.lineHeight.none,
+export const root = style({
+	display: 'flex',
+	gap: theme.spacing[2],
 
 	selectors: {
+		'&[data-orientation="horizontal"]': {
+			flexDirection: 'column',
+		},
+		'&[data-orientation="vertical"]': {
+			flexDirection: 'row',
+			alignItems: 'flex-start',
+		},
+	},
+});
+
+export const list = style({
+	display: 'inline-flex',
+	width: 'fit-content',
+	alignItems: 'center',
+	justifyContent: 'center',
+	borderRadius: theme.borderRadius.md,
+	padding: theme.spacing[1],
+	color: theme.colors.text.secondary,
+
+	selectors: {
+		'&[data-variant="default"]': {
+			backgroundColor: theme.colors.background.element,
+		},
+		'&[data-variant="line"]': {
+			gap: theme.spacing[1],
+			borderRadius: 0,
+			backgroundColor: 'transparent',
+		},
+		'&[data-orientation="horizontal"]': {
+			height: theme.spacing[8],
+		},
+		'&[data-orientation="vertical"]': {
+			height: 'fit-content',
+			flexDirection: 'column',
+		},
+	},
+});
+
+export const trigger = style({
+	position: 'relative',
+	display: 'inline-flex',
+	height: '100%',
+	flex: 1,
+	alignItems: 'center',
+	justifyContent: 'center',
+	gap: theme.spacing[2],
+	border: '1px solid transparent',
+	borderRadius: theme.borderRadius.sm,
+	backgroundColor: 'transparent',
+	padding: `0 ${theme.spacing[1]}`,
+	opacity: 0.8,
+	fontFamily: 'inherit',
+	fontSize: theme.fontSize.sm,
+	fontWeight: theme.fontWeight.medium,
+	lineHeight: theme.lineHeight.tight,
+	whiteSpace: 'nowrap',
+	cursor: 'pointer',
+	transition:
+		'background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease',
+
+	'::after': {
+		position: 'absolute',
+		content: '',
+		backgroundColor: theme.colors.primary,
+		opacity: 0,
+		transition: 'opacity 0.2s ease',
+	},
+
+	selectors: {
+		'&:hover': {
+			color: theme.colors.text.primary,
+		},
 		'&:focus-visible': {
-			outline: '2px solid transparent',
-			outlineOffset: '2px',
-			boxShadow: theme.elevation[1],
+			borderColor: theme.colors.primary,
+			outline: 'none',
+			boxShadow: `0 0 0 3px color-mix(in oklch, ${theme.colors.primary} 20%, transparent)`,
 		},
 		'&:disabled': {
 			pointerEvents: 'none',
 			opacity: 0.5,
 		},
+		'&[aria-disabled="true"]': {
+			pointerEvents: 'none',
+			opacity: 0.5,
+		},
 		'&[data-active]': {
-			backgroundColor: theme.colors.primary,
-			color: theme.colors.foreground.primary,
-			boxShadow: theme.elevation[3],
-		},
-	},
-});
-
-export const sizes = styleVariants({
-	small: {
-		height: 28,
-		fontSize: theme.fontSize.sm,
-		padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
-	},
-	medium: {
-		height: theme.spacing[8],
-		fontSize: theme.fontSize.base,
-		padding: `${theme.spacing[2]} ${theme.spacing[3]}`,
-	},
-	large: {
-		height: 36,
-		fontSize: theme.fontSize.base,
-		padding: `${theme.spacing[2]} ${theme.spacing[4]}`,
-	},
-});
-
-export const contentClass = style({
-	marginTop: theme.spacing[2], // 0.5rem
-
-	selectors: {
-		'&:focus-visible': {
-			outline: 'none',
+			backgroundColor: theme.colors.background.paper,
+			color: theme.colors.text.primary,
 			boxShadow: theme.elevation[1],
-			outlineOffset: '2px',
+			opacity: 1,
+		},
+		'&[data-orientation="vertical"]': {
+			width: '100%',
+			minHeight: `calc(${theme.spacing[6]} + ${theme.spacing[1]})`,
+			justifyContent: 'flex-start',
+		},
+		'&[data-orientation="horizontal"]::after': {
+			right: 0,
+			bottom: `calc(-1 * ${theme.spacing[1]})`,
+			left: 0,
+			height: '2px',
+		},
+		'&[data-orientation="vertical"]::after': {
+			top: 0,
+			right: `calc(-1 * ${theme.spacing[1]})`,
+			bottom: 0,
+			width: '2px',
 		},
 	},
+});
+
+globalStyle(`${list}[data-variant="line"] ${trigger}[data-active]`, {
+	borderColor: 'transparent',
+	backgroundColor: 'transparent',
+	boxShadow: 'none',
+});
+
+globalStyle(`${list}[data-variant="line"] ${trigger}[data-active]::after`, {
+	opacity: 1,
+});
+
+globalStyle(`${trigger} svg`, {
+	width: theme.spacing[4],
+	height: theme.spacing[4],
+	flexShrink: 0,
+	pointerEvents: 'none',
+});
+
+export const content = style({
+	flex: 1,
+	color: theme.colors.text.primary,
+	fontSize: theme.fontSize.sm,
+	outline: 'none',
 });

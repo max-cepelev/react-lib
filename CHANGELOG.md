@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.10.2
+
+### Patch Changes
+
+- Refactor Tabs and fix elevation shadows
+
 ## 1.10.1
 
 ### Patch Changes

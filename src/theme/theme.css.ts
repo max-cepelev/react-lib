@@ -122,11 +122,11 @@ createGlobalTheme(':root', theme, {
 		20: '5rem',
 	},
 	elevation: {
-		1: '0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba #00000024 (0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12)',
-		2: '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);',
-		3: '0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12)',
-		4: '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
-		6: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);',
+		1: '0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.06)',
+		2: '0px 2px 6px 0px rgba(0, 0, 0, 0.1), 0px 1px 3px -1px rgba(0, 0, 0, 0.08)',
+		3: '0px 4px 10px 0px rgba(0, 0, 0, 0.1), 0px 2px 4px -1px rgba(0, 0, 0, 0.06)',
+		4: '0px 6px 16px 0px rgba(0, 0, 0, 0.1), 0px 3px 6px -2px rgba(0, 0, 0, 0.06)',
+		6: '0px 10px 24px 0px rgba(0, 0, 0, 0.12), 0px 4px 8px -2px rgba(0, 0, 0, 0.08)',
 	},
 	fontSize: {
 		xs: '0.75rem',
