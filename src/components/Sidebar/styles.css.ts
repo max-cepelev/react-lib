@@ -25,8 +25,9 @@ const pulse = keyframes({
 
 export const wrapper = style({
 	display: 'flex',
-	minHeight: '100svh',
 	width: '100%',
+	height: '100%',
+	minHeight: '100svh',
 	selectors: {
 		'&:has([data-variant="inset"])': {
 			backgroundColor: theme.colors.background.sidebar,
@@ -163,7 +164,7 @@ export const inner = style({
 
 globalStyle(`${desktopSidebar}[data-variant="floating"] ${inner}`, {
 	border: `1px solid ${sidebarBorder}`,
-	borderRadius: theme.borderRadius.lg,
+	borderRadius: theme.borderRadius.md,
 	boxShadow: theme.elevation[1],
 });
 

@@ -11,6 +11,15 @@ export type PageHeaderProps = {
 	 */
 	title?: string;
 
+	/**
+	 * HTML title
+	 * @example <PageHeader htmlTitle="Заголовок страницы" />
+	 */
+	htmlTitle?: string;
+
+	/**
+	 * Компонент для отображения триггера бокового меню
+	 */
 	sidebarTrigger?: ReactElement;
 
 	/**
@@ -32,12 +41,16 @@ export const Header = ({
 	title,
 	children,
 	sidebarTrigger,
+	htmlTitle,
 }: PageHeaderProps) => {
 	useEffect(() => {
-		if (title) {
+		if (htmlTitle) {
+			document.title = htmlTitle;
+			return;
+		} else if (title) {
 			document.title = title;
 		}
-	}, [title]);
+	}, [title, htmlTitle]);
 
 	return (
 		<header className={clsx(styles.root, PAGE_HEADER_CLASSNAME, className)}>

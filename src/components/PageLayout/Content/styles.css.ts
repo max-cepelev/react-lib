@@ -4,10 +4,9 @@ import { theme } from '~/theme';
 export const rootClass = style({
 	gridArea: 'content',
 	scrollBehavior: 'smooth',
-	scrollbarGutter: 'stable',
 	overflow: 'auto',
 	height: 'auto',
-	padding: theme.spacing[4],
+	padding: theme.spacing[2],
 });
 
 export const fullHeightClass = style({

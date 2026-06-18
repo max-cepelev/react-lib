@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.10.0
+
+### Minor Changes
+
+- Add ScalableContainer, refine layouts
+
 ## 1.9.0
 
 ### Minor Changes

@@ -1,9 +1,9 @@
 import type { Meta } from 'storybook-react-rsbuild';
 import {
+	Breadcrumb,
 	Button,
 	DashboardLayout,
 	PageLayout,
-	Typography,
 	useDashboard,
 } from '~/components';
 
@@ -32,8 +32,14 @@ export const Example = () => {
 				/>
 				<DashboardLayout.Main>
 					<PageLayout>
-						<PageLayout.Header>
-							<Typography variant="h1">Dashboard</Typography>
+						<PageLayout.Header title="Dashboard">
+							<Breadcrumb>
+								<Breadcrumb.Item>
+									<Breadcrumb.Link href="/">Home</Breadcrumb.Link>
+								</Breadcrumb.Item>
+								<Breadcrumb.Separator />
+								<Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+							</Breadcrumb>
 						</PageLayout.Header>
 						<PageLayout.Content>
 							<Toggler />

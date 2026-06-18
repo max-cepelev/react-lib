@@ -42,6 +42,7 @@ export * from './Placeholder';
 export * from './Popover';
 export * from './RadioGroup';
 export * from './RangeInput';
+export * from './ScalableContainer';
 export * from './ScrollTopButton';
 export * from './Select';
 export * from './Sheet';
