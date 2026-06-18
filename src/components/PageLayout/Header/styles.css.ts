@@ -10,6 +10,7 @@ export const root = style({
 		"trigger title content actions"
 	`,
 	padding: theme.spacing[2],
+	paddingTop: theme.spacing[4],
 });
 
 globalStyle(`${root} > div`, {

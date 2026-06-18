@@ -3,4 +3,5 @@ export type {
 	AutocompleteMultipleProps,
 	AutocompleteProps,
 	AutocompleteSingleProps,
+	AutocompleteSize,
 } from './types';

@@ -36,6 +36,7 @@ function Autocomplete<TOption>(props: AutocompleteProps<TOption>) {
 		placeholder,
 		renderOption,
 		required,
+		size = 'medium',
 		style,
 		value,
 		...rootProps
@@ -111,6 +112,7 @@ function Autocomplete<TOption>(props: AutocompleteProps<TOption>) {
 				{multiple ? (
 					<Combobox.Chips
 						ref={anchor}
+						size={size}
 						className={clsx({ [styles.fullWidth]: fullWidth }, inputClassName)}
 					>
 						{(Array.isArray(selectedValue) ? selectedValue : []).map(
@@ -140,6 +142,7 @@ function Autocomplete<TOption>(props: AutocompleteProps<TOption>) {
 						aria-invalid={invalid}
 						placeholder={placeholder}
 						showClear
+						size={size}
 						className={clsx({ [styles.fullWidth]: fullWidth }, inputClassName)}
 					/>
 				)}

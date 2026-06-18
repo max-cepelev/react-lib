@@ -52,6 +52,34 @@ export function Default() {
 	);
 }
 
+export function Sizes() {
+	return (
+		<div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
+			{(['small', 'medium', 'large'] as const).map((size) => (
+				<div
+					key={size}
+					style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}
+				>
+					<Autocomplete
+						size={size}
+						options={fruits}
+						placeholder={`${size} autocomplete`}
+						style={{ width: 280 }}
+					/>
+					<Autocomplete
+						multiple
+						size={size}
+						defaultValue={['Apple']}
+						options={fruits}
+						placeholder={`${size} multiple`}
+						style={{ width: 280 }}
+					/>
+				</div>
+			))}
+		</div>
+	);
+}
+
 export function ErrorState() {
 	return (
 		<Autocomplete

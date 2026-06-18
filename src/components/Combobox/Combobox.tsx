@@ -48,13 +48,19 @@ function Input({
 	disabled = false,
 	error: _error,
 	helperText: _helperText,
+	size = 'medium',
 	showTrigger = true,
 	showClear = false,
 	...props
 }: ComboboxProps.Input) {
 	return (
 		<ComboboxPrimitive.InputGroup
-			render={<InputGroup className={clsx(styles.inputGroup, className)} />}
+			render={
+				<InputGroup
+					data-size={size}
+					className={clsx(styles.inputGroup, className)}
+				/>
+			}
 		>
 			<ComboboxPrimitive.Input
 				render={<InputGroup.Input disabled={disabled} />}
@@ -165,10 +171,11 @@ function Separator({ className, ...props }: ComboboxProps.Separator) {
 	);
 }
 
-function Chips({ className, ...props }: ComboboxProps.Chips) {
+function Chips({ className, size = 'medium', ...props }: ComboboxProps.Chips) {
 	return (
 		<ComboboxPrimitive.Chips
 			data-slot="combobox-chips"
+			data-size={size}
 			className={clsx(styles.chips, className)}
 			{...props}
 		/>

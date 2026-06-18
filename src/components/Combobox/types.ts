@@ -1,6 +1,8 @@
 import type { Combobox } from '@base-ui/react/combobox';
 import type { Separator } from '@base-ui/react/separator';
 
+export type ComboboxSize = 'small' | 'medium' | 'large';
+
 export namespace ComboboxProps {
 	export type Root<
 		Value = unknown,
@@ -13,7 +15,8 @@ export namespace ComboboxProps {
 
 	export type Clear = Combobox.Clear.Props;
 
-	export type Input = Combobox.Input.Props & {
+	export type Input = Omit<Combobox.Input.Props, 'size'> & {
+		size?: ComboboxSize;
 		showTrigger?: boolean;
 		showClear?: boolean;
 		error?: boolean;
@@ -40,7 +43,9 @@ export namespace ComboboxProps {
 
 	export type Separator = Separator.Props;
 
-	export type Chips = Combobox.Chips.Props;
+	export type Chips = Combobox.Chips.Props & {
+		size?: ComboboxSize;
+	};
 
 	export type Chip = Combobox.Chip.Props & {
 		showRemove?: boolean;

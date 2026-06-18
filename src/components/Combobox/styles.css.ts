@@ -72,6 +72,21 @@ export const controlButton = style({
 
 export const inputGroup = style({
 	width: 'auto',
+
+	selectors: {
+		'&[data-size="small"]': {
+			height: `calc(${theme.spacing[6]} + ${theme.spacing[1]})`,
+			minHeight: `calc(${theme.spacing[6]} + ${theme.spacing[1]})`,
+		},
+		'&[data-size="medium"]': {
+			height: theme.spacing[8],
+			minHeight: theme.spacing[8],
+		},
+		'&[data-size="large"]': {
+			height: `calc(${theme.spacing[8]} + ${theme.spacing[1]})`,
+			minHeight: `calc(${theme.spacing[8]} + ${theme.spacing[1]})`,
+		},
+	},
 });
 
 export const inputTrigger = style({});
@@ -211,6 +226,18 @@ export const chips = style({
 		'&:has([aria-invalid="true"])': {
 			borderColor: theme.colors.error,
 			boxShadow: `0 0 0 3px color-mix(in oklch, ${theme.colors.error} 20%, transparent)`,
+		},
+		'&[data-size="small"]': {
+			minHeight: `calc(${theme.spacing[6]} + ${theme.spacing[1]})`,
+			paddingBlock: 0,
+		},
+		'&[data-size="medium"]': {
+			minHeight: theme.spacing[8],
+			paddingBlock: theme.spacing[1],
+		},
+		'&[data-size="large"]': {
+			minHeight: `calc(${theme.spacing[8]} + ${theme.spacing[1]})`,
+			paddingBlock: theme.spacing[1],
 		},
 	},
 });

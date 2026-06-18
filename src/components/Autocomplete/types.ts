@@ -1,5 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react';
-import type { ComboboxProps } from '../Combobox';
+import type { ComboboxProps, ComboboxSize } from '../Combobox';
+
+export type AutocompleteSize = ComboboxSize;
 
 type AutocompleteBaseProps<TOption> = Omit<
 	ComboboxProps.Root<TOption, boolean>,
@@ -20,6 +22,7 @@ type AutocompleteBaseProps<TOption> = Omit<
 	error?: boolean;
 	isLoading?: boolean;
 	loadingText?: ReactNode;
+	size?: AutocompleteSize;
 	fullWidth?: boolean;
 	id?: string;
 	placeholder?: string;

@@ -229,7 +229,7 @@ function Trigger({
 		>
 			{children ?? (
 				<>
-					<PanelLeftIcon />
+					<PanelLeftIcon size={16} />
 					<span className={styles.visuallyHidden}>Toggle Sidebar</span>
 				</>
 			)}

@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.10.1
+
+### Patch Changes
+
+- Add Autocomplete/Combobox size prop
+
 ## 1.10.0
 
 ### Minor Changes
