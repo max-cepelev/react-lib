@@ -72,8 +72,24 @@ export const controlButton = style({
 
 export const inputGroup = style({
 	width: 'auto',
+	border: 0,
+	outline: `1px solid ${theme.colors.border}`,
+	transition: 'outline-color 0.2s ease, box-shadow 0.2s ease',
+
+	':hover': {
+		outlineColor: theme.colors.primary,
+	},
+	':focus-within': {
+		outlineColor: theme.colors.primary,
+	},
 
 	selectors: {
+		'&:has([disabled])': {
+			outlineColor: theme.colors.border,
+		},
+		'&:has([aria-invalid="true"])': {
+			outlineColor: theme.colors.error,
+		},
 		'&[data-size="small"]': {
 			height: `calc(${theme.spacing[6]} + ${theme.spacing[1]})`,
 			minHeight: `calc(${theme.spacing[6]} + ${theme.spacing[1]})`,
@@ -88,6 +104,27 @@ export const inputGroup = style({
 		},
 	},
 });
+
+globalStyle(
+	`${inputGroup}[data-size="small"] [data-slot="input-group-control"]`,
+	{
+		fontSize: theme.fontSize.sm,
+	},
+);
+
+globalStyle(
+	`${inputGroup}[data-size="medium"] [data-slot="input-group-control"]`,
+	{
+		fontSize: theme.fontSize.base,
+	},
+);
+
+globalStyle(
+	`${inputGroup}[data-size="large"] [data-slot="input-group-control"]`,
+	{
+		fontSize: theme.fontSize.base,
+	},
+);
 
 export const inputTrigger = style({});
 
@@ -211,20 +248,23 @@ export const chips = style({
 	flexWrap: 'wrap',
 	alignItems: 'center',
 	gap: theme.spacing[1],
-	border: `1px solid ${theme.colors.border}`,
+	outline: `1px solid ${theme.colors.border}`,
 	borderRadius: theme.borderRadius.md,
 	backgroundClip: 'padding-box',
 	padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
 	fontSize: theme.fontSize.sm,
-	transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+	transition: 'outline-color 0.2s ease, box-shadow 0.2s ease',
 
 	selectors: {
+		'&:hover': {
+			outlineColor: theme.colors.primary,
+		},
 		'&:focus-within': {
-			borderColor: theme.colors.primary,
+			outlineColor: theme.colors.primary,
 			boxShadow: `0 0 0 3px color-mix(in oklch, ${theme.colors.primary} 20%, transparent)`,
 		},
 		'&:has([aria-invalid="true"])': {
-			borderColor: theme.colors.error,
+			outlineColor: theme.colors.error,
 			boxShadow: `0 0 0 3px color-mix(in oklch, ${theme.colors.error} 20%, transparent)`,
 		},
 		'&[data-size="small"]': {
@@ -302,7 +342,20 @@ export const chipsInput = style({
 	color: theme.colors.text.primary,
 	fontFamily: 'inherit',
 	fontSize: theme.fontSize.sm,
+	lineHeight: theme.lineHeight.tight,
 	outline: 'none',
+});
+
+globalStyle(`${chips}[data-size="small"] ${chipsInput}`, {
+	fontSize: theme.fontSize.sm,
+});
+
+globalStyle(`${chips}[data-size="medium"] ${chipsInput}`, {
+	fontSize: theme.fontSize.base,
+});
+
+globalStyle(`${chips}[data-size="large"] ${chipsInput}`, {
+	fontSize: theme.fontSize.base,
 });
 
 export const chipRemoveSize = styleVariants({

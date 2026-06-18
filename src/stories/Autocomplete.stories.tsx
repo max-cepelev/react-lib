@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { Meta } from 'storybook-react-rsbuild';
-import { Autocomplete } from '~/components';
+import { Autocomplete, Input } from '~/components';
 
 const fruits = [
 	'Apple',
@@ -60,6 +60,12 @@ export function Sizes() {
 					key={size}
 					style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}
 				>
+					<Input
+						size={size}
+						placeholder={`${size} input`}
+						readOnly
+						style={{ width: 280 }}
+					/>
 					<Autocomplete
 						size={size}
 						options={fruits}
