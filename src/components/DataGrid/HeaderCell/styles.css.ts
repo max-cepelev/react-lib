@@ -4,7 +4,7 @@ import { theme } from '~/theme';
 export const headerCellClass = style({
 	padding: `${theme.spacing[1]} ${theme.spacing[2]}`,
 	width: '100%',
-	fontWeight: theme.fontWeight.semibold,
+	fontWeight: theme.fontWeight.medium,
 	fontSize: theme.fontSize.sm,
 	overflowWrap: 'break-word',
 	backgroundColor: theme.colors.background.paper,

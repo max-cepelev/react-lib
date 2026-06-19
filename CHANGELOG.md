@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.10.4
+
+### Patch Changes
+
+- Fix ScalableContainer clicks, adjust HeaderCell
+
 ## 1.10.3
 
 ### Patch Changes

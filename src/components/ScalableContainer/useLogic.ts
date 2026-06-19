@@ -6,6 +6,7 @@ import type {
 
 const DEFAULT_POSITION: ScalableContainerPosition = { x: 0, y: 0 };
 const OVERLAY_TIMEOUT = 1500;
+const DRAG_THRESHOLD = 4;
 const ZOOM_FACTOR = 1.5;
 const WHEEL_ZOOM_FACTOR = 0.05;
 
@@ -34,7 +35,7 @@ function shouldSkipDragStart(target: EventTarget | null) {
 
 	return Boolean(
 		target.closest(
-			'button, a, input, textarea, select, label, path, summary, [role="button"], [contenteditable="true"]',
+			'button, a, input, textarea, select, label, path, circle, ellipse, polygon, polyline, line, summary, [role="button"], [contenteditable="true"], [data-scalable-container-interactive]',
 		),
 	);
 }
@@ -56,6 +57,9 @@ export function useLogic({
 	const scaleRef = useRef(initialClampedScale);
 	const positionRef = useRef(DEFAULT_POSITION);
 	const dragStartRef = useRef(DEFAULT_POSITION);
+	const dragOriginRef = useRef(DEFAULT_POSITION);
+	const isDraggingRef = useRef(false);
+	const didDragRef = useRef(false);
 	const activePointersRef = useRef(
 		new Map<number, ScalableContainerPosition>(),
 	);
@@ -102,14 +106,16 @@ export function useLogic({
 			if (event.pointerType === 'mouse' && event.button !== 0) return;
 			if (shouldSkipDragStart(event.target)) return;
 
-			event.currentTarget.setPointerCapture(event.pointerId);
 			activePointersRef.current.set(event.pointerId, {
 				x: event.clientX,
 				y: event.clientY,
 			});
 
 			if (activePointersRef.current.size === 1) {
-				setIsDragging(true);
+				dragOriginRef.current = {
+					x: event.clientX,
+					y: event.clientY,
+				};
 				dragStartRef.current = {
 					x: event.clientX - positionRef.current.x,
 					y: event.clientY - positionRef.current.y,
@@ -129,6 +135,20 @@ export function useLogic({
 			});
 
 			if (activePointersRef.current.size === 1) {
+				if (!isDraggingRef.current) {
+					const deltaX = event.clientX - dragOriginRef.current.x;
+					const deltaY = event.clientY - dragOriginRef.current.y;
+
+					if (Math.sqrt(deltaX * deltaX + deltaY * deltaY) < DRAG_THRESHOLD) {
+						return;
+					}
+
+					event.currentTarget.setPointerCapture(event.pointerId);
+					isDraggingRef.current = true;
+					didDragRef.current = true;
+					setIsDragging(true);
+				}
+
 				setPosition({
 					x: event.clientX - dragStartRef.current.x,
 					y: event.clientY - dragStartRef.current.y,
@@ -145,14 +165,30 @@ export function useLogic({
 			const remainingPointer = activePointersRef.current.values().next().value;
 
 			if (remainingPointer) {
+				dragOriginRef.current = remainingPointer;
 				dragStartRef.current = {
 					x: remainingPointer.x - positionRef.current.x,
 					y: remainingPointer.y - positionRef.current.y,
 				};
-				setIsDragging(true);
-			} else {
-				setIsDragging(false);
 			}
+
+			isDraggingRef.current = false;
+			setIsDragging(false);
+
+			window.setTimeout(() => {
+				didDragRef.current = false;
+			});
+		},
+		[],
+	);
+
+	const handleClickCapture = useCallback(
+		(event: React.MouseEvent<HTMLDivElement>) => {
+			if (!didDragRef.current) return;
+
+			event.preventDefault();
+			event.stopPropagation();
+			didDragRef.current = false;
 		},
 		[],
 	);
@@ -244,6 +280,7 @@ export function useLogic({
 			transition: isDragging ? 'none' : 'transform 0.1s ease-out',
 		},
 		cursor: isDragging ? 'grabbing' : 'grab',
+		handleClickCapture,
 		handlePointerDown,
 		handlePointerEnd,
 		handlePointerMove,

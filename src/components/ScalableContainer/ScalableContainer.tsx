@@ -22,6 +22,7 @@ function ScalableContainer({
 	const {
 		contentStyle,
 		cursor,
+		handleClickCapture,
 		handlePointerDown,
 		handlePointerEnd,
 		handlePointerMove,
@@ -103,6 +104,7 @@ function ScalableContainer({
 				data-slot="scalable-container-content"
 				className={styles.content}
 				style={contentStyle}
+				onClickCapture={handleClickCapture}
 				onPointerDown={handlePointerDown}
 				onPointerMove={handlePointerMove}
 				onPointerUp={handlePointerEnd}

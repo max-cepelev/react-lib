@@ -95,3 +95,46 @@ export function InsideScrollablePage() {
 		</div>
 	);
 }
+
+export function InteractiveContent() {
+	const [clicks, setClicks] = useState(0);
+
+	return (
+		<div>
+			<div
+				style={{
+					width: 640,
+					height: 420,
+					border: `1px solid ${theme.colors.border}`,
+				}}
+			>
+				<ScalableContainer showToolbar>
+					{/** biome-ignore lint/a11y/useKeyWithClickEvents: verifies pointer interaction inside ScalableContainer */}
+					<svg
+						aria-label="Interactive map"
+						onClick={() => setClicks((value) => value + 1)}
+						role="img"
+						style={{ width: 320, height: 220 }}
+						viewBox="0 0 320 220"
+					>
+						<rect
+							width="320"
+							height="220"
+							fill={theme.colors.background.element}
+						/>
+						{/** biome-ignore lint/a11y/noStaticElementInteractions: verifies clickable SVG geometry */}
+						<path
+							d="M 80 60 L 240 60 L 240 160 L 80 160 Z"
+							fill={theme.colors.info}
+							onClick={(event) => {
+								event.stopPropagation();
+								setClicks((value) => value + 1);
+							}}
+						/>
+					</svg>
+				</ScalableContainer>
+			</div>
+			<div style={{ marginTop: theme.spacing[3] }}>clicks: {clicks}</div>
+		</div>
+	);
+}
