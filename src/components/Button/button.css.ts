@@ -19,7 +19,7 @@ export const buttonBase = style({
 	fontWeight: theme.fontWeight.medium,
 	transition: 'background-color 0.2s',
 	cursor: 'pointer',
-	lineHeight: '100%',
+	lineHeight: theme.lineHeight.none,
 	position: 'relative',
 	selectors: {
 		'&:disabled': {

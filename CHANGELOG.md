@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.10.3
+
+### Patch Changes
+
+- Button lineHeight -> theme. Add Tabs gap
+
 ## 1.10.2
 
 ### Patch Changes

@@ -36,6 +36,7 @@ export const list = style({
 		},
 		'&[data-orientation="horizontal"]': {
 			height: theme.spacing[8],
+			gap: theme.spacing[1],
 		},
 		'&[data-orientation="vertical"]': {
 			height: 'fit-content',
