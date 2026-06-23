@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.10.5
+
+### Patch Changes
+
+- Extract DataGrid logic to useLogic hook
+
 ## 1.10.4
 
 ### Patch Changes
