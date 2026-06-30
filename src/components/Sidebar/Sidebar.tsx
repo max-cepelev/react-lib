@@ -28,6 +28,36 @@ import type {
 
 const SidebarContext = React.createContext<SidebarContextValue | null>(null);
 
+function getSidebarCookieOpenState() {
+	if (typeof document === 'undefined') {
+		return null;
+	}
+
+	const cookieValue = document.cookie
+		.split('; ')
+		.find((row) => row.startsWith(`${SIDEBAR_COOKIE_NAME}=`))
+		?.split('=')[1];
+
+	if (cookieValue === 'true') {
+		return true;
+	}
+
+	if (cookieValue === 'false') {
+		return false;
+	}
+
+	return null;
+}
+
+function setSidebarCookieOpenState(open: boolean) {
+	if (typeof document === 'undefined') {
+		return;
+	}
+
+	// biome-ignore lint/suspicious/noDocumentCookie: matches the source sidebar API for persisted open state.
+	document.cookie = `${SIDEBAR_COOKIE_NAME}=${open}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}; SameSite=Lax`;
+}
+
 function useSidebar() {
 	const context = React.useContext(SidebarContext);
 
@@ -50,7 +80,28 @@ function Provider({
 	const isMobile = useIsMobile();
 	const [openMobile, setOpenMobile] = React.useState(false);
 	const [_open, _setOpen] = React.useState(defaultOpen);
+	const isControlled = openProp !== undefined;
 	const open = openProp ?? _open;
+
+	React.useEffect(() => {
+		if (isControlled) {
+			return;
+		}
+
+		const storedOpen = getSidebarCookieOpenState();
+
+		if (storedOpen !== null) {
+			_setOpen(storedOpen);
+		}
+	}, [isControlled]);
+
+	React.useEffect(() => {
+		if (!isControlled) {
+			return;
+		}
+
+		setSidebarCookieOpenState(open);
+	}, [isControlled, open]);
 
 	const setOpen = React.useCallback(
 		(value: boolean | ((value: boolean) => boolean)) => {
@@ -62,8 +113,7 @@ function Provider({
 				_setOpen(openState);
 			}
 
-			// biome-ignore lint/suspicious/noDocumentCookie: matches the source sidebar API for persisted open state.
-			document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+			setSidebarCookieOpenState(openState);
 		},
 		[onOpenChange, open],
 	);

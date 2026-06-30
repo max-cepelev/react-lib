@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.10.6
+
+### Patch Changes
+
+- Sync sidebar state with cookie
+
 ## 1.10.5
 
 ### Patch Changes
