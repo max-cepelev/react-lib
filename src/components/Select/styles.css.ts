@@ -153,10 +153,22 @@ globalStyle(`${chipRemove} svg`, {
 
 export const scrollButton = style({
 	display: 'flex',
+	left: 0,
+	zIndex: 1,
+	width: '100%',
 	cursor: 'default',
 	alignItems: 'center',
 	justifyContent: 'center',
 	padding: `${theme.spacing[1]} 0`,
+	backgroundColor: theme.colors.background.paper,
+	selectors: {
+		'&[data-direction="up"]': {
+			top: 0,
+		},
+		'&[data-direction="down"]': {
+			bottom: 0,
+		},
+	},
 });
 
 export const positioner = style({
@@ -199,9 +211,19 @@ export const content = style({
 });
 
 export const viewport = style({
+	position: 'relative',
 	padding: theme.spacing[1],
 	width: '100%',
 	minWidth: 'var(--anchor-width, 100%)',
+	maxHeight: 'var(--available-height, 24rem)',
+	overflowX: 'hidden',
+	overflowY: 'auto',
+	scrollbarWidth: 'none',
+	selectors: {
+		'&::-webkit-scrollbar': {
+			display: 'none',
+		},
+	},
 });
 
 export const label = style({

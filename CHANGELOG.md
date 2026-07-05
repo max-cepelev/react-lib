@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.10.8
+
+### Patch Changes
+
+- Fix Select scroll UI
+
 ## 1.10.7
 
 ### Patch Changes
