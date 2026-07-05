@@ -259,4 +259,10 @@ export const chevron = style({
 	height: '1rem',
 	width: '1rem',
 	opacity: 0.5,
+	transition: 'transform ease-out 150ms',
+	selectors: {
+		'&[data-popup-open]': {
+			transform: 'rotate(180deg)',
+		},
+	},
 });

@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.10.7
+
+### Patch Changes
+
+- Animate select chevron on open
+
 ## 1.10.6
 
 ### Patch Changes
