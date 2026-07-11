@@ -22,6 +22,7 @@ type UseLogicProps = {
 };
 
 type UseLogicReturn = {
+	align: CarouselAlign;
 	carouselRef: (node: HTMLDivElement | null) => void;
 	api: CarouselApi;
 	scrollPrev: () => void;
@@ -344,6 +345,7 @@ export const useLogic = ({
 	}, [detachViewport]);
 
 	return {
+		align: resolvedAlign,
 		carouselRef,
 		api,
 		scrollPrev,

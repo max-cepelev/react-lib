@@ -1,7 +1,8 @@
 import React from 'react';
-import type { CarouselApi, CarouselOrientation } from './types';
+import type { CarouselAlign, CarouselApi, CarouselOrientation } from './types';
 
 type CarouselContextProps = {
+	align: CarouselAlign;
 	carouselRef: (node: HTMLDivElement | null) => void;
 	api: CarouselApi;
 	orientation: CarouselOrientation;

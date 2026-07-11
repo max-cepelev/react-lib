@@ -27,6 +27,7 @@ function Carousel({
 	...props
 }: CarouselProps) {
 	const {
+		align: resolvedAlign,
 		canScrollNext,
 		canScrollPrev,
 		scrollNext,
@@ -45,6 +46,7 @@ function Carousel({
 	return (
 		<CarouselContext.Provider
 			value={{
+				align: resolvedAlign,
 				carouselRef,
 				api,
 				orientation,

@@ -9,11 +9,15 @@ export const item = style({
 
 export const orientations = styleVariants({
 	horizontal: {
-		scrollSnapAlign: 'center',
 		scrollSnapStop: 'always',
 	},
 	vertical: {
-		scrollSnapAlign: 'start',
 		scrollSnapStop: 'always',
 	},
+});
+
+export const alignments = styleVariants({
+	start: { scrollSnapAlign: 'start' },
+	center: { scrollSnapAlign: 'center' },
+	end: { scrollSnapAlign: 'end' },
 });

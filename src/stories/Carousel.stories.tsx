@@ -1,5 +1,7 @@
-import type { Meta } from 'storybook-react-rsbuild';
+import type { Meta, StoryObj } from 'storybook-react-rsbuild';
 import { Card, Carousel } from '~/components';
+
+type Story = StoryObj<typeof Carousel>;
 
 export default {
 	title: 'Carousel',
@@ -114,69 +116,79 @@ export function StartAligned() {
 	);
 }
 
-export function MultipleItemsPerView() {
-	const data = Array.from({ length: 8 }, (_, index) => ({
-		id: index + 1,
-		title: `Item ${index + 1}`,
-	}));
+export const MultipleItemsPerView: Story = {
+	args: {
+		align: 'start',
+	},
+	render: ({ align }) => {
+		const data = Array.from({ length: 8 }, (_, index) => ({
+			id: index + 1,
+			title: `Item ${index + 1}`,
+		}));
 
-	return (
-		<Carousel align="start" style={{ width: 500, height: 240 }}>
-			<Carousel.Content>
-				{data.map((item) => (
-					<Carousel.Item
-						key={item.id}
-						style={{ flexBasis: 160, height: '100%' }}
-					>
-						<Card style={{ height: '100%', padding: 6 }}>
-							<Card.Content
-								style={{
-									display: 'flex',
-									justifyContent: 'center',
-									alignItems: 'center',
-									height: '100%',
-								}}
-							>
-								<span>{item.title}</span>
-							</Card.Content>
-						</Card>
-					</Carousel.Item>
-				))}
-			</Carousel.Content>
-			<Carousel.Arrows />
-			<Carousel.Dots />
-		</Carousel>
-	);
-}
+		return (
+			<Carousel align={align} style={{ width: 500, height: 240 }}>
+				<Carousel.Content>
+					{data.map((item) => (
+						<Carousel.Item
+							key={item.id}
+							style={{ flexBasis: 160, height: '100%' }}
+						>
+							<Card style={{ height: '100%', padding: 6 }}>
+								<Card.Content
+									style={{
+										display: 'flex',
+										justifyContent: 'center',
+										alignItems: 'center',
+										height: '100%',
+									}}
+								>
+									<span>{item.title}</span>
+								</Card.Content>
+							</Card>
+						</Carousel.Item>
+					))}
+				</Carousel.Content>
+				<Carousel.Arrows />
+				<Carousel.Dots />
+			</Carousel>
+		);
+	},
+};
 
-export function InitialIndex() {
-	const data = ['One', 'Two', 'Three', 'Four'];
+export const InitialIndex: Story = {
+	args: {
+		initialIndex: 2,
+	},
+	render: ({ initialIndex }) => {
+		const data = ['One', 'Two', 'Three', 'Four'];
 
-	return (
-		<Carousel initialIndex={2} style={{ width: 500, height: 240 }}>
-			<Carousel.Content>
-				{data.map((title) => (
-					<Carousel.Item key={title}>
-						<Card style={{ height: '100%', padding: 6 }}>
-							<Card.Content
-								style={{
-									display: 'flex',
-									justifyContent: 'center',
-									alignItems: 'center',
-									height: '100%',
-								}}
-							>
-								<span>{title}</span>
-							</Card.Content>
-						</Card>
-					</Carousel.Item>
-				))}
-			</Carousel.Content>
-			<Carousel.Arrows />
-			<Carousel.Dots />
-		</Carousel>
-	);
-}
+		return (
+			<Carousel initialIndex={initialIndex} style={{ width: 500, height: 240 }}>
+				<Carousel.Content>
+					{data.map((title) => (
+						<Carousel.Item key={title}>
+							<Card style={{ height: '100%', padding: 6 }}>
+								<Card.Content
+									style={{
+										display: 'flex',
+										justifyContent: 'center',
+										alignItems: 'center',
+										height: '100%',
+									}}
+								>
+									<span>{title}</span>
+								</Card.Content>
+							</Card>
+						</Carousel.Item>
+					))}
+				</Carousel.Content>
+				<Carousel.Arrows />
+				<Carousel.Dots />
+			</Carousel>
+		);
+	},
+};
 
 export function Vertical() {
 	const data = [
