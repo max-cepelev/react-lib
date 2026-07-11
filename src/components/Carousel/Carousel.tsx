@@ -12,6 +12,7 @@ import { useLogic } from './useLogic';
 
 export type CarouselProps = ComponentProps<'section'> & {
 	align?: CarouselAlign;
+	initialIndex?: number;
 	orientation?: CarouselOrientation;
 	setApi?: (api: CarouselApi | undefined) => void;
 };
@@ -20,6 +21,7 @@ function Carousel({
 	align,
 	children,
 	className,
+	initialIndex,
 	orientation: orientationProp,
 	setApi,
 	...props
@@ -33,7 +35,12 @@ function Carousel({
 		orientation,
 		carouselRef,
 		handleKeyDown,
-	} = useLogic({ align, orientation: orientationProp, setApi });
+	} = useLogic({
+		align,
+		initialIndex,
+		orientation: orientationProp,
+		setApi,
+	});
 
 	return (
 		<CarouselContext.Provider

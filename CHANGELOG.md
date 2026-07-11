@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.10.10
+
+### Patch Changes
+
+- Refactor Carousel logic and improve accessibility
+
 ## 1.10.9
 
 ### Patch Changes

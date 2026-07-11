@@ -6,7 +6,6 @@ export const content = style({
 	height: '100%',
 	width: '100%',
 	overflow: 'hidden',
-	scrollBehavior: 'smooth',
 	scrollbarWidth: 'none',
 	WebkitOverflowScrolling: 'touch',
 	selectors: {

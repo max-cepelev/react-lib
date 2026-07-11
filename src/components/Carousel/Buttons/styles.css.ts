@@ -3,6 +3,7 @@ import { theme } from '~/theme';
 
 const buttonBase = style({
 	position: 'absolute',
+	zIndex: 2,
 	backgroundColor: 'transparent',
 	border: 'none',
 	cursor: 'pointer',

@@ -20,6 +20,7 @@ export function Arrows({ className, ...props }: ComponentProps<'button'>) {
 				type="button"
 				data-slot="carousel-previous"
 				aria-label="Previous slide"
+				aria-disabled={!canScrollPrev}
 				disabled={!canScrollPrev}
 				onClick={scrollPrev}
 				{...props}

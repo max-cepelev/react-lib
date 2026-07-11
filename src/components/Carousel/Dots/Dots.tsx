@@ -13,7 +13,8 @@ export const Dots = ({ className, ...props }: ComponentProps<'div'>) => {
 				<button
 					type="button"
 					key={number}
-					aria-label="Carousel Dots"
+					aria-label={`Go to slide ${index + 1}`}
+					aria-current={index === selectedIndex ? 'true' : undefined}
 					data-selected={index === selectedIndex}
 					className={clsx(styles.dotButton[orientation])}
 					onClick={() => onDotButtonClick(index)}
