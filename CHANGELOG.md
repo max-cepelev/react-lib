@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.10.12
+
+### Patch Changes
+
+- Optimize Carousel scroll performance
+
 ## 1.10.11
 
 ### Patch Changes

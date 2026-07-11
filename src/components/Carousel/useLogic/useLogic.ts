@@ -58,6 +58,7 @@ export const useLogic = ({
 	const canScrollPrevRef = useRef(false);
 	const canScrollNextRef = useRef(false);
 	const scrollSnapsRef = useRef<number[]>([]);
+	const animationFrameRef = useRef<number | null>(null);
 	const listenersRef = useRef<ListenerMap>({
 		reInit: new Set(),
 		select: new Set(),
@@ -146,19 +147,23 @@ export const useLogic = ({
 		}
 	}, [getSlides]);
 
-	const refresh = useCallback(
+	const updateScrollState = useCallback(
 		(carouselApi: CarouselApi) => {
 			const viewport = viewportRef.current;
 			const previousSelectedIndex = selectedIndexRef.current;
-			const scrollSnaps = getScrollSnaps();
-			scrollSnapsRef.current = scrollSnaps;
+			const scrollSnaps = scrollSnapsRef.current;
 
 			if (!viewport || scrollSnaps.length === 0) {
 				selectedIndexRef.current = 0;
-				canScrollPrevRef.current = false;
-				canScrollNextRef.current = false;
-				setCanScrollPrev(false);
-				setCanScrollNext(false);
+
+				if (canScrollPrevRef.current) {
+					canScrollPrevRef.current = false;
+					setCanScrollPrev(false);
+				}
+				if (canScrollNextRef.current) {
+					canScrollNextRef.current = false;
+					setCanScrollNext(false);
+				}
 
 				if (previousSelectedIndex !== 0) {
 					emit('select', carouselApi);
@@ -184,16 +189,29 @@ export const useLogic = ({
 			const nextCanScrollPrev = nearestIndex > 0;
 			const nextCanScrollNext = nearestIndex < scrollSnaps.length - 1;
 			selectedIndexRef.current = nearestIndex;
-			canScrollPrevRef.current = nextCanScrollPrev;
-			canScrollNextRef.current = nextCanScrollNext;
-			setCanScrollPrev(nextCanScrollPrev);
-			setCanScrollNext(nextCanScrollNext);
+
+			if (canScrollPrevRef.current !== nextCanScrollPrev) {
+				canScrollPrevRef.current = nextCanScrollPrev;
+				setCanScrollPrev(nextCanScrollPrev);
+			}
+			if (canScrollNextRef.current !== nextCanScrollNext) {
+				canScrollNextRef.current = nextCanScrollNext;
+				setCanScrollNext(nextCanScrollNext);
+			}
 
 			if (previousSelectedIndex !== nearestIndex) {
 				emit('select', carouselApi);
 			}
 		},
-		[emit, getScrollSnaps],
+		[emit],
+	);
+
+	const refresh = useCallback(
+		(carouselApi: CarouselApi) => {
+			scrollSnapsRef.current = getScrollSnaps();
+			updateScrollState(carouselApi);
+		},
+		[getScrollSnaps, updateScrollState],
 	);
 
 	const api = useMemo<CarouselApi>(() => {
@@ -243,13 +261,30 @@ export const useLogic = ({
 	}, [emit, rebindSlideObservers, refresh]);
 
 	const handleScroll = useCallback(() => {
-		refresh(api);
-	}, [api, refresh]);
+		if (animationFrameRef.current !== null) return;
+
+		if (typeof requestAnimationFrame === 'undefined') {
+			updateScrollState(api);
+			return;
+		}
+
+		animationFrameRef.current = requestAnimationFrame(() => {
+			animationFrameRef.current = null;
+			updateScrollState(api);
+		});
+	}, [api, updateScrollState]);
 
 	const detachViewport = useCallback(() => {
 		if (viewportRef.current) {
 			viewportRef.current.removeEventListener('scroll', handleScroll);
 		}
+		if (
+			animationFrameRef.current !== null &&
+			typeof cancelAnimationFrame !== 'undefined'
+		) {
+			cancelAnimationFrame(animationFrameRef.current);
+		}
+		animationFrameRef.current = null;
 		resizeObserverRef.current?.disconnect();
 		mutationObserverRef.current?.disconnect();
 		resizeObserverRef.current = null;
@@ -286,10 +321,10 @@ export const useLogic = ({
 			if (!didApplyInitialIndexRef.current) {
 				didApplyInitialIndexRef.current = true;
 				api.scrollTo(initialIndexRef.current, true);
-				refresh(api);
+				updateScrollState(api);
 			}
 		},
-		[api, detachViewport, handleScroll, refresh],
+		[api, detachViewport, handleScroll, refresh, updateScrollState],
 	);
 
 	const scrollPrev = useCallback(() => {
