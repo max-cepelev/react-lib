@@ -14,9 +14,8 @@ export const Dots = ({ className, ...props }: ComponentProps<'div'>) => {
 					type="button"
 					key={number}
 					aria-label="Carousel Dots"
-					className={clsx(styles.dotButton[orientation], {
-						[styles.selected]: index === selectedIndex,
-					})}
+					data-selected={index === selectedIndex}
+					className={clsx(styles.dotButton[orientation])}
 					onClick={() => onDotButtonClick(index)}
 				/>
 			))}

@@ -46,6 +46,9 @@ const buttonBase = style({
 		'&:after': {
 			backgroundColor: theme.colors.border,
 		},
+		'&[data-selected="true"]:after': {
+			backgroundColor: theme.colors.primary,
+		},
 	},
 });
 
@@ -82,12 +85,4 @@ export const dotButton = styleVariants({
 			},
 		},
 	],
-});
-
-export const selected = style({
-	selectors: {
-		'&::after': {
-			backgroundColor: theme.colors.primary,
-		},
-	},
 });
