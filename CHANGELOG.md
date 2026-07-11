@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.10.11
+
+### Patch Changes
+
+- Pass align to Carousel items
+
 ## 1.10.10
 
 ### Patch Changes
