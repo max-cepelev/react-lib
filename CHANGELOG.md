@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.10.9
+
+### Patch Changes
+
+- Use data-selected for Carousel Dots
+
 ## 1.10.8
 
 ### Patch Changes
