@@ -1,6 +1,6 @@
 {
 	"name": "@max-ts/kit",
-	"version": "1.10.12",
+	"version": "1.11.0",
 	"main": "./lib/index.js",
 	"module": "./lib/index.mjs",
 	"types": "./lib/index.d.ts",
@@ -20,6 +20,8 @@
 		"dev": "rsbuild dev --open",
 		"preview": "rsbuild preview",
 		"storybook": "storybook dev -p 6006",
+		"test": "vitest run",
+		"test:watch": "vitest",
 		"lint": "pnpm lint:types && pnpm lint:fix",
 		"lint:types": "tsc --noEmit",
 		"lint:fix": "biome check --write",
@@ -50,17 +52,21 @@
 		"@storybook/addon-docs": "10.5.0",
 		"@storybook/addon-onboarding": "10.5.0",
 		"@storybook/react": "10.5.0",
+		"@testing-library/jest-dom": "^6.9.1",
+		"@testing-library/react": "^16.3.2",
 		"@types/node": "^26.1.1",
 		"@types/react": "^19.2.17",
 		"@types/react-dom": "^19.2.3",
 		"@vanilla-extract/css": "^1.21.1",
 		"@vanilla-extract/webpack-plugin": "^2.3.27",
-		"rsbuild-plugin-dts": "^0.23.2",
+		"jsdom": "^29.1.1",
 		"react": "19.2.7",
 		"react-dom": "19.2.7",
+		"rsbuild-plugin-dts": "^0.23.2",
 		"storybook": "10.5.0",
 		"storybook-addon-rslib": "^3.3.4",
 		"storybook-react-rsbuild": "^3.3.4",
-		"typescript": "^7.0.2"
+		"typescript": "^7.0.2",
+		"vitest": "^4.1.10"
 	}
 }

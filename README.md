@@ -16,6 +16,7 @@
 - **Rslib/Rsbuild** — сборка библиотеки в ESM-формате и генерация деклараций TypeScript.
 - **Vanilla Extract** — CSS-in-TypeScript с использованием токенов темы.
 - **Storybook** — разработка, просмотр и документация компонентов.
+- **Vitest** — unit- и regression-тесты компонентов.
 - **Biome** — форматирование и статический анализ.
 - **TypeScript** — строгая типизация публичного API.
 
@@ -53,6 +54,17 @@ pnpm build:storybook
 ```
 
 Собирает Storybook для публикации.
+```bash
+pnpm test
+```
+
+Запускает unit- и regression-тесты в jsdom.
+
+```bash
+pnpm test:watch
+```
+
+Запускает Vitest в watch-режиме.
 
 ```bash
 pnpm lint

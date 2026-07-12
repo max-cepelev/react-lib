@@ -13,10 +13,16 @@ import type {
 	CarouselEventName,
 	CarouselOrientation,
 } from '../types';
+import {
+	createScrollSnapModel,
+	findNearestSnapIndex,
+	getScrollTarget,
+} from './scrollModel';
 
 type UseLogicProps = {
 	align?: CarouselAlign;
 	initialIndex?: number;
+	loop?: boolean;
 	orientation?: CarouselOrientation;
 	setApi?: (api: CarouselApi | undefined) => void;
 };
@@ -34,13 +40,28 @@ type UseLogicReturn = {
 };
 
 type ListenerMap = Record<CarouselEventName, Set<CarouselEventCallback>>;
+function getLayoutOffset(
+	element: HTMLElement,
+	orientation: CarouselOrientation,
+) {
+	const offsetProperty =
+		orientation === 'horizontal' ? 'offsetLeft' : 'offsetTop';
+	let offset = 0;
+	let current: HTMLElement | null = element;
 
-const SNAP_EPSILON = 0.5;
+	while (current) {
+		offset += current[offsetProperty];
+		current = current.offsetParent as HTMLElement | null;
+	}
+
+	return offset;
+}
 
 export const useLogic = ({
 	orientation = 'horizontal',
 	align = 'center',
 	initialIndex = 0,
+	loop = false,
 	setApi,
 }: UseLogicProps): UseLogicReturn => {
 	const resolvedOrientation = orientation;
@@ -52,12 +73,16 @@ export const useLogic = ({
 	const observedSlidesRef = useRef<HTMLElement[]>([]);
 	const orientationRef = useRef(resolvedOrientation);
 	const alignRef = useRef(resolvedAlign);
+	const loopRef = useRef(loop);
 	const initialIndexRef = useRef(initialIndex);
 	const didApplyInitialIndexRef = useRef(false);
 	const selectedIndexRef = useRef(0);
 	const canScrollPrevRef = useRef(false);
 	const canScrollNextRef = useRef(false);
 	const scrollSnapsRef = useRef<number[]>([]);
+	const slideToSnapRef = useRef<number[]>([]);
+	const navigationSnapRef = useRef(0);
+	const pendingNavigationSnapRef = useRef<number | null>(null);
 	const animationFrameRef = useRef<number | null>(null);
 	const listenersRef = useRef<ListenerMap>({
 		reInit: new Set(),
@@ -76,57 +101,35 @@ export const useLogic = ({
 		);
 	}, []);
 
-	const getTargetFor = useCallback((slide: HTMLElement) => {
+	const getScrollSnapModel = useCallback(() => {
 		const viewport = viewportRef.current;
-		if (!viewport) return 0;
+		if (!viewport) return createScrollSnapModel([]);
 
 		const isHorizontal = orientationRef.current === 'horizontal';
-		const viewportRect = viewport.getBoundingClientRect();
-		const slideRect = slide.getBoundingClientRect();
 		const viewportSize = isHorizontal
 			? viewport.clientWidth
 			: viewport.clientHeight;
-		const slideSize = isHorizontal ? slide.offsetWidth : slide.offsetHeight;
-		const scrollPosition = isHorizontal
-			? viewport.scrollLeft
-			: viewport.scrollTop;
-		const slideStart =
-			scrollPosition +
-			(isHorizontal
-				? slideRect.left - viewportRect.left
-				: slideRect.top - viewportRect.top);
-
-		let target = slideStart;
-		if (alignRef.current === 'center') {
-			target = slideStart - (viewportSize - slideSize) / 2;
-		} else if (alignRef.current === 'end') {
-			target = slideStart - (viewportSize - slideSize);
-		}
 
 		const max = isHorizontal
 			? viewport.scrollWidth - viewport.clientWidth
 			: viewport.scrollHeight - viewport.clientHeight;
+		const viewportOffset = getLayoutOffset(viewport, orientationRef.current);
+		const slideTargets = getSlides().map((slide) => {
+			const slideStart =
+				getLayoutOffset(slide, orientationRef.current) - viewportOffset;
+			const slideSize = isHorizontal ? slide.offsetWidth : slide.offsetHeight;
 
-		return Math.max(0, Math.min(target, Math.max(0, max)));
-	}, []);
+			return getScrollTarget({
+				align: alignRef.current,
+				maxScroll: max,
+				slideSize,
+				slideStart,
+				viewportSize,
+			});
+		});
 
-	const getScrollSnaps = useCallback(() => {
-		const scrollSnaps: number[] = [];
-
-		for (const slide of getSlides()) {
-			const target = getTargetFor(slide);
-			const previousTarget = scrollSnaps.at(-1);
-
-			if (
-				previousTarget === undefined ||
-				Math.abs(target - previousTarget) > SNAP_EPSILON
-			) {
-				scrollSnaps.push(target);
-			}
-		}
-
-		return scrollSnaps;
-	}, [getSlides, getTargetFor]);
+		return createScrollSnapModel(slideTargets);
+	}, [getSlides]);
 
 	const emit = useCallback((event: CarouselEventName, api: CarouselApi) => {
 		for (const callback of listenersRef.current[event]) {
@@ -176,19 +179,16 @@ export const useLogic = ({
 					? viewport.scrollLeft
 					: viewport.scrollTop;
 
-			let nearestIndex = 0;
-			let nearestDistance = Number.POSITIVE_INFINITY;
-			for (let index = 0; index < scrollSnaps.length; index += 1) {
-				const distance = Math.abs(scrollSnaps[index] - scrollPosition);
-				if (distance < nearestDistance) {
-					nearestDistance = distance;
-					nearestIndex = index;
-				}
-			}
+			const nearestIndex = findNearestSnapIndex(scrollSnaps, scrollPosition);
 
-			const nextCanScrollPrev = nearestIndex > 0;
-			const nextCanScrollNext = nearestIndex < scrollSnaps.length - 1;
+			const canLoop = loopRef.current && scrollSnaps.length > 1;
+			const nextCanScrollPrev = canLoop || nearestIndex > 0;
+			const nextCanScrollNext =
+				canLoop || nearestIndex < scrollSnaps.length - 1;
 			selectedIndexRef.current = nearestIndex;
+			if (pendingNavigationSnapRef.current === null) {
+				navigationSnapRef.current = nearestIndex;
+			}
 
 			if (canScrollPrevRef.current !== nextCanScrollPrev) {
 				canScrollPrevRef.current = nextCanScrollPrev;
@@ -208,21 +208,49 @@ export const useLogic = ({
 
 	const refresh = useCallback(
 		(carouselApi: CarouselApi) => {
-			scrollSnapsRef.current = getScrollSnaps();
+			const { scrollSnaps, slideToSnap } = getScrollSnapModel();
+			scrollSnapsRef.current = scrollSnaps;
+			slideToSnapRef.current = slideToSnap;
+			navigationSnapRef.current = Math.min(
+				navigationSnapRef.current,
+				Math.max(0, scrollSnaps.length - 1),
+			);
 			updateScrollState(carouselApi);
 		},
-		[getScrollSnaps, updateScrollState],
+		[getScrollSnapModel, updateScrollState],
 	);
 
 	const api = useMemo<CarouselApi>(() => {
 		const carouselApi: CarouselApi = {
 			scrollPrev: () => {
-				carouselApi.scrollTo(selectedIndexRef.current - 1);
+				const lastSnapIndex = scrollSnapsRef.current.length - 1;
+				const targetIndex =
+					loopRef.current && navigationSnapRef.current === 0
+						? lastSnapIndex
+						: navigationSnapRef.current - 1;
+
+				carouselApi.scrollToSnap(targetIndex);
 			},
 			scrollNext: () => {
-				carouselApi.scrollTo(selectedIndexRef.current + 1);
+				const lastSnapIndex = scrollSnapsRef.current.length - 1;
+				const targetIndex =
+					loopRef.current && navigationSnapRef.current === lastSnapIndex
+						? 0
+						: navigationSnapRef.current + 1;
+
+				carouselApi.scrollToSnap(targetIndex);
 			},
 			scrollTo: (index, jump = false) => {
+				if (slideToSnapRef.current.length === 0) return;
+				const targetSlideIndex = Math.max(
+					0,
+					Math.min(Math.trunc(index), slideToSnapRef.current.length - 1),
+				);
+				const targetSnapIndex = slideToSnapRef.current[targetSlideIndex];
+
+				carouselApi.scrollToSnap(targetSnapIndex, jump);
+			},
+			scrollToSnap: (index, jump = false) => {
 				const viewport = viewportRef.current;
 				const scrollSnaps = scrollSnapsRef.current;
 				if (!viewport || scrollSnaps.length === 0) return;
@@ -232,6 +260,8 @@ export const useLogic = ({
 					Math.min(Math.trunc(index), scrollSnaps.length - 1),
 				);
 				const target = scrollSnaps[targetIndex];
+				navigationSnapRef.current = targetIndex;
+				pendingNavigationSnapRef.current = jump ? null : targetIndex;
 				viewport.scrollTo(
 					orientationRef.current === 'horizontal'
 						? { left: target, behavior: jump ? 'auto' : 'smooth' }
@@ -259,6 +289,10 @@ export const useLogic = ({
 
 		return carouselApi;
 	}, [emit, rebindSlideObservers, refresh]);
+	const handleScrollEnd = useCallback(() => {
+		pendingNavigationSnapRef.current = null;
+		navigationSnapRef.current = selectedIndexRef.current;
+	}, []);
 
 	const handleScroll = useCallback(() => {
 		if (animationFrameRef.current !== null) return;
@@ -277,6 +311,7 @@ export const useLogic = ({
 	const detachViewport = useCallback(() => {
 		if (viewportRef.current) {
 			viewportRef.current.removeEventListener('scroll', handleScroll);
+			viewportRef.current.removeEventListener('scrollend', handleScrollEnd);
 		}
 		if (
 			animationFrameRef.current !== null &&
@@ -290,7 +325,7 @@ export const useLogic = ({
 		resizeObserverRef.current = null;
 		mutationObserverRef.current = null;
 		observedSlidesRef.current = [];
-	}, [handleScroll]);
+	}, [handleScroll, handleScrollEnd]);
 
 	const carouselRef = useCallback(
 		(node: HTMLDivElement | null) => {
@@ -302,6 +337,7 @@ export const useLogic = ({
 			if (!node) return;
 
 			node.addEventListener('scroll', handleScroll, { passive: true });
+			node.addEventListener('scrollend', handleScrollEnd);
 
 			if (typeof ResizeObserver !== 'undefined') {
 				resizeObserverRef.current = new ResizeObserver(() => refresh(api));
@@ -324,7 +360,14 @@ export const useLogic = ({
 				updateScrollState(api);
 			}
 		},
-		[api, detachViewport, handleScroll, refresh, updateScrollState],
+		[
+			api,
+			detachViewport,
+			handleScroll,
+			handleScrollEnd,
+			refresh,
+			updateScrollState,
+		],
 	);
 
 	const scrollPrev = useCallback(() => {
@@ -367,8 +410,9 @@ export const useLogic = ({
 	useEffect(() => {
 		orientationRef.current = resolvedOrientation;
 		alignRef.current = resolvedAlign;
+		loopRef.current = loop;
 		api.reInit();
-	}, [api, resolvedAlign, resolvedOrientation]);
+	}, [api, loop, resolvedAlign, resolvedOrientation]);
 
 	useEffect(() => {
 		setApi?.(api);

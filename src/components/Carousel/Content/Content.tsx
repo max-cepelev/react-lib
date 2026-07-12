@@ -1,10 +1,22 @@
 import { clsx } from 'clsx';
-import type { ComponentProps } from 'react';
+import { type ComponentProps, useCallback } from 'react';
 import { useCarousel } from '../CarouselContext';
 import * as styles from './styles.css';
 
-export function Content({ className, ...props }: ComponentProps<'div'>) {
+export function Content({ className, ref, ...props }: ComponentProps<'div'>) {
 	const { carouselRef, orientation = 'horizontal' } = useCarousel();
+	const handleRef = useCallback(
+		(node: HTMLDivElement | null) => {
+			carouselRef(node);
+
+			if (typeof ref === 'function') {
+				ref(node);
+			} else if (ref) {
+				ref.current = node;
+			}
+		},
+		[carouselRef, ref],
+	);
 
 	return (
 		<div
@@ -13,7 +25,7 @@ export function Content({ className, ...props }: ComponentProps<'div'>) {
 				styles.orientations[orientation],
 				className,
 			)}
-			ref={carouselRef}
+			ref={handleRef}
 			data-slot="carousel-content"
 			data-orientation={orientation}
 			{...props}

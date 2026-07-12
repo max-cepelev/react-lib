@@ -8,6 +8,7 @@ export type CarouselApi = {
 	scrollPrev: () => void;
 	scrollNext: () => void;
 	scrollTo: (index: number, jump?: boolean) => void;
+	scrollToSnap: (index: number, jump?: boolean) => void;
 	canScrollNext: () => boolean;
 	canScrollPrev: () => boolean;
 	selectedScrollSnap: () => number;

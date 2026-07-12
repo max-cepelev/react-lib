@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.11.0
+
+### Minor Changes
+
+- feat(carousel): add wrap loop mode and Vitest coverage
+
 ## 1.10.12
 
 ### Patch Changes

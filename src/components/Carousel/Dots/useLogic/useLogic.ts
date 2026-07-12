@@ -7,7 +7,7 @@ export const useLogic = (api: CarouselApi) => {
 
 	const onDotButtonClick = useCallback(
 		(index: number) => {
-			api.scrollTo(index);
+			api.scrollToSnap(index);
 		},
 		[api],
 	);
