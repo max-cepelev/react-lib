@@ -26,13 +26,13 @@
 		"prepublishOnly": "pnpm run build"
 	},
 	"dependencies": {
-		"@base-ui/react": "^1.5.0",
+		"@base-ui/react": "^1.6.0",
 		"@react-input/mask": "^2.0.4",
 		"clsx": "^2.1.1",
 		"input-otp": "^1.4.2",
-		"lucide-react": "^1.17.0",
+		"lucide-react": "^1.24.0",
 		"react-day-picker": "^10.0.1",
-		"react-virtuoso": "^4.18.7",
+		"react-virtuoso": "^4.18.10",
 		"sonner": "^2.0.7"
 	},
 	"peerDependencies": {
@@ -40,27 +40,27 @@
 		"react-dom": "^19.0.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.16",
+		"@biomejs/biome": "^2.5.3",
 		"@changesets/cli": "^2.31.0",
 		"@chromatic-com/storybook": "^5.2.1",
 		"@fontsource-variable/roboto": "^5.2.10",
-		"@rsbuild/core": "^2.0.12",
-		"@rsbuild/plugin-react": "^2.0.1",
-		"@rslib/core": "^0.22.1",
-		"@storybook/addon-docs": "10.4.4",
-		"@storybook/addon-onboarding": "10.4.4",
-		"@storybook/react": "10.4.4",
-		"@types/node": "^25.9.3",
+		"@rsbuild/core": "^2.1.5",
+		"@rsbuild/plugin-react": "^2.1.0",
+		"@rslib/core": "^0.23.2",
+		"@storybook/addon-docs": "10.5.0",
+		"@storybook/addon-onboarding": "10.5.0",
+		"@storybook/react": "10.5.0",
+		"@types/node": "^26.1.1",
 		"@types/react": "^19.2.17",
 		"@types/react-dom": "^19.2.3",
-		"@vanilla-extract/css": "^1.20.1",
+		"@vanilla-extract/css": "^1.21.1",
 		"@vanilla-extract/webpack-plugin": "^2.3.27",
-		"rsbuild-plugin-dts": "^0.22.1",
+		"rsbuild-plugin-dts": "^0.23.2",
 		"react": "19.2.7",
 		"react-dom": "19.2.7",
-		"storybook": "10.4.4",
+		"storybook": "10.5.0",
 		"storybook-addon-rslib": "^3.3.4",
 		"storybook-react-rsbuild": "^3.3.4",
-		"typescript": "^6.0.3"
+		"typescript": "^7.0.2"
 	}
 }

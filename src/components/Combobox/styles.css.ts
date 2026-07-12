@@ -30,8 +30,13 @@ export const triggerIcon = style({
 	width: theme.spacing[4],
 	height: theme.spacing[4],
 	pointerEvents: 'none',
-	color: theme.colors.text.secondary,
+  color: theme.colors.text.secondary,
+  transition: 'transform ease-out 150ms'
 });
+
+globalStyle(`${trigger}[data-popup-open] ${triggerIcon}`, {
+  transform: 'rotate(180deg)'
+})
 
 export const clearIcon = style({
 	width: theme.spacing[4],
