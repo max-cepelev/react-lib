@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.12.0
+
+### Minor Changes
+
+- Added Alert component
+
 ## 1.11.0
 
 ### Minor Changes
