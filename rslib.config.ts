@@ -11,7 +11,13 @@ export default defineConfig({
 			format: 'esm',
 			source: {
 				entry: {
+					form: './src/form/index.ts',
 					index: './src/index.ts',
+				},
+			},
+			output: {
+				filename: {
+					css: 'styles.css',
 				},
 			},
 		},
@@ -28,13 +34,16 @@ export default defineConfig({
 	output: {
 		cleanDistPath: true,
 		target: 'web',
-		externals: ['react', 'react-dom', '@fontsource-variable/roboto'],
+		externals: [
+			'@fontsource-variable/roboto',
+			'@formisch/react',
+			'@max-ts/kit',
+			'react',
+			'react-dom',
+		],
 		// Устанавливаем пути для CSS файлов
 		distPath: {
 			root: './lib',
-		},
-		filename: {
-			css: 'styles.css',
 		},
 	},
 	plugins: [

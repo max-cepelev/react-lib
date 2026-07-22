@@ -1,6 +1,6 @@
 {
 	"name": "@max-ts/kit",
-	"version": "1.13.0",
+	"version": "1.14.0",
 	"main": "./lib/index.js",
 	"module": "./lib/index.mjs",
 	"types": "./lib/index.d.ts",
@@ -8,6 +8,10 @@
 		".": {
 			"import": "./lib/index.mjs",
 			"types": "./lib/index.d.ts"
+		},
+		"./form": {
+			"import": "./lib/form.mjs",
+			"types": "./lib/form/index.d.ts"
 		},
 		"./styles.css": "./lib/styles.css"
 	},
@@ -38,14 +42,25 @@
 		"sonner": "^2.0.7"
 	},
 	"peerDependencies": {
+		"@formisch/react": "^0.8.0",
 		"react": "^19.0.0",
-		"react-dom": "^19.0.0"
+		"react-dom": "^19.0.0",
+		"valibot": "^1.4.1"
+	},
+	"peerDependenciesMeta": {
+		"@formisch/react": {
+			"optional": true
+		},
+		"valibot": {
+			"optional": true
+		}
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.5.3",
 		"@changesets/cli": "^2.31.0",
 		"@chromatic-com/storybook": "^5.2.1",
 		"@fontsource-variable/roboto": "^5.2.10",
+		"@formisch/react": "^0.8.0",
 		"@rsbuild/core": "^2.1.5",
 		"@rsbuild/plugin-react": "^2.1.0",
 		"@rslib/core": "^0.23.2",
@@ -67,6 +82,7 @@
 		"storybook-addon-rslib": "^3.3.4",
 		"storybook-react-rsbuild": "^3.3.4",
 		"typescript": "^7.0.2",
+		"valibot": "^1.4.2",
 		"vitest": "^4.1.10"
 	}
 }

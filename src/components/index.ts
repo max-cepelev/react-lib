@@ -29,6 +29,7 @@ export * from './Drawer';
 export * from './DropdownMenu';
 export * from './Empty';
 export * from './FileUploader';
+export * from './FormControl';
 export * from './ImageCarousel';
 export * from './Input';
 export * from './InputGroup';

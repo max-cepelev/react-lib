@@ -56,7 +56,7 @@ export const Input = ({
 				})}
 				ref={ref}
 				disabled={disabled}
-				value={value || ''}
+				value={value ?? ''}
 				{...props}
 			/>
 			{endAdornment && <span className={adornment}>{endAdornment}</span>}

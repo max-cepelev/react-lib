@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.14.0
+
+### Minor Changes
+
+- feat(form): add type-safe Formisch adapters
+
 ## 1.13.0
 
 ### Minor Changes
