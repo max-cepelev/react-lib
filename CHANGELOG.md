@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.13.0
+
+### Minor Changes
+
+- Add FileUploader, ProgressBar, and component architecture skill
+
 ## 1.12.0
 
 ### Minor Changes

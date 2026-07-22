@@ -1,0 +1,4 @@
+interface:
+  display_name: "Max TS Kit React Architecture"
+  short_description: "Архитектура компонентов @max-ts/kit"
+  default_prompt: "Используй $build-max-ts-kit-components, чтобы создать или отрефакторить компонент библиотеки @max-ts/kit по принятой архитектуре."
