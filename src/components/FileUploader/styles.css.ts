@@ -1,4 +1,4 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 import { spacing, theme } from '~/theme';
 
 export const root = style({
@@ -67,34 +67,17 @@ export const fileList = style({
 
 export const prompt = style({
 	display: 'flex',
+	flexDirection: 'column',
 	minWidth: 0,
-	flexWrap: 'wrap',
 	alignItems: 'center',
+	justifyContent: 'center',
 	gap: theme.spacing[3],
-
 	selectors: {
 		'&[data-has-files]': {
 			paddingTop: theme.spacing[3],
 			borderTop: `1px solid ${theme.colors.border}`,
 		},
 	},
-});
-
-export const uploadIcon = style({
-	display: 'flex',
-	width: theme.spacing[10],
-	height: theme.spacing[10],
-	flexShrink: 0,
-	alignItems: 'center',
-	justifyContent: 'center',
-	borderRadius: theme.borderRadius.md,
-	backgroundColor: theme.colors.background.element,
-	color: theme.colors.text.secondary,
-});
-
-globalStyle(`${uploadIcon} svg`, {
-	width: theme.spacing[5],
-	height: theme.spacing[5],
 });
 
 export const promptContent = style({
@@ -111,11 +94,13 @@ export const promptText = style({
 
 export const constraints = style({
 	margin: 0,
-	color: theme.colors.text.secondary,
 });
 
 export const uploadButton = style({
-	marginInlineStart: 'auto',
+	width: theme.spacing[10],
+	height: theme.spacing[10],
+	backgroundColor: theme.colors.background.element,
+	color: theme.colors.text.secondary,
 });
 
 export const limitNotice = style({

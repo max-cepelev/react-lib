@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import { UploadCloudIcon } from 'lucide-react';
+import { Upload } from 'lucide-react';
 import { Button } from '../Button/Button';
 import { Label } from '../Label/Label';
 import { Typography } from '../Typography/Typography';
@@ -130,15 +130,24 @@ export const FileUploader = (props: FileUploaderProps) => {
 						data-has-files={files.length ? '' : undefined}
 						className={styles.prompt}
 					>
-						<div className={styles.uploadIcon} aria-hidden="true">
-							<UploadCloudIcon />
-						</div>
+						<Button
+							type="button"
+							size="icon"
+							variant="outline"
+							className={styles.uploadButton}
+							disabled={isDisabled}
+							onClick={onDownloadClick}
+						>
+							<Upload />
+						</Button>
 						<div className={styles.promptContent}>
 							{typeof placeholder === 'string' || placeholder == null ? (
 								<Typography
 									component="p"
 									variant="body2"
 									weight="medium"
+									align="center"
+									color="muted"
 									className={styles.promptText}
 								>
 									{isDragActive
@@ -152,22 +161,14 @@ export const FileUploader = (props: FileUploaderProps) => {
 								<Typography
 									component="p"
 									variant="caption"
-									color="secondary"
+									color="muted"
+									align="center"
 									className={styles.constraints}
 								>
 									{constraints}
 								</Typography>
 							)}
 						</div>
-						<Button
-							type="button"
-							size="small"
-							className={styles.uploadButton}
-							disabled={isDisabled}
-							onClick={onDownloadClick}
-						>
-							Загрузить
-						</Button>
 					</div>
 				) : (
 					<Typography

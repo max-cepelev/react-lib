@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.14.1
+
+### Patch Changes
+
+- Rework FileUploader prompt layout
+
 ## 1.14.0
 
 ### Minor Changes
