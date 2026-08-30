@@ -1,171 +1,211 @@
+import { clsx } from 'clsx';
 import { Calendar1 } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Button } from '../Button';
-import { Calendar, type PropsSingle } from '../Calendar';
-import { MaskField } from '../MaskField';
-import { Popover } from '../Popover';
-import type { TextFieldProps } from '../TextField';
-
-export type DatePickerProps = Omit<PropsSingle, 'onSelect' | 'mode'> & {
-	label?: string;
-
-	disabled?: boolean;
-
-	onSelect?: (date: Date | undefined) => void;
-
-	selectMonth?: boolean;
-
-	selectYear?: boolean;
-
-	calendarClassName?: string;
-} & Pick<
-		TextFieldProps,
-		'error' | 'helperText' | 'className' | 'fullWidth' | 'size' | 'name'
-	>;
+import { Calendar } from '../Calendar/Calendar';
+import { InputGroup } from '../InputGroup/InputGroup';
+import { Label } from '../Label/Label';
+import { Popover } from '../Popover/Popover';
+import { Typography } from '../Typography/Typography';
+import * as styles from './styles.css';
+import type { DatePickerProps } from './types';
+import { useLogic } from './useLogic';
 
 export const DatePicker = (props: DatePickerProps) => {
 	const {
-		label,
-		disabled = false,
-		selected,
-		onSelect,
-		selectMonth,
-		selectYear,
-		error,
-		helperText,
+		calendarIcon,
+		calendarProps = {},
 		className,
-		fullWidth,
-		size,
+		contentProps = {},
+		disabled = false,
+		error = false,
+		fullWidth = false,
+		helperText,
+		inputProps = {},
+		label,
 		name,
-		...rest
+		openCalendarLabel = 'Открыть календарь',
+		placeholder = 'дд.мм.гггг',
+		popoverProps = {},
+		readOnly = false,
+		ref,
+		required = false,
+		size = 'medium',
+		style,
+		triggerProps = {},
+		value: _value,
+		defaultValue: _defaultValue,
+		onValueChange: _onValueChange,
+		open: _open,
+		defaultOpen: _defaultOpen,
+		onOpenChange: _onOpenChange,
+		month: _month,
+		defaultMonth: _defaultMonth,
+		onMonthChange: _onMonthChange,
+		inputId: _inputId,
+		inputRef: _inputRef,
+		min: _min,
+		max: _max,
+		formatDate: _formatDate,
+		parseDate: _parseDate,
+		invalidDateMessage: _invalidDateMessage,
+		unavailableDateMessage: _unavailableDateMessage,
+		closeOnSelect: _closeOnSelect,
+		...rootProps
 	} = props;
-	const [innerError, setInnerError] = useState<string | null>(null);
-	const [isOpen, setIsOpen] = useState(false);
-	const [month, setMonth] = useState(new Date());
-	const [inputValue, setInputValue] = useState('');
-
-	const getLayout = () => {
-		if (selectMonth && selectYear) {
-			return 'dropdown';
-		}
-
-		if (selectMonth) {
-			return 'dropdown-months';
-		}
-
-		if (selectYear) {
-			return 'dropdown-years';
-		}
-
-		return 'label';
-	};
-
-	const handleClick = () => {
-		setIsOpen(true);
-	};
-
-	const handleClose = () => {
-		setIsOpen(false);
-	};
-
-	const handleDayPickerSelect = (date: Date | undefined) => {
-		if (!date) {
-			setInputValue('');
-			onSelect?.(undefined);
-		} else {
-			onSelect?.(date);
-			setMonth(date);
-			setInputValue(
-				date.toLocaleString('ru-RU', {
-					day: '2-digit',
-					month: '2-digit',
-					year: 'numeric',
-				}),
-			);
-		}
-
-		handleClose();
-	};
-
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setInnerError(null);
-		setInputValue(e.target.value);
-
-		const [day, month, year] = e.target.value.split('.').map(Number);
-		if (
-			Number.isNaN(day) ||
-			Number.isNaN(month) ||
-			Number.isNaN(year) ||
-			day < 1 ||
-			day > 31 ||
-			month < 1 ||
-			month > 12 ||
-			year < 1000
-		) {
-			setInnerError('Некорректная дата');
-			return;
-		}
-		const parsedDate = new Date(year, month - 1, day);
-
-		onSelect?.(parsedDate);
-		setMonth(parsedDate);
-	};
-
-	// Sync the input value with the selected date
-	useEffect(() => {
-		if (selected) {
-			setInputValue(
-				selected.toLocaleString('ru-RU', {
-					day: '2-digit',
-					month: '2-digit',
-					year: 'numeric',
-				}),
-			);
-			setMonth(selected);
-		} else {
-			setInputValue('');
-		}
-	}, [selected]);
+	const {
+		disabledMatchers,
+		displayedMonth,
+		handleCalendarSelect,
+		handleInputBlur,
+		handleInputChange,
+		handleInputKeyDown,
+		helperTextId,
+		inputId,
+		inputValue,
+		internalError,
+		isOpen,
+		selectedDate,
+		setDisplayedMonth,
+		setInputElementRef,
+		setOpen,
+	} = useLogic(props);
+	const {
+		'aria-describedby': inputAriaDescribedBy,
+		'aria-invalid': inputAriaInvalid,
+		className: inputClassName,
+		inputMode,
+		onBlur: _inputOnBlur,
+		onChange: _inputOnChange,
+		onKeyDown: _inputOnKeyDown,
+		...restInputProps
+	} = inputProps;
+	const {
+		'aria-label': triggerAriaLabel,
+		className: triggerClassName,
+		size: triggerSize,
+		...restTriggerProps
+	} = triggerProps;
+	const {
+		align = 'end',
+		alignOffset = -10,
+		side = 'bottom',
+		...restContentProps
+	} = contentProps;
+	const displayedHelperText = internalError ?? helperText;
+	const isInvalid = Boolean(internalError) || error;
+	const describedBy = [
+		inputAriaDescribedBy,
+		displayedHelperText != null ? helperTextId : undefined,
+	]
+		.filter(Boolean)
+		.join(' ');
+	const isInteractionDisabled = disabled || readOnly;
 
 	return (
-		<Popover open={isOpen} onOpenChange={setIsOpen}>
-			<MaskField
-				value={inputValue}
-				onChange={handleInputChange}
-				label={label}
-				disabled={disabled}
-				className={className}
-				fullWidth={fullWidth}
-				size={size}
-				name={name}
-				endAdornment={
-					<Popover.Trigger
-						render={
-							<Button variant="ghost" size="icon" onClick={handleClick}>
-								<Calendar1 />
-							</Button>
+		<Popover
+			{...popoverProps}
+			open={isOpen}
+			onOpenChange={(nextOpen) => setOpen(nextOpen)}
+		>
+			<div
+				{...rootProps}
+				data-slot="date-picker"
+				data-disabled={disabled ? '' : undefined}
+				data-invalid={isInvalid ? '' : undefined}
+				ref={ref}
+				style={style}
+				className={clsx(styles.root, fullWidth && styles.fullWidth, className)}
+			>
+				{label != null && (
+					<Label
+						htmlFor={inputId}
+						disabled={disabled}
+						error={isInvalid}
+						required={required}
+					>
+						{label}
+					</Label>
+				)}
+
+				<InputGroup
+					data-slot="date-picker-control"
+					data-size={size}
+					className={styles.control}
+				>
+					<InputGroup.Input
+						{...restInputProps}
+						data-slot="date-picker-input"
+						ref={setInputElementRef}
+						id={inputId}
+						name={name}
+						type="text"
+						inputMode={inputMode ?? 'numeric'}
+						value={inputValue}
+						placeholder={placeholder}
+						disabled={disabled}
+						readOnly={readOnly}
+						required={required}
+						aria-invalid={isInvalid || inputAriaInvalid || undefined}
+						aria-describedby={describedBy || undefined}
+						className={inputClassName}
+						onChange={handleInputChange}
+						onBlur={handleInputBlur}
+						onKeyDown={handleInputKeyDown}
+					/>
+					<InputGroup.Addon data-slot="date-picker-actions" align="inline-end">
+						<Popover.Trigger
+							disabled={isInteractionDisabled}
+							render={
+								<InputGroup.Button
+									{...restTriggerProps}
+									data-slot="date-picker-trigger"
+									size={triggerSize ?? 'iconExtraSmall'}
+									disabled={isInteractionDisabled}
+									aria-label={triggerAriaLabel ?? openCalendarLabel}
+									className={clsx(styles.trigger, triggerClassName)}
+								>
+									{calendarIcon ?? <Calendar1 />}
+								</InputGroup.Button>
+							}
+						/>
+					</InputGroup.Addon>
+				</InputGroup>
+
+				{displayedHelperText != null && (
+					<Typography
+						id={helperTextId}
+						data-slot="date-picker-helper-text"
+						component="p"
+						variant="caption"
+						color={isInvalid ? 'error' : 'secondary'}
+						role={internalError ? 'alert' : undefined}
+						className={styles.helperText}
+					>
+						{displayedHelperText}
+					</Typography>
+				)}
+			</div>
+
+			<Popover.Content
+				{...restContentProps}
+				data-slot="date-picker-content"
+				align={align}
+				alignOffset={alignOffset}
+				side={side}
+			>
+				<div data-slot="date-picker-calendar">
+					<Calendar
+						{...calendarProps}
+						mode="single"
+						required={required}
+						month={displayedMonth}
+						onMonthChange={setDisplayedMonth}
+						selected={selectedDate ?? undefined}
+						onSelect={handleCalendarSelect}
+						disabled={
+							disabledMatchers.length > 0 ? disabledMatchers : undefined
 						}
 					/>
-				}
-				maskProps={{
-					mask: '__.__.____',
-					replacement: { _: /\d/ },
-					showMask: true,
-				}}
-				placeholder="дд.мм.гггг"
-				error={!!innerError || error}
-				helperText={innerError || helperText}
-			/>
-			<Popover.Content align="end" alignOffset={-10} side="bottom">
-				<Calendar
-					month={month}
-					onMonthChange={setMonth}
-					selected={selected}
-					onSelect={handleDayPickerSelect}
-					{...rest}
-					mode="single"
-					captionLayout={getLayout()}
-				/>
+				</div>
 			</Popover.Content>
 		</Popover>
 	);

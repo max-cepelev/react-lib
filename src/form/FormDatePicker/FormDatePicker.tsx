@@ -7,7 +7,7 @@ export type FormDatePickerProps<
 	TFieldPath extends RequiredPath,
 > = Omit<
 	DatePickerProps,
-	'error' | 'helperText' | 'name' | 'onSelect' | 'selected'
+	'defaultValue' | 'error' | 'helperText' | 'name' | 'onValueChange' | 'value'
 > &
 	FormFieldBindingProps<TSchema, TFieldPath, Date>;
 
@@ -21,14 +21,19 @@ export const FormDatePicker = <
 }: FormDatePickerProps<TSchema, TFieldPath>) => (
 	<Field<TSchema, TFieldPath> of={form} path={path}>
 		{(field) => {
-			const handleSelect = field.onChange as (date: Date | undefined) => void;
+			const handleFieldChange = field.onChange as (
+				date: Date | undefined,
+			) => void;
+			const handleValueChange = (date: Date | null) => {
+				handleFieldChange(date ?? undefined);
+			};
 
 			return (
 				<DatePicker
 					{...restProps}
 					name={field.props.name}
-					selected={field.input instanceof Date ? field.input : undefined}
-					onSelect={handleSelect}
+					value={field.input instanceof Date ? field.input : null}
+					onValueChange={handleValueChange}
 					error={Boolean(field.errors)}
 					helperText={field.errors?.[0]}
 				/>

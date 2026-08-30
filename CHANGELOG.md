@@ -1,5 +1,16 @@
 # @max-ts/kit
 
+## 1.15.0
+
+### Minor Changes
+
+- Rewrite DatePicker with composable slot API
+
+### Patch Changes
+
+- Refresh the build, Storybook, React, and Biome toolchain, generate declarations
+  through Rslib, and publish consistent ESM `.js` entry points.
+
 ## 1.14.1
 
 ### Patch Changes

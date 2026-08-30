@@ -43,20 +43,25 @@ export type CalendarProps = PropsBase &
 export const Calendar = ({
 	className,
 	classNames,
+	components,
+	locale = ru,
 	showOutsideDays = true,
 	...props
 }: CalendarProps) => {
 	return (
 		<DayPicker
-			locale={ru}
+			{...props}
+			className={className}
+			locale={locale}
 			showOutsideDays={showOutsideDays}
 			classNames={{
-				month: styles.month,
-				months: styles.months,
-				nav: styles.nav,
-				month_caption: styles.monthCaption,
-				dropdown: styles.dropdownNav,
-				dropdowns: styles.dropdowns,
+				...classNames,
+				month: clsx(styles.month, classNames?.month),
+				months: clsx(styles.months, classNames?.months),
+				nav: clsx(styles.nav, classNames?.nav),
+				month_caption: clsx(styles.monthCaption, classNames?.month_caption),
+				dropdown: clsx(styles.dropdownNav, classNames?.dropdown),
+				dropdowns: clsx(styles.dropdowns, classNames?.dropdowns),
 			}}
 			components={{
 				DayButton,
@@ -78,8 +83,8 @@ export const Calendar = ({
 				CaptionLabel: ({ className, color, ...props }) => (
 					<Typography transform="capitalize" className={className} {...props} />
 				),
+				...components,
 			}}
-			{...props}
 		/>
 	);
 };

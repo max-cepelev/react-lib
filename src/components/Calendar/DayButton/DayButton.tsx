@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 import { type ButtonHTMLAttributes, useEffect, useRef } from 'react';
 import type { CalendarDay, Modifiers } from 'react-day-picker';
-import { Button } from '~/components';
+import { Button } from '../../Button';
 import * as styles from './styles.css';
 
 export const DayButton = (

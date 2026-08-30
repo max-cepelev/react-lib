@@ -1,6 +1,7 @@
 import type { SelectHTMLAttributes } from 'react';
 import type { DropdownOption } from 'react-day-picker';
-import { Select, Typography } from '~/components';
+import { Select } from '../../Select';
+import { Typography } from '../../Typography';
 import { trigger } from './styles.css';
 
 export function Dropdown(
