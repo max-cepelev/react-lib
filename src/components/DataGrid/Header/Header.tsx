@@ -1,9 +1,12 @@
-import { clsx } from 'clsx';
 import type { CSSProperties } from 'react';
 import { Checkbox } from '../../Checkbox';
 import { HeaderCell } from '../HeaderCell';
 import type { DataGridColumn, DataGridSorting } from '../types';
-import { headerRow, selectionHeaderCell } from './styles.css';
+import {
+	headerRow,
+	selectionCheckbox,
+	selectionHeaderCell,
+} from './styles.css';
 
 type HeaderProps<TData> = {
 	columns: DataGridColumn<TData>[];
@@ -30,7 +33,7 @@ export function Header<TData>({
 }: HeaderProps<TData>) {
 	return (
 		<thead>
-			<tr className={clsx(headerRow)}>
+			<tr className={headerRow}>
 				{isSelectionEnabled && (
 					<th
 						className={selectionHeaderCell}
@@ -38,6 +41,7 @@ export function Header<TData>({
 						aria-label="Select all rows"
 					>
 						<Checkbox
+							className={selectionCheckbox}
 							checked={isAllRowsSelected}
 							indeterminate={!isAllRowsSelected && isSomeRowsSelected}
 							disabled={isSelectionDisabled}

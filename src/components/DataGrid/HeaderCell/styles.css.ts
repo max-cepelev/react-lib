@@ -7,8 +7,8 @@ export const headerCellClass = style({
 	fontWeight: theme.fontWeight.medium,
 	fontSize: theme.fontSize.sm,
 	overflowWrap: 'break-word',
-	backgroundColor: theme.colors.background.paper,
 	borderBottom: `1px solid ${theme.colors.border}`,
+
 	// selectors: {
 	// 	'& svg': {
 	// 		minWidth: 10,

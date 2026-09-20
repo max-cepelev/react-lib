@@ -147,7 +147,6 @@ const columns: DataGridColumns<(typeof rows)[0]> = [
 	{
 		label: 'ID',
 		field: 'id',
-		align: 'center',
 	},
 	{
 		label: 'Имя',

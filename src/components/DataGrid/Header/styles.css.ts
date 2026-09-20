@@ -8,8 +8,12 @@ export const headerRow = style({
 });
 
 export const selectionHeaderCell = style({
-	display: 'flex',
-	alignItems: 'center',
-	justifyContent: 'center',
+	padding: 0,
+	textAlign: 'center',
+	verticalAlign: 'middle',
 	borderBottom: `1px solid ${theme.colors.border}`,
+});
+
+export const selectionCheckbox = style({
+	marginInline: 'auto',
 });

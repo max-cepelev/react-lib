@@ -3,7 +3,12 @@ import { useCallback } from 'react';
 import { Checkbox } from '../../Checkbox';
 import { Cell } from '../Cell';
 import type { DataGridColumn, DataGridRowId } from '../types';
-import { rowClass, selectableClass, selectionCellClass } from './styles.css';
+import {
+	rowClass,
+	selectableClass,
+	selectionCellClass,
+	selectionCheckbox,
+} from './styles.css';
 
 type RowProps<TRow> = {
 	row: TRow;
@@ -45,6 +50,7 @@ export function Row<TRow>({
 					style={{ height: rowHeight, width: rowHeight }}
 				>
 					<Checkbox
+						className={selectionCheckbox}
 						checked={isSelected}
 						aria-label="Select row"
 						onClick={(event) => event.stopPropagation()}

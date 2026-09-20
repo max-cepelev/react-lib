@@ -35,7 +35,7 @@ export const trigger = style({
 	position: 'relative',
 	display: 'flex',
 	flex: 1,
-	alignItems: 'flex-start',
+	alignItems: 'center',
 	justifyContent: 'space-between',
 	textAlign: 'left',
 	fontWeight: theme.fontWeight.medium,

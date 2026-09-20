@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.15.1
+
+### Patch Changes
+
+- Update deps and fix DataGrid checkbox alignment
+
 ## 1.15.0
 
 ### Minor Changes
