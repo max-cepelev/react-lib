@@ -5,6 +5,7 @@ export const headerRow = style({
 	position: 'sticky',
 	top: 0,
 	zIndex: 1,
+	backgroundColor: theme.colors.background.sidebar,
 });
 
 export const selectionHeaderCell = style({

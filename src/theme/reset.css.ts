@@ -73,8 +73,8 @@ globalStyle('img, picture, video, canvas, svg', {
 });
 
 globalStyle('*::-webkit-scrollbar', {
-	width: 6,
-	height: 6,
+	width: 4,
+	height: 4,
 });
 
 globalStyle('*::-webkit-scrollbar-track', {
@@ -82,8 +82,6 @@ globalStyle('*::-webkit-scrollbar-track', {
 });
 
 globalStyle('*::-webkit-scrollbar-thumb', {
-	backgroundColor: `color-mix(in oklch, ${theme.colors.primary} 60%, transparent)`,
+	backgroundColor: `color-mix(in oklch, ${theme.colors.secondary} 50%, transparent)`,
 	borderRadius: theme.borderRadius.sm,
-	width: 6,
-	height: 6,
 });

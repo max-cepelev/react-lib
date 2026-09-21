@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.15.2
+
+### Patch Changes
+
+- Polish DataGrid header and scrollbars
+
 ## 1.15.1
 
 ### Patch Changes
