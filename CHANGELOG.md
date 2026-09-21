@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.15.3
+
+### Patch Changes
+
+- Prevent input overflow in flex layouts
+
 ## 1.15.2
 
 ### Patch Changes

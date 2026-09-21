@@ -54,6 +54,7 @@ export const errorClass = style({
 // Input styles
 export const input = style({
 	flex: 1,
+	minWidth: 0,
 	border: 'none',
 	outline: 'none',
 	fontSize: 'inherit',
