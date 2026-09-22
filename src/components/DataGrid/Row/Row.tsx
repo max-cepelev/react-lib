@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
-import { useCallback } from 'react';
-import { Checkbox } from '../../Checkbox';
+import { memo } from 'react';
+import { Checkbox } from '../../Checkbox/Checkbox';
 import { Cell } from '../Cell';
 import type { DataGridColumn, DataGridRowId } from '../types';
 import {
@@ -9,8 +9,9 @@ import {
 	selectionCellClass,
 	selectionCheckbox,
 } from './styles.css';
+import { useLogic } from './useLogic';
 
-type RowProps<TRow> = {
+export type RowProps<TRow> = {
 	row: TRow;
 	columns: DataGridColumn<TRow>[];
 	rowIndex: number;
@@ -21,7 +22,7 @@ type RowProps<TRow> = {
 	isSelected?: boolean;
 	onSelectionChange?: (rowId: DataGridRowId, isSelected: boolean) => void;
 };
-export function Row<TRow>({
+const RowComponent = <TRow,>({
 	row,
 	rowHeight,
 	onRowClick,
@@ -31,10 +32,13 @@ export function Row<TRow>({
 	isSelectionEnabled,
 	isSelected,
 	onSelectionChange,
-}: RowProps<TRow>) {
-	const handleSelect = useCallback(() => {
-		onRowClick?.(row);
-	}, [onRowClick, row]);
+}: RowProps<TRow>) => {
+	const { handleSelect, handleSelectionChange, stopPropagation } = useLogic({
+		row,
+		rowId,
+		onRowClick,
+		onSelectionChange,
+	});
 
 	return (
 		<tr
@@ -53,9 +57,9 @@ export function Row<TRow>({
 						className={selectionCheckbox}
 						checked={isSelected}
 						aria-label="Select row"
-						onClick={(event) => event.stopPropagation()}
-						onKeyDown={(event) => event.stopPropagation()}
-						onCheckedChange={(checked) => onSelectionChange?.(rowId, checked)}
+						onClick={stopPropagation}
+						onKeyDown={stopPropagation}
+						onCheckedChange={handleSelectionChange}
 					/>
 				</td>
 			)}
@@ -73,4 +77,6 @@ export function Row<TRow>({
 			})}
 		</tr>
 	);
-}
+};
+
+export const Row = memo(RowComponent) as typeof RowComponent;

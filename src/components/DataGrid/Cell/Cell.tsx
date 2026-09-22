@@ -1,4 +1,5 @@
 import { clsx } from 'clsx';
+import { memo } from 'react';
 import type { DataGridColumn } from '../types';
 import { cellClass, disabledClass } from './styles.css';
 
@@ -9,9 +10,14 @@ export type CellProps<TRow> = {
 	height: number;
 };
 
-export function Cell<TRow>({ row, column, rowIndex, height }: CellProps<TRow>) {
+const CellComponent = <TRow,>({
+	row,
+	column,
+	rowIndex,
+	height,
+}: CellProps<TRow>) => {
 	const { align, cellColor, isDisabled } = column;
-	const Content = () => {
+	const renderContent = () => {
 		if (column.renderCell) {
 			return column.renderCell(row, rowIndex);
 		}
@@ -38,7 +44,9 @@ export function Cell<TRow>({ row, column, rowIndex, height }: CellProps<TRow>) {
 				column.cellClassName?.(row),
 			)}
 		>
-			<Content />
+			{renderContent()}
 		</td>
 	);
-}
+};
+
+export const Cell = memo(CellComponent) as typeof CellComponent;

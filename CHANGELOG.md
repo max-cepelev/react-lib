@@ -1,5 +1,11 @@
 # @max-ts/kit
 
+## 1.15.4
+
+### Patch Changes
+
+- Optimize DataGrid selection rendering
+
 ## 1.15.3
 
 ### Patch Changes

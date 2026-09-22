@@ -45,7 +45,7 @@ export const content = style({
 	zIndex: 50,
 	display: 'grid',
 	width: '100%',
-	maxWidth: 'calc(100% - 2rem)',
+	maxWidth: '24rem',
 	transform: 'translate(-50%, -50%)',
 	gap: spacing(4),
 	border: `1px solid color-mix(in oklch, ${theme.colors.text.primary} 10%, transparent)`,
@@ -62,11 +62,6 @@ export const content = style({
 		},
 		'&[data-closed]': {
 			animation: `${zoomOut} 100ms ease-in, ${fadeOut} 100ms ease-in`,
-		},
-	},
-	'@media': {
-		'(min-width: 640px)': {
-			maxWidth: '24rem',
 		},
 	},
 });

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { DataGridProps } from '../DataGrid';
 import type { DataGridRowId } from '../types';
 import { compareValues, getRowId } from './utils';
@@ -82,7 +82,7 @@ export const useLogic = <TRow>({
 		[keyId, onSelectRow, onSelectedRowIdsChange, rows, selectedRowIds],
 	);
 
-	const handleRowSelectionChange = useCallback(
+	const updateRowSelection = useCallback(
 		(rowId: DataGridRowId, isSelected: boolean) => {
 			const nextSelectedRowIdSet = new Set(activeSelectedRowIds);
 
@@ -95,6 +95,19 @@ export const useLogic = <TRow>({
 			handleSelectedRowIdsChange(Array.from(nextSelectedRowIdSet));
 		},
 		[activeSelectedRowIds, handleSelectedRowIdsChange],
+	);
+	const rowSelectionChangeRef = useRef(updateRowSelection);
+
+	useLayoutEffect(() => {
+		rowSelectionChangeRef.current = updateRowSelection;
+	}, [updateRowSelection]);
+
+	// Keep row props stable while event handlers use the latest committed selection.
+	const handleRowSelectionChange = useCallback(
+		(rowId: DataGridRowId, isSelected: boolean) => {
+			rowSelectionChangeRef.current(rowId, isSelected);
+		},
+		[],
 	);
 
 	const handleAllRowsSelectionChange = useCallback(
