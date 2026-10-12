@@ -117,3 +117,19 @@ export function Disabled() {
 		</Tabs>
 	);
 }
+
+export function Overflow() {
+	return (
+		<div style={{ width: 280 }}>
+			<Tabs defaultValue="billing">
+				<Tabs.List>
+					<Tabs.Trigger value="account">Account</Tabs.Trigger>
+					<Tabs.Trigger value="password">Password</Tabs.Trigger>
+					<Tabs.Trigger value="notifications">Notifications</Tabs.Trigger>
+					<Tabs.Trigger value="integrations">Integrations</Tabs.Trigger>
+					<Tabs.Trigger value="billing">Billing</Tabs.Trigger>
+				</Tabs.List>
+			</Tabs>
+		</div>
+	);
+}

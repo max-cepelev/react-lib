@@ -19,13 +19,19 @@ export const root = style({
 export const list = style({
 	display: 'inline-flex',
 	width: 'fit-content',
+	maxWidth: '100%',
 	alignItems: 'center',
-	justifyContent: 'center',
+	justifyContent: 'safe center',
+	overflowX: 'auto',
+	scrollbarWidth: 'none',
 	borderRadius: theme.borderRadius.md,
 	padding: theme.spacing[1],
 	color: theme.colors.text.secondary,
 
 	selectors: {
+		'&::-webkit-scrollbar': {
+			display: 'none',
+		},
 		'&[data-variant="default"]': {
 			backgroundColor: theme.colors.background.element,
 		},

@@ -2,6 +2,7 @@ import { Tabs as TabsPrimitive } from '@base-ui/react/tabs';
 import { clsx } from 'clsx';
 import * as styles from './styles.css';
 import type { TabsProps } from './types';
+import { useActiveTabScroll } from './useActiveTabScroll';
 
 function Tabs({
 	className,
@@ -18,9 +19,17 @@ function Tabs({
 	);
 }
 
-function List({ className, variant = 'default', ...props }: TabsProps.List) {
+function List({
+	className,
+	variant = 'default',
+	ref,
+	...props
+}: TabsProps.List) {
+	const listRef = useActiveTabScroll(ref);
+
 	return (
 		<TabsPrimitive.List
+			ref={listRef}
 			data-slot="tabs-list"
 			data-variant={variant}
 			className={clsx(styles.list, className)}
